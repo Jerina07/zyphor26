@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ZYPHOR'26 — Host Dashboard</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="host.css">
+</head>
+<body class="host-body">
+
+<!-- 3D Galaxy Canvas Canvas Element -->
+<canvas id="galaxyCanvas"></canvas>
+<div class="grain-overlay" aria-hidden="true"></div>
+
+<!-- ===== PASSCODE GATE ===== -->
+<section id="gate" class="gate">
+  <div class="gate-card">
+    <div class="gate-logo" aria-hidden="true">
+      <span class="brand-mark">Z</span>
+    </div>
+    <h1 class="gate-title">Host Access</h1>
+    <p class="gate-sub">Enter the organizer passcode to view ZYPHOR'26 registrations.</p>
+    <form id="gateForm" class="gate-form">
+      <div class="gate-input-wrap">
+        <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" class="gate-icon"><rect x="4" y="9" width="12" height="9" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 9V6a3 3 0 0 1 6 0v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <input type="password" id="gatePasscode" class="gate-input" placeholder="Enter passcode" autocomplete="off" required>
+      </div>
+      <button type="submit" class="btn-gate-enter">Enter Dashboard</button>
+    </form>
+    <p class="gate-error" id="gateError" role="alert"></p>
+    <p class="gate-hint">Default passcode: <code>ZYPHOR26HOST</code></p>
+  </div>
+</section>
+
+<!-- ===== DASHBOARD ===== -->
+<section id="dashboard" class="dashboard" hidden>
+
+  <header class="dash-header">
+    <div class="dash-brand">
+      <span class="brand-mark" aria-hidden="true">Z</span>
+      <div class="dash-brand-text">
+        <h1>ZYPHOR'26 — Host Dashboard</h1>
+        <p>Organizer Control Panel &amp; Real-time Registrations</p>
+      </div>
+    </div>
+    <div class="dash-actions">
+      <a href="statement.html" class="dash-action-btn" target="_blank">
+        <svg viewBox="0 0 20 20" fill="none"><path d="M4 4h12v12H4z" stroke="currentColor" stroke-width="1.5"/><path d="M7 8h6M7 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Statement Page
+      </a>
+      <button class="dash-action-btn" id="refreshBtn" type="button" title="Refresh data">
+        <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10a6 6 0 1 0 1.2-3.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M4 5v3h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Refresh
+      </button>
+      <button class="dash-action-btn" id="exportCsvBtn" type="button">
+        <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 3v10M6 9l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 15h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Export CSV
+      </button>
+      <button class="dash-action-btn dash-action-btn--lock" id="lockBtn" type="button">
+        <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="4" y="9" width="12" height="9" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 9V6a3 3 0 0 1 6 0v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Lock
+      </button>
+    </div>
+  </header>
+
+  <!-- ── TOP METRIC SUMMARY CARDS ── -->
+  <div class="dash-metrics-grid">
+    <div class="metric-card">
+      <div class="mc-icon mc-icon--teams">🏆</div>
+      <div class="mc-data">
+        <span class="mc-val" id="metricTeamCount">0</span>
+        <span class="mc-label">Team Count</span>
+      </div>
+    </div>
+    <div class="metric-card">
+      <div class="mc-icon mc-icon--members">👥</div>
+      <div class="mc-data">
+        <span class="mc-val" id="metricMemberCount">0</span>
+        <span class="mc-label">Team Members Count</span>
+      </div>
+    </div>
+    <div class="metric-card">
+      <div class="mc-icon mc-icon--veg">🟢</div>
+      <div class="mc-data">
+        <span class="mc-val" id="metricVegCount">0</span>
+        <span class="mc-label">Veg Count</span>
+      </div>
+    </div>
+    <div class="metric-card">
+      <div class="mc-icon mc-icon--nonveg">🔴</div>
+      <div class="mc-data">
+        <span class="mc-val" id="metricNonVegCount">0</span>
+        <span class="mc-label">Non-Veg Count</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ── HACKATHON INSTRUCTIONS SECTION ── -->
+  <div class="dash-instructions-card">
+    <div class="inst-header">
+      <h2 class="inst-title">📌 HACKATHON INSTRUCTIONS</h2>
+      <span class="inst-date-badge">Date: 28/08/2026</span>
+    </div>
+    <ul class="inst-list">
+      <li>All participants must report to the Grace College Auditorium by <strong>9:00 AM</strong>.</li>
+      <li>The hackathon will conclude at <strong>5:00 PM</strong>.</li>
+      <li>Online payment cost <strong>₹250</strong> per member. Offline payment cost <strong>₹300</strong> per member.</li>
+      <li>Each team can have a maximum of <strong>3 participants</strong>.</li>
+      <li>Each team must prepare a <strong>PowerPoint Presentation (PPT)</strong> and bring it with them.</li>
+      <li>Each team will be given <strong>5 minutes</strong> to present and explain their PPT.</li>
+      <li>Participants must bring their own laptops for the hackathon.</li>
+      <li>Participants must select a single problem statement of their choice from any category, such as AI or IoT, from the official hackathon website.</li>
+      <li>The problem statements will be released one day before the hackathon on <strong>27-08-2026 at 9:00 AM</strong>.</li>
+      <li>Participants must develop their website at the hackathon venue based on the selected problem statement.</li>
+      <li>Cash prizes will be awarded to the 1st, 2nd, and 3rd place winners.</li>
+      <li>Certificates will be provided to all participants.</li>
+      <li>Lunch will be provided for all participants.</li>
+    </ul>
+    <div class="inst-contact">
+      <h4>Contact Details</h4>
+      <p>📞 Phone: <strong>+91 8072584827</strong> &nbsp;|&nbsp; ✉️ Email: <a href="mailto:zyphor26cse@gmail.com">zyphor26cse@gmail.com</a></p>
+    </div>
+  </div>
+
+
+  <!-- ── TOOLBAR ── -->
+  <div class="dash-toolbar">
+    <div class="dash-search-wrap">
+      <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" class="dash-search-icon"><circle cx="8" cy="8" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M13 13l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <input type="search" id="searchInput" class="dash-search" placeholder="Search by team, leader, student, email, college…">
+    </div>
+    <select id="domainFilter" class="dash-filter">
+      <option value="">All Domains</option>
+      <option value="AI">AI</option>
+      <option value="IoT">IoT</option>
+    </select>
+  </div>
+
+
+  <!-- ── FULL DATA TABLE FORMAT ── -->
+  <div class="table-container">
+    <table class="dash-table" id="teamsTable">
+      <thead>
+        <tr>
+          <th>Team Name</th>
+          <th>Domain</th>
+          <th>Leader</th>
+          <th>Members</th>
+          <th>Veg / Non-Veg</th>
+          <th>Selected Statement</th>
+          <th>Student Details</th>
+          <th>Payment</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="teamsTableBody"></tbody>
+    </table>
+  </div>
+
+  <p class="dash-empty" id="dashEmpty" hidden>No team registrations found.</p>
+  <div class="dash-loading" id="dashLoading" hidden>
+    <div class="dash-loading-spinner" aria-hidden="true"></div>
+    <p>Loading teams data from Supabase…</p>
+  </div>
+
+</section>
+
+<!-- Screenshot Viewer Modal -->
+<div id="imgModal" class="img-modal" hidden>
+  <button class="img-modal-close" id="imgModalClose" aria-label="Close modal">&times;</button>
+  <img id="imgModalImage" alt="Payment proof" class="img-modal-img">
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="galaxy.js"></script>
+<script type="module" src="host.js"></script>
+</body>
+</html>

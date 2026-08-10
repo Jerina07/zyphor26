@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Problem Statement Selection — ZYPHOR'26</title>
+<meta name="description" content="Official ZYPHOR'26 Problem Statements release page. Domain statements unlock on 27-08-2026 at 9:00 AM." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="statement.css">
+</head>
+<body class="stmt-body">
+
+<!-- 3D Galaxy Canvas Canvas Element -->
+<canvas id="galaxyCanvas"></canvas>
+<div class="grain-overlay" aria-hidden="true"></div>
+
+<!-- HEADER -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="index.html" class="site-logo" aria-label="ZYPHOR'26 Home">
+      <img src="images/logo-transparent.png" alt="ZYPHOR'26" class="site-logo-img">
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="application.html" class="nav-link">application</a>
+      <a href="problem-statement.html" class="nav-link nav-link--active"> problem Statement</a>
+      <a href="register.html" class="nav-link nav-link--cta">Register Now</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="stmt-hero">
+  <div class="stmt-hero-content">
+    <p class="eyebrow">Hackathon Challenges</p>
+    <h1 class="stmt-hero-title">Official<span class="hero-title-accent"> Problem Statements</span></h1>
+    <p class="stmt-hero-sub">Problem statements for AI and IoT domains are released one day before the hackathon on 27-08-2026 at 9:00 AM.</p>
+  </div>
+</section>
+
+<!-- MAIN CONTAINER -->
+<main class="stmt-main">
+
+  <!-- ================= LOCKED CONTAINER ================= -->
+  <div class="stmt-lock-card" id="stmtLockCard">
+    <div class="stmt-lock-badge" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" class="stmt-lock-icon">
+        <rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.8"/>
+        <path d="M8 11V7a4 4 0 1 1 8 0v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        <circle cx="12" cy="16" r="1.5" fill="currentColor"/>
+      </svg>
+      <span>LOCKED</span>
+    </div>
+
+    <h2 class="stmt-lock-title">Domain Statements Release</h2>
+    <p class="stmt-lock-message">Your domain statement will be released on <strong>27-08-2026 at 9:00 AM</strong>.</p>
+
+    <!-- Countdown Timer -->
+    <div class="stmt-countdown" id="stmtCountdown">
+      <div class="cd-unit"><span id="cdDays">00</span><p>Days</p></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><span id="cdHours">00</span><p>Hours</p></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><span id="cdMins">00</span><p>Mins</p></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><span id="cdSecs">00</span><p>Secs</p></div>
+    </div>
+  </div>
+
+
+  <!-- ================= UNLOCKED CONTAINER ================= -->
+  <div class="stmt-unlocked-card" id="stmtUnlockedCard" hidden>
+
+    <!-- Step 1: Enter Team Name -->
+    <div class="stmt-lookup-section" id="stmtLookupSection">
+      <div class="stmt-lookup-box">
+        <h2 class="stmt-lookup-title">Enter Your Team Name</h2>
+        <p class="stmt-lookup-desc">Enter the exact Team Name registered during Problem Statement submission to unlock your domain statements.</p>
+        
+        <form id="teamLookupForm" class="stmt-lookup-form" novalidate>
+          <div class="stmt-input-wrap">
+            <input type="text" id="stmtTeamNameInput" class="stmt-input" placeholder="e.g. Byte Brigade" required autocomplete="off">
+            <button type="submit" class="btn-stmt-lookup" id="btnStmtLookup">
+              <span>View Statements</span>
+              <svg viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+          <p class="stmt-lookup-status" id="stmtLookupStatus" role="status"></p>
+        </form>
+      </div>
+    </div>
+
+    <!-- Step 2: Problem Statements List -->
+    <div class="stmt-list-section" id="stmtListSection" hidden>
+      <div class="stmt-list-header">
+        <div class="stmt-team-badge">
+          <span class="st-team-label">Team:</span>
+          <strong id="displayTeamName">Byte Brigade</strong>
+          <span class="st-domain-tag" id="displayTeamDomain">AI Domain</span>
+        </div>
+        <p class="stmt-list-note">Select <strong>one problem statement</strong> below for your team to build during ZYPHOR'26.</p>
+      </div>
+
+      <!-- Problem Statements Cards List -->
+      <form id="statementSelectForm" class="stmt-select-form">
+        <div class="stmt-cards-grid" id="stmtCardsGrid"></div>
+
+        <div class="stmt-submit-bar">
+          <button type="submit" class="btn-stmt-confirm" id="btnConfirmStatement">
+            <span id="btnConfirmText">Confirm &amp; Lock Selected Statement</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Step 3: Selection Confirmed Panel -->
+    <div class="stmt-success-box" id="stmtSuccessBox" hidden>
+      <div class="stmt-success-icon">✓</div>
+      <h2 class="stmt-success-title">Problem Statement Confirmed!</h2>
+      <p class="stmt-success-team">Team: <strong id="confirmedTeamDisplay"></strong></p>
+
+      <div class="stmt-confirmed-card" id="confirmedCardDisplay">
+        <span class="st-code" id="confCode">AI01</span>
+        <h3 id="confTitle">AI-Powered Early Crop Disease Detection</h3>
+        <p id="confDesc"></p>
+      </div>
+
+      <p class="stmt-success-hint">All team members should prepare your presentation according to the hackathon guidelines.</p>
+      <a href="index.html" class="btn-ps-back" style="margin-top: 1.5rem; text-decoration: none;">Back to Home</a>
+    </div>
+
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="brand-mark" aria-hidden="true">Z</span>
+      <span class="brand-text">ZYPHOR<span class="brand-apos">'26</span></span>
+    </div>
+    <p>CSE / GRACE COLLEGE OF ENGINEERING</p>
+    <p>HOSTED BY ZYPHOR PANEL GCOE</p>
+    <p>28 AUGUST 2026 &nbsp;&middot;&nbsp; MULLAKADU, THOOTHUKUDI</p>
+    <div class="footer-rule" aria-hidden="true"></div>
+    <p class="footer-copyright">&copy; 2026 ZYPHOR'26. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script src="galaxy.js"></script>
+<script type="module" src="statement-script.js"></script>
+</body>
+</html>
