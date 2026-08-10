@@ -346,6 +346,15 @@ form.addEventListener("submit", async (e) => {
   }
 });
 
+if (registrationSuccessful) {
+
+    // Show success message
+    document.getElementById("successMessage").style.display = "block";
+
+    // Show WhatsApp invite ONLY after submission
+    document.getElementById("whatsappInvite").style.display = "block";
+}
+
 
 /* Initial counter render */
 updateMemberCountAndPricing(3);
