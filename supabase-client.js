@@ -4,8 +4,8 @@
    ========================================================= */
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
-const SUPABASE_URL  = "https://frhenpsdnfajnphagakk.supabase.co";
-const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZyaGVucHNdbmZham5waGFnYWtrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYxNTQ5MjYsImV4cCI6MjEwMTczMDkyNn0.Qg5A6F2tPCx7JEi0h8Wc9EQ8XEttDmizHbZsMYg5F0U";
+const SUPABASE_URL  = "https://qcgobbldrystrplllckj.supabase.co";
+const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFjZ29iYmxkcnlzdHJwbGxsY2tqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYzMzM4MzMsImV4cCI6MjEwMTkwOTgzM30.23oNCrGiPrUztp_qsrkABrzJ3JgAFoN73VJsvZQmSAA";
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON);
 

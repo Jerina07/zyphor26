@@ -45,7 +45,8 @@ CREATE TABLE IF NOT EXISTS public.registrations (
     payment_id TEXT DEFAULT NULL,
     payment_screenshot_url TEXT DEFAULT '',
     payment_status TEXT DEFAULT 'Pending Verification',
-    registered_at TIMESTAMPTZ DEFAULT NOW()
+    registered_at TIMESTAMPTZ DEFAULT NOW(),
+    YEar_of_study INTEGER NOT NULL
 );
 
 -- Add missing columns if table already exists
