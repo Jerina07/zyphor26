@@ -1,308 +1,621 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Problem Statement — ZYPHOR'26 Hackathon</title>
-<meta name="description" content="Select your domain and enter your team details for ZYPHOR'26 Hackathon at Grace College of Engineering." />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="ps.css">
-</head>
-<body class="ps-body">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Problem Statement — ZYPHOR'26 Hackathon</title>
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+    <meta
+      name="description"
+      content="Select your domain and enter your team details for ZYPHOR'26 Hackathon at Grace College of Engineering."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="ps.css" />
+  </head>
+  <body class="ps-body">
+    <!-- 3D Galaxy Canvas Element -->
+    <canvas id="galaxyCanvas"></canvas>
+    <div class="grain-overlay" aria-hidden="true"></div>
 
-<!-- 3D Galaxy Canvas Element -->
-<canvas id="galaxyCanvas"></canvas>
-<div class="grain-overlay" aria-hidden="true"></div>
-
-<!-- HEADER -->
-<header class="site-header" id="siteHeader">
-  <div class="header-inner">
-    <a href="index.html" class="site-logo" aria-label="ZYPHOR'26 Home">
-      <img src="images/logo-transparent.png" alt="ZYPHOR'26" class="site-logo-img">
-    </a>
-    <nav class="main-nav" id="mainNav">
-      <a href="index.html" class="nav-link">Home</a>
-      <a href="application.html" class="nav-link nav-link--active">Application</a>
-      <a href="problem-statement.html" class="nav-link"> problem Statement</a>
-      <a href="register.html" class="nav-link nav-link--cta">Register Now</a>
-    </nav>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</header>
-
-<!-- PAGE HERO -->
-<section class="ps-hero">
-  <div class="ps-hero-bg" aria-hidden="true">
-    <div class="ps-hero-glow"></div>
-  </div>
-  <div class="ps-hero-content">
-    <p class="eyebrow">Step 1 of Registration</p>
-    <h1 class="ps-hero-title">Problem<span class="hero-title-accent"> Statement &amp; Team Details</span></h1>
-    <p class="ps-hero-sub">Select your domain and enter your team details to initialize your team record for ZYPHOR'26.</p>
-  </div>
-</section>
-
-<!-- STEP PROGRESS BAR -->
-<div class="ps-progress-wrap" id="progressWrap">
-  <div class="ps-progress-track">
-    <div class="ps-progress-fill" id="progressFill"></div>
-  </div>
-  <div class="ps-steps">
-    <div class="ps-step active" id="stepDot1" data-step="1">
-      <div class="ps-step-dot"><span>01</span></div>
-      <p class="ps-step-label">Domain</p>
-    </div>
-    <div class="ps-step" id="stepDot2" data-step="2">
-      <div class="ps-step-dot"><span>02</span></div>
-      <p class="ps-step-label">Team Details</p>
-    </div>
-    <div class="ps-step" id="stepDot3" data-step="3">
-      <div class="ps-step-dot"><span>03</span></div>
-      <p class="ps-step-label">Review &amp; Confirm</p>
-    </div>
-  </div>
-</div>
-
-<!-- MAIN FORM CONTAINER -->
-<main class="ps-main" id="psMain">
-
-  <!-- ===== STEP 1: DOMAIN SELECTION ===== -->
-  <section class="ps-step-panel active" id="panel1" aria-label="Step 1: Domain Selection">
-    <div class="ps-panel-header">
-      <span class="ps-panel-eyebrow">Step 01</span>
-      <h2 class="ps-panel-title">Choose Your Domain</h2>
-      <p class="ps-panel-desc">Select the technical domain your team will compete in.</p>
-    </div>
-
-    <div class="domain-cards" id="domainCards" role="radiogroup" aria-label="Select domain">
-
-      <label class="domain-card" for="domainAI" id="cardAI">
-        <input type="radio" name="domain" id="domainAI" value="AI" class="domain-radio">
-        <div class="domain-card-inner">
-          <div class="domain-card-icon">
-            <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
-              <circle cx="32" cy="32" r="28" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
-              <circle cx="32" cy="32" r="8" fill="currentColor" opacity="0.8"/>
-              <path d="M32 4 L32 16 M32 48 L32 60 M4 32 L16 32 M48 32 L60 32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              <path d="M13 13 L21 21 M43 43 L51 51 M51 13 L43 21 M21 43 L13 51" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
-              <circle cx="32" cy="32" r="16" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4" opacity="0.4"/>
-            </svg>
-          </div>
-          <div class="domain-card-body">
-            <h3 class="domain-card-title">Artificial Intelligence</h3>
-            <p class="domain-card-desc">Machine learning, intelligent systems, AI-powered solutions, neural networks, and data-driven innovation.</p>
-            <ul class="domain-card-tags">
-              <li>Machine Learning</li>
-              <li>Neural Networks</li>
-              <li>Computer Vision</li>
-              <li>NLP</li>
-            </ul>
-          </div>
-          <div class="domain-card-check" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-        </div>
-      </label>
-
-      <label class="domain-card" for="domainIoT" id="cardIoT">
-        <input type="radio" name="domain" id="domainIoT" value="IoT" class="domain-radio">
-        <div class="domain-card-inner">
-          <div class="domain-card-icon">
-            <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
-              <rect x="24" y="24" width="16" height="16" rx="2" fill="currentColor" opacity="0.8"/>
-              <path d="M12 32 C12 20 20 12 32 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
-              <path d="M52 32 C52 20 44 12 32 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
-              <path d="M12 32 C12 44 20 52 32 52" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
-              <path d="M52 32 C52 44 44 52 32 52" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
-              <circle cx="8" cy="32" r="3" fill="currentColor" opacity="0.6"/>
-              <circle cx="56" cy="32" r="3" fill="currentColor" opacity="0.6"/>
-              <circle cx="32" cy="8" r="3" fill="currentColor" opacity="0.6"/>
-              <circle cx="32" cy="56" r="3" fill="currentColor" opacity="0.6"/>
-            </svg>
-          </div>
-          <div class="domain-card-body">
-            <h3 class="domain-card-title">Internet of Things</h3>
-            <p class="domain-card-desc">Connected devices, sensors, automation, smart systems, and real-world hardware-software integration.</p>
-            <ul class="domain-card-tags">
-              <li>Sensors</li>
-              <li>Connectivity</li>
-              <li>Automation</li>
-              <li>Smart Systems</li>
-            </ul>
-          </div>
-          <div class="domain-card-check" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-        </div>
-      </label>
-
-    </div>
-
-    <div class="ps-panel-actions">
-      <button class="btn-ps-next" id="step1Next" type="button" disabled>
-        <span>Continue to Team Details</span>
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-      <p class="ps-step-error" id="step1Error" role="alert"></p>
-    </div>
-  </section>
-
-
-  <!-- ===== STEP 2: TEAM DETAILS ===== -->
-  <section class="ps-step-panel" id="panel2" aria-label="Step 2: Team Details" hidden>
-    <div class="ps-panel-header">
-      <span class="ps-panel-eyebrow">Step 02</span>
-      <h2 class="ps-panel-title">Team Details</h2>
-      <p class="ps-panel-desc">Enter your Team Name, Team Leader, and Members below.</p>
-      <div class="ps-selected-domain" id="selectedDomainBadge" aria-live="polite"></div>
-    </div>
-
-    <form id="teamDetailsForm" class="ps-form" novalidate>
-
-      <fieldset class="ps-fieldset">
-        <legend class="ps-fieldset-legend">
-          <span class="ps-fieldset-num">A</span> Team Information
-        </legend>
-
-        <div class="ps-field-grid">
-          <div class="ps-field ps-field--full">
-            <label for="psTeamName" class="ps-label">TEAM NAME <span class="req">*</span></label>
-            <input type="text" id="psTeamName" name="teamName" class="ps-input" placeholder="e.g. Byte Brigade" required autocomplete="off">
-            <p class="ps-field-hint">This exact Team Name will be used during registration and statement unlocking.</p>
-            <p class="ps-field-error" data-error="psTeamName"></p>
-          </div>
-
-          <div class="ps-field">
-            <label for="psTeamLeader" class="ps-label">TEAM LEADER NAME <span class="req">*</span></label>
-            <input type="text" id="psTeamLeader" name="teamLeader" class="ps-input" placeholder="Full name of team leader" required>
-            <p class="ps-field-error" data-error="psTeamLeader"></p>
-          </div>
-
-          <div class="ps-field">
-            <label for="psNumMembers" class="ps-label">NUMBER OF MEMBERS <span class="req">*</span></label>
-            <select id="psNumMembers" name="numMembers" class="ps-input ps-select" required>
-              <option value="" disabled selected>Select team size</option>
-              <option value="1">1 Member</option>
-              <option value="2">2 Members</option>
-              <option value="3">3 Members</option>
-            </select>
-            <p class="ps-field-error" data-error="psNumMembers"></p>
-          </div>
-        </div>
-
-        <div id="psMemberFields" class="ps-member-fields" aria-live="polite"></div>
-      </fieldset>
-
-    </form>
-
-    <div class="ps-panel-actions ps-panel-actions--two">
-      <button class="btn-ps-back" id="step2Back" type="button">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span>Back</span>
-      </button>
-      <button class="btn-ps-next" id="step2Next" type="button">
-        <span>Review &amp; Confirm</span>
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-    </div>
-    <p class="ps-step-error" id="step2Error" role="alert"></p>
-  </section>
-
-
-  <!-- ===== STEP 3: REVIEW & CONFIRM ===== -->
-  <section class="ps-step-panel" id="panel3" aria-label="Step 3: Review and Confirm" hidden>
-    <div class="ps-panel-header">
-      <span class="ps-panel-eyebrow">Step 03</span>
-      <h2 class="ps-panel-title">Review &amp; Confirm</h2>
-      <p class="ps-panel-desc">Review your team details below. Click Confirm to save your team record in Supabase.</p>
-    </div>
-
-    <!-- Review Card -->
-    <div class="ps-review-card" id="reviewCard">
-      <div class="ps-review-section">
-        <h3 class="ps-review-section-title">
-          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7 10l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Selected Domain
-        </h3>
-        <p class="ps-review-value" id="reviewDomain">—</p>
-      </div>
-
-      <div class="ps-review-divider"></div>
-
-      <div class="ps-review-section">
-        <h3 class="ps-review-section-title">
-          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 10a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM2 17a8 8 0 0 1 16 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          Team Details
-        </h3>
-        <div class="ps-review-grid" id="reviewTeamGrid">
-          <div class="ps-review-item"><span class="ps-review-label">Team Name</span><span class="ps-review-val" id="reviewTeamName">—</span></div>
-          <div class="ps-review-item"><span class="ps-review-label">Team Leader</span><span class="ps-review-val" id="reviewTeamLeader">—</span></div>
-          <div class="ps-review-item"><span class="ps-review-label">No. of Members</span><span class="ps-review-val" id="reviewNumMembers">—</span></div>
-          <div class="ps-review-item ps-review-item--full"><span class="ps-review-label">Team Members</span><span class="ps-review-val" id="reviewMemberNames">—</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="ps-panel-actions ps-panel-actions--two">
-      <button class="btn-ps-back" id="step3Back" type="button">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span>Edit Details</span>
-      </button>
-      <button class="btn-ps-confirm" id="confirmPSBtn" type="button">
-        <span id="confirmBtnText">Confirm Team Details</span>
-        <svg class="btn-spinner" id="confirmSpinner" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="display:none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" stroke-dasharray="40 20" stroke-linecap="round"/></svg>
-      </button>
-    </div>
-    <p class="ps-step-error" id="step3Error" role="alert"></p>
-  </section>
-
-
-  <!-- ===== SUCCESS STATE ===== -->
-  <section class="ps-success-panel" id="successPanel" hidden aria-label="Submission successful">
-    <div class="ps-success-inner">
-      <div class="ps-success-icon" aria-hidden="true">
-        <svg viewBox="0 0 80 80" fill="none">
-          <circle cx="40" cy="40" r="38" stroke="currentColor" stroke-width="2" opacity="0.2"/>
-          <circle cx="40" cy="40" r="28" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
-          <path d="M24 40l10 10 22-22" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-      <h2 class="ps-success-title">Team Registered!</h2>
-      <p class="ps-success-desc">Team <strong id="successTeamNameDisplay"></strong> is registered under <strong id="successDomainDisplay"></strong> domain.</p>
-      <p class="ps-success-next">Next, complete your team's registration &amp; payment to lock your spot.</p>
-      <div class="ps-success-actions">
-        <a href="register.html" class="btn-ps-confirm ps-success-cta">
-          <span>Proceed to Registration &rarr;</span>
+    <!-- HEADER -->
+    <header class="site-header" id="siteHeader">
+      <div class="header-inner">
+        <a href="index.html" class="site-logo" aria-label="ZYPHOR'26 Home">
+          <img
+            src="images/logo-transparent.png"
+            alt="ZYPHOR'26"
+            class="site-logo-img"
+          />
         </a>
+        <nav class="main-nav" id="mainNav">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="application.html" class="nav-link nav-link--active"
+            >Application</a
+          >
+          <a href="problem-statement.html" class="nav-link">
+            problem Statement</a
+          >
+          <a href="register.html" class="nav-link nav-link--cta"
+            >Register Now</a
+          >
+        </nav>
+        <button
+          class="nav-toggle"
+          id="navToggle"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- PAGE HERO -->
+    <section class="ps-hero">
+      <div class="ps-hero-bg" aria-hidden="true">
+        <div class="ps-hero-glow"></div>
+      </div>
+      <div class="ps-hero-content">
+        <p class="eyebrow">Step 1 of Registration</p>
+        <h1 class="ps-hero-title">
+          Problem<span class="hero-title-accent">
+            Statement &amp; Team Details</span
+          >
+        </h1>
+        <p class="ps-hero-sub">
+          Select your domain and enter your team details to initialize your team
+          record for ZYPHOR'26.
+        </p>
+      </div>
+    </section>
+
+    <!-- STEP PROGRESS BAR -->
+    <div class="ps-progress-wrap" id="progressWrap">
+      <div class="ps-progress-track">
+        <div class="ps-progress-fill" id="progressFill"></div>
+      </div>
+      <div class="ps-steps">
+        <div class="ps-step active" id="stepDot1" data-step="1">
+          <div class="ps-step-dot"><span>01</span></div>
+          <p class="ps-step-label">Domain</p>
+        </div>
+        <div class="ps-step" id="stepDot2" data-step="2">
+          <div class="ps-step-dot"><span>02</span></div>
+          <p class="ps-step-label">Team Details</p>
+        </div>
+        <div class="ps-step" id="stepDot3" data-step="3">
+          <div class="ps-step-dot"><span>03</span></div>
+          <p class="ps-step-label">Review &amp; Confirm</p>
+        </div>
       </div>
     </div>
-  </section>
 
-</main>
+    <!-- MAIN FORM CONTAINER -->
+    <main class="ps-main" id="psMain">
+      <!-- ===== STEP 1: DOMAIN SELECTION ===== -->
+      <section
+        class="ps-step-panel active"
+        id="panel1"
+        aria-label="Step 1: Domain Selection"
+      >
+        <div class="ps-panel-header">
+          <span class="ps-panel-eyebrow">Step 01</span>
+          <h2 class="ps-panel-title">Choose Your Domain</h2>
+          <p class="ps-panel-desc">
+            Select the technical domain your team will compete in.
+          </p>
+        </div>
 
-<!-- FOOTER -->
-<footer class="site-footer">
+        <div
+          class="domain-cards"
+          id="domainCards"
+          role="radiogroup"
+          aria-label="Select domain"
+        >
+          <label class="domain-card" for="domainAI" id="cardAI">
+            <input
+              type="radio"
+              name="domain"
+              id="domainAI"
+              value="AI"
+              class="domain-radio"
+            />
+            <div class="domain-card-inner">
+              <div class="domain-card-icon">
+                <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                  <circle
+                    cx="32"
+                    cy="32"
+                    r="28"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    opacity="0.3"
+                  />
+                  <circle
+                    cx="32"
+                    cy="32"
+                    r="8"
+                    fill="currentColor"
+                    opacity="0.8"
+                  />
+                  <path
+                    d="M32 4 L32 16 M32 48 L32 60 M4 32 L16 32 M48 32 L60 32"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    d="M13 13 L21 21 M43 43 L51 51 M51 13 L43 21 M21 43 L13 51"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    opacity="0.6"
+                  />
+                  <circle
+                    cx="32"
+                    cy="32"
+                    r="16"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    stroke-dasharray="4 4"
+                    opacity="0.4"
+                  />
+                </svg>
+              </div>
+              <div class="domain-card-body">
+                <h3 class="domain-card-title">Artificial Intelligence</h3>
+                <p class="domain-card-desc">
+                  Machine learning, intelligent systems, AI-powered solutions,
+                  neural networks, and data-driven innovation.
+                </p>
+                <ul class="domain-card-tags">
+                  <li>Machine Learning</li>
+                  <li>Neural Networks</li>
+                  <li>Computer Vision</li>
+                  <li>NLP</li>
+                </ul>
+              </div>
+              <div class="domain-card-check" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M5 12l5 5L19 7"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
+          </label>
 
-    <div class="footer-logo">
-        <img src="images/logo-transparent.png" alt="ZYPHOR'26">
-    </div>
+          <label class="domain-card" for="domainIoT" id="cardIoT">
+            <input
+              type="radio"
+              name="domain"
+              id="domainIoT"
+              value="IoT"
+              class="domain-radio"
+            />
+            <div class="domain-card-inner">
+              <div class="domain-card-icon">
+                <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                  <rect
+                    x="24"
+                    y="24"
+                    width="16"
+                    height="16"
+                    rx="2"
+                    fill="currentColor"
+                    opacity="0.8"
+                  />
+                  <path
+                    d="M12 32 C12 20 20 12 32 12"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    opacity="0.5"
+                  />
+                  <path
+                    d="M52 32 C52 20 44 12 32 12"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    opacity="0.5"
+                  />
+                  <path
+                    d="M12 32 C12 44 20 52 32 52"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    opacity="0.5"
+                  />
+                  <path
+                    d="M52 32 C52 44 44 52 32 52"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    opacity="0.5"
+                  />
+                  <circle
+                    cx="8"
+                    cy="32"
+                    r="3"
+                    fill="currentColor"
+                    opacity="0.6"
+                  />
+                  <circle
+                    cx="56"
+                    cy="32"
+                    r="3"
+                    fill="currentColor"
+                    opacity="0.6"
+                  />
+                  <circle
+                    cx="32"
+                    cy="8"
+                    r="3"
+                    fill="currentColor"
+                    opacity="0.6"
+                  />
+                  <circle
+                    cx="32"
+                    cy="56"
+                    r="3"
+                    fill="currentColor"
+                    opacity="0.6"
+                  />
+                </svg>
+              </div>
+              <div class="domain-card-body">
+                <h3 class="domain-card-title">Internet of Things</h3>
+                <p class="domain-card-desc">
+                  Connected devices, sensors, automation, smart systems, and
+                  real-world hardware-software integration.
+                </p>
+                <ul class="domain-card-tags">
+                  <li>Sensors</li>
+                  <li>Connectivity</li>
+                  <li>Automation</li>
+                  <li>Smart Systems</li>
+                </ul>
+              </div>
+              <div class="domain-card-check" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M5 12l5 5L19 7"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
+          </label>
+        </div>
 
-    <p class="footer-title">
-        ZYPHOR'26 — National Level Technical Hackathon
-    </p>
+        <div class="ps-panel-actions">
+          <button class="btn-ps-next" id="step1Next" type="button" disabled>
+            <span>Continue to Team Details</span>
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path
+                d="M5 12h14M13 6l6 6-6 6"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+          <p class="ps-step-error" id="step1Error" role="alert"></p>
+        </div>
+      </section>
 
-    <p class="footer-copy">
-        © 2026 ZYPHOR'26. All Rights Reserved.
-    </p>
+      <!-- ===== STEP 2: TEAM DETAILS ===== -->
+      <section
+        class="ps-step-panel"
+        id="panel2"
+        aria-label="Step 2: Team Details"
+        hidden
+      >
+        <div class="ps-panel-header">
+          <span class="ps-panel-eyebrow">Step 02</span>
+          <h2 class="ps-panel-title">Team Details</h2>
+          <p class="ps-panel-desc">
+            Enter your Team Name, Team Leader, and Members below.
+          </p>
+          <div
+            class="ps-selected-domain"
+            id="selectedDomainBadge"
+            aria-live="polite"
+          ></div>
+        </div>
 
-</footer>
+        <form id="teamDetailsForm" class="ps-form" novalidate>
+          <fieldset class="ps-fieldset">
+            <legend class="ps-fieldset-legend">
+              <span class="ps-fieldset-num">A</span> Team Information
+            </legend>
 
-<script src="galaxy.js"></script>
-<script type="module" src="ps-script.js"></script>
-</body>
+            <div class="ps-field-grid">
+              <div class="ps-field ps-field--full">
+                <label for="psTeamName" class="ps-label"
+                  >TEAM NAME <span class="req">*</span></label
+                >
+                <input
+                  type="text"
+                  id="psTeamName"
+                  name="teamName"
+                  class="ps-input"
+                  placeholder="e.g. Byte Brigade"
+                  required
+                  autocomplete="off"
+                />
+                <p class="ps-field-hint">
+                  This exact Team Name will be used during registration and
+                  statement unlocking.
+                </p>
+                <p class="ps-field-error" data-error="psTeamName"></p>
+              </div>
+
+              <div class="ps-field">
+                <label for="psTeamLeader" class="ps-label"
+                  >TEAM LEADER NAME <span class="req">*</span></label
+                >
+                <input
+                  type="text"
+                  id="psTeamLeader"
+                  name="teamLeader"
+                  class="ps-input"
+                  placeholder="Full name of team leader"
+                  required
+                />
+                <p class="ps-field-error" data-error="psTeamLeader"></p>
+              </div>
+
+              <div class="ps-field">
+                <label for="psNumMembers" class="ps-label"
+                  >NUMBER OF MEMBERS <span class="req">*</span></label
+                >
+                <select
+                  id="psNumMembers"
+                  name="numMembers"
+                  class="ps-input ps-select"
+                  required
+                >
+                  <option value="" disabled selected>Select team size</option>
+                  <option value="1">1 Member</option>
+                  <option value="2">2 Members</option>
+                  <option value="3">3 Members</option>
+                </select>
+                <p class="ps-field-error" data-error="psNumMembers"></p>
+              </div>
+            </div>
+
+            <div
+              id="psMemberFields"
+              class="ps-member-fields"
+              aria-live="polite"
+            ></div>
+          </fieldset>
+        </form>
+
+        <div class="ps-panel-actions ps-panel-actions--two">
+          <button class="btn-ps-back" id="step2Back" type="button">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path
+                d="M19 12H5M11 18l-6-6 6-6"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span>Back</span>
+          </button>
+          <button class="btn-ps-next" id="step2Next" type="button">
+            <span>Review &amp; Confirm</span>
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path
+                d="M5 12h14M13 6l6 6-6 6"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+        <p class="ps-step-error" id="step2Error" role="alert"></p>
+      </section>
+
+      <!-- ===== STEP 3: REVIEW & CONFIRM ===== -->
+      <section
+        class="ps-step-panel"
+        id="panel3"
+        aria-label="Step 3: Review and Confirm"
+        hidden
+      >
+        <div class="ps-panel-header">
+          <span class="ps-panel-eyebrow">Step 03</span>
+          <h2 class="ps-panel-title">Review &amp; Confirm</h2>
+          <p class="ps-panel-desc">
+            Review your team details below. Click Confirm to save your team
+            record in Supabase.
+          </p>
+        </div>
+
+        <!-- Review Card -->
+        <div class="ps-review-card" id="reviewCard">
+          <div class="ps-review-section">
+            <h3 class="ps-review-section-title">
+              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <circle
+                  cx="10"
+                  cy="10"
+                  r="9"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                />
+                <path
+                  d="M7 10l2 2 4-4"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              Selected Domain
+            </h3>
+            <p class="ps-review-value" id="reviewDomain">—</p>
+          </div>
+
+          <div class="ps-review-divider"></div>
+
+          <div class="ps-review-section">
+            <h3 class="ps-review-section-title">
+              <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path
+                  d="M10 10a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM2 17a8 8 0 0 1 16 0"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+              </svg>
+              Team Details
+            </h3>
+            <div class="ps-review-grid" id="reviewTeamGrid">
+              <div class="ps-review-item">
+                <span class="ps-review-label">Team Name</span
+                ><span class="ps-review-val" id="reviewTeamName">—</span>
+              </div>
+              <div class="ps-review-item">
+                <span class="ps-review-label">Team Leader</span
+                ><span class="ps-review-val" id="reviewTeamLeader">—</span>
+              </div>
+              <div class="ps-review-item">
+                <span class="ps-review-label">No. of Members</span
+                ><span class="ps-review-val" id="reviewNumMembers">—</span>
+              </div>
+              <div class="ps-review-item ps-review-item--full">
+                <span class="ps-review-label">Team Members</span
+                ><span class="ps-review-val" id="reviewMemberNames">—</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ps-panel-actions ps-panel-actions--two">
+          <button class="btn-ps-back" id="step3Back" type="button">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path
+                d="M19 12H5M11 18l-6-6 6-6"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span>Edit Details</span>
+          </button>
+          <button class="btn-ps-confirm" id="confirmPSBtn" type="button">
+            <span id="confirmBtnText">Confirm Team Details</span>
+            <svg
+              class="btn-spinner"
+              id="confirmSpinner"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+              style="display: none"
+            >
+              <circle
+                cx="12"
+                cy="12"
+                r="9"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-dasharray="40 20"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+        </div>
+        <p class="ps-step-error" id="step3Error" role="alert"></p>
+      </section>
+
+      <!-- ===== SUCCESS STATE ===== -->
+      <section
+        class="ps-success-panel"
+        id="successPanel"
+        hidden
+        aria-label="Submission successful"
+      >
+        <div class="ps-success-inner">
+          <div class="ps-success-icon" aria-hidden="true">
+            <svg viewBox="0 0 80 80" fill="none">
+              <circle
+                cx="40"
+                cy="40"
+                r="38"
+                stroke="currentColor"
+                stroke-width="2"
+                opacity="0.2"
+              />
+              <circle
+                cx="40"
+                cy="40"
+                r="28"
+                stroke="currentColor"
+                stroke-width="1.5"
+                opacity="0.4"
+              />
+              <path
+                d="M24 40l10 10 22-22"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+          <h2 class="ps-success-title">Team Registered!</h2>
+          <p class="ps-success-desc">
+            Team <strong id="successTeamNameDisplay"></strong> is registered
+            under <strong id="successDomainDisplay"></strong> domain.
+          </p>
+          <p class="ps-success-next">
+            Next, complete your team's registration &amp; payment to lock your
+            spot.
+          </p>
+          <div class="ps-success-actions">
+            <a href="register.html" class="btn-ps-confirm ps-success-cta">
+              <span>Proceed to Registration &rarr;</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="footer-logo">
+        <img src="images/logo-transparent.png" alt="ZYPHOR'26" />
+      </div>
+
+      <p class="footer-title">ZYPHOR'26 — National Level Technical Hackathon</p>
+
+      <p class="footer-copy">© 2026 ZYPHOR'26. All Rights Reserved.</p>
+    </footer>
+
+    <script src="galaxy.js"></script>
+    <script type="module" src="ps-script.js"></script>
+  </body>
 </html>

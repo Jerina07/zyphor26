@@ -1,308 +1,442 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      ZYPHOR'26 — Technical Hackathon | Grace College of Engineering
+    </title>
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+    <meta
+      name="description"
+      content="ZYPHOR'26 — a national-level technical hackathon hosted by Zyphor Panel GCOE, Grace College of Engineering, Mullakadu, Thoothukudi."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ZYPHOR'26 — Technical Hackathon | Grace College of Engineering</title>
-  <meta name="description"
-    content="ZYPHOR'26 — a national-level technical hackathon hosted by Zyphor Panel GCOE, Grace College of Engineering, Mullakadu, Thoothukudi." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Poppins:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
+  <body>
+    <!-- 3D Galaxy Canvas Element -->
+    <canvas id="galaxyCanvas"></canvas>
+    <div class="grain-overlay" aria-hidden="true"></div>
 
-<body>
+    <!-- ================= HEADER ================= -->
+    <header class="site-header" id="siteHeader">
+      <div class="header-inner">
+        <a href="index.html" class="site-logo" aria-label="ZYPHOR'26 Home">
+          <img
+            src="images/logo-transparent.png"
+            alt="ZYPHOR'26"
+            class="site-logo-img"
+          />
+        </a>
 
-  <!-- 3D Galaxy Canvas Element -->
-  <canvas id="galaxyCanvas"></canvas>
-  <div class="grain-overlay" aria-hidden="true"></div>
+        <nav class="main-nav" id="mainNav">
+          <a href="index.html" class="nav-link nav-link--active">Home</a>
+          <a href="application.html" class="nav-link">Application</a>
+          <a href="problem-statement.html" class="nav-link">
+            problem Statement</a
+          >
+          <a href="register.html" class="nav-link nav-link--cta"
+            >Register Now</a
+          >
+        </nav>
 
-  <!-- ================= HEADER ================= -->
-  <header class="site-header" id="siteHeader">
-    <div class="header-inner">
-      <a href="index.html" class="site-logo" aria-label="ZYPHOR'26 Home">
-        <img src="images/logo-transparent.png" alt="ZYPHOR'26" class="site-logo-img">
-      </a>
+        <button
+          class="nav-toggle"
+          id="navToggle"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
 
-      <nav class="main-nav" id="mainNav">
-        <a href="index.html" class="nav-link nav-link--active">Home</a>
-        <a href="application.html" class="nav-link">Application</a>
-        <a href="problem-statement.html" class="nav-link"> problem Statement</a>
-        <a href="register.html" class="nav-link nav-link--cta">Register Now</a>
-      </nav>
-
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </header>
-
-  <!-- ================= HERO ================= -->
-  <section class="hero" id="top">
-    <div class="hero-bg" aria-hidden="true">
-      <svg class="hero-lines" viewBox="0 0 1200 800" preserveAspectRatio="none">
-        <path class="line line-1" d="M-50,120 C 250,60 550,220 1250,90" />
-        <path class="line line-2" d="M-50,650 C 300,720 700,560 1250,700" />
-        <path class="line line-3" d="M-50,400 C 350,340 850,460 1250,380" />
-      </svg>
-      <div class="hero-glow"></div>
-    </div>
-
-    <div class="hero-content reveal">
-      <div class="hero-logo" aria-label="ZYPHOR'26 logo">
-        <span class="hero-logo-mark">ZYPHOR'26</span>
+    <!-- ================= HERO ================= -->
+    <section class="hero" id="top">
+      <div class="hero-bg" aria-hidden="true">
+        <svg
+          class="hero-lines"
+          viewBox="0 0 1200 800"
+          preserveAspectRatio="none"
+        >
+          <path class="line line-1" d="M-50,120 C 250,60 550,220 1250,90" />
+          <path class="line line-2" d="M-50,650 C 300,720 700,560 1250,700" />
+          <path class="line line-3" d="M-50,400 C 350,340 850,460 1250,380" />
+        </svg>
+        <div class="hero-glow"></div>
       </div>
 
-      <h1 class="hero-title">ZYPHOR<span class="hero-title-accent">'26</span></h1>
-
-      <p class="hero-tagline">NATIONAL LEVEL TECHNICAL HACKATHON</p>
-      <p class="hero-sub">DEPARTMENT OF CSE &middot; GRACE COLLEGE OF ENGINEERING</p>
-      <p class="hero-host">HOSTED BY ZYPHOR PANEL GCOE</p>
-
-      <div class="hero-meta">
-        <span class="hero-date">28 AUGUST 2026 &nbsp;&bull;&nbsp; FRIDAY</span>
-        <span class="hero-divider" aria-hidden="true"></span>
-        <span class="hero-venue">
-          <svg class="pin-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z" stroke="currentColor" stroke-width="1.4" />
-            <circle cx="12" cy="9" r="2.4" stroke="currentColor" stroke-width="1.4" />
-          </svg>
-          GRACE COLLEGE AUDITORIUM, MULLAKADU, THOOTHUKUDI
-        </span>
-      </div>
-
-      <!-- Event countdown: intentionally placed BELOW the event details -->
-      <div class="home-countdown" id="homeCountdown" aria-label="Countdown to ZYPHOR'26">
-        <div class="home-countdown-unit">
-          <strong id="homeDays">00</strong>
-          <span>DAYS</span>
+      <div class="hero-content reveal">
+        <div class="hero-logo" aria-label="ZYPHOR'26 logo">
+          <span class="hero-logo-mark">ZYPHOR'26</span>
         </div>
-        <div class="home-countdown-sep">:</div>
-        <div class="home-countdown-unit">
-          <strong id="homeHours">00</strong>
-          <span>HOURS</span>
+
+        <h1 class="hero-title">
+          ZYPHOR<span class="hero-title-accent">'26</span>
+        </h1>
+
+        <p class="hero-tagline">NATIONAL LEVEL TECHNICAL HACKATHON</p>
+        <p class="hero-sub">
+          DEPARTMENT OF CSE &middot; GRACE COLLEGE OF ENGINEERING
+        </p>
+        <p class="hero-host">HOSTED BY ZYPHOR PANEL GCOE</p>
+
+        <div class="hero-meta">
+          <span class="hero-date"
+            >28 AUGUST 2026 &nbsp;&bull;&nbsp; FRIDAY</span
+          >
+          <span class="hero-divider" aria-hidden="true"></span>
+          <span class="hero-venue">
+            <svg
+              class="pin-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z"
+                stroke="currentColor"
+                stroke-width="1.4"
+              />
+              <circle
+                cx="12"
+                cy="9"
+                r="2.4"
+                stroke="currentColor"
+                stroke-width="1.4"
+              />
+            </svg>
+            GRACE COLLEGE AUDITORIUM, MULLAKADU, THOOTHUKUDI
+          </span>
         </div>
-        <div class="home-countdown-sep">:</div>
-        <div class="home-countdown-unit">
-          <strong id="homeMinutes">00</strong>
-          <span>MINUTES</span>
-        </div>
-        <div class="home-countdown-sep">:</div>
-        <div class="home-countdown-unit">
-          <strong id="homeSeconds">00</strong>
-          <span>SECONDS</span>
-        </div>
-      </div>
-    </div>
 
-    <div class="scroll-cue reveal" aria-hidden="true">
-      <span></span>
-    </div>
-  </section>
-
-  <!-- ================= ACTION CARDS ================= -->
-  <section class="action-section reveal">
-    <div class="action-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
-      <a href="application.html" class="action-card action-card--outline">
-        <div class="action-card-top">
-          <span class="action-eyebrow">STEP 01</span>
-          <span class="action-tag">Application</span>
-        </div>
-        <h3>Choose Domain &amp; Team Details</h3>
-        <p>Select your domain (AI / IoT) and submit team details to create your team profile.</p>
-        <span class="action-arrow" aria-hidden="true">&rarr;</span>
-      </a>
-
-      <a href="register.html" class="action-card action-card--solid">
-        <div class="action-card-top">
-          <span class="action-eyebrow">STEP 02</span>
-          <span class="action-tag">Registration</span>
-        </div>
-        <h3>Register &amp; Payment</h3>
-        <p>Link your team name, select Veg/Non-Veg meals, and pay ₹250/member.</p>
-        <span class="action-arrow" aria-hidden="true">&rarr;</span>
-      </a>
-
-      <a href="problem-statement.html" class="action-card action-card--outline">
-        <div class="action-card-top">
-          <span class="action-eyebrow">27-08-2026</span>
-          <span class="action-tag"> Problem Statements</span>
-        </div>
-        <h3>Problem Statements Release</h3>
-        <p>Problem statements unlock on 27-08-2026 at 9:00 AM. Enter Team Name to select your challenge.</p>
-        <span class="action-arrow" aria-hidden="true">&rarr;</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- ================= HACKATHON INSTRUCTIONS ================= -->
-  <main class="participate-page">
-
-    <section class="about-section reveal">
-      <p class="eyebrow">Official Guidelines</p>
-      <h3 class="section-title">HACKATHON INSTRUCTIONS</h3>
-      <div
-        style="background: rgba(255,255,255,0.02); border: 1px solid rgba(212,168,67,0.3); border-radius: 20px; padding: 2.5rem; margin-top: 1.5rem; backdrop-filter: blur(14px);">
-        <ul
-          style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 0.8rem 2rem; color: var(--cream-60); font-size: 0.9rem; line-height: 1.7; padding-left: 1.25rem;">
-          <li><strong>Date:</strong> 28/08/2026</li>
-          <li>All participants must report to the Grace College Auditorium by <strong>9:00 AM</strong>.</li>
-          <li>The hackathon will conclude at <strong>5:00 PM</strong>.</li>
-          <li>Per Head Online payment cost <strong>₹250</strong>. Offline payment cost <strong>₹300</strong>.</li>
-          <li>The last date for registration is 24/08/2026. Please make sure that you complete your registration before the deadline.</li>
-          <li>Each team can have a maximum of <strong>3 participants</strong>.</li>
-          <li>A WhatsApp group will be created, and the team leaders can join the group.</li>
-          <li>Each team must prepare a <strong>PowerPoint Presentation (PPT)</strong> and bring it with them.</li>
-          <li>Each team will be given <strong>5 minutes</strong> to present and explain their PPT.</li>
-          <li>Participants must bring their own laptops for the hackathon.</li>
-          <li>Once you have registered, you will be able to select your preferred problem statement one day before the hackathon. Registrations will not be accepted after the deadline.</li>
-          <li>The problem statements will be released one day before the hackathon on <strong>27-08-2026 at 9:00
-              AM</strong>.</li>
-          <li>Participants must develop their website at the hackathon venue based on the selected problem statement.
-          </li>
-          <li>Cash prizes will be awarded to the 1st, 2nd, and 3rd place winners.</li>
-          <li>Certificates will be provided to all participants.</li>
-          <li>Lunch will be provided for all participants.</li>
-        </ul>
-
+        <!-- Event countdown: intentionally placed BELOW the event details -->
         <div
-          style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-          <div>
-            <h4
-              style="font-family: var(--font-display); font-size: 1.1rem; color: var(--gold); margin-bottom: 0.25rem;">
-              Contact Details</h4>
-            <p style="font-size: 0.88rem; color: var(--cream-60); margin: 0;">Phone: <strong
-                style="color: var(--cream);">+91 8072584827</strong> | Email: <a href="mailto:zyphor26cse@gmail.com"
-                style="color: var(--gold);">zyphor26cse@gmail.com</a></p>
+          class="home-countdown"
+          id="homeCountdown"
+          aria-label="Countdown to ZYPHOR'26"
+        >
+          <div class="home-countdown-unit">
+            <strong id="homeDays">00</strong>
+            <span>DAYS</span>
           </div>
-          <a href="register.html" class="nav-link nav-link--cta" style="padding: 10px 24px;">Register Team Now
-            &rarr;</a>
+          <div class="home-countdown-sep">:</div>
+          <div class="home-countdown-unit">
+            <strong id="homeHours">00</strong>
+            <span>HOURS</span>
+          </div>
+          <div class="home-countdown-sep">:</div>
+          <div class="home-countdown-unit">
+            <strong id="homeMinutes">00</strong>
+            <span>MINUTES</span>
+          </div>
+          <div class="home-countdown-sep">:</div>
+          <div class="home-countdown-unit">
+            <strong id="homeSeconds">00</strong>
+            <span>SECONDS</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll-cue reveal" aria-hidden="true">
+        <span></span>
+      </div>
+    </section>
+
+    <!-- ================= ACTION CARDS ================= -->
+    <section class="action-section reveal">
+      <div
+        class="action-grid"
+        style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))"
+      >
+        <a href="application.html" class="action-card action-card--outline">
+          <div class="action-card-top">
+            <span class="action-eyebrow">STEP 01</span>
+            <span class="action-tag">Application</span>
+          </div>
+          <h3>Choose Domain &amp; Team Details</h3>
+          <p>
+            Select your domain (AI / IoT) and submit team details to create your
+            team profile.
+          </p>
+          <span class="action-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+
+        <a href="register.html" class="action-card action-card--solid">
+          <div class="action-card-top">
+            <span class="action-eyebrow">STEP 02</span>
+            <span class="action-tag">Registration</span>
+          </div>
+          <h3>Register &amp; Payment</h3>
+          <p>
+            Link your team name, select Veg/Non-Veg meals, and pay ₹250/member.
+          </p>
+          <span class="action-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+
+        <a
+          href="problem-statement.html"
+          class="action-card action-card--outline"
+        >
+          <div class="action-card-top">
+            <span class="action-eyebrow">27-08-2026</span>
+            <span class="action-tag"> Problem Statements</span>
+          </div>
+          <h3>Problem Statements Release</h3>
+          <p>
+            Problem statements unlock on 27-08-2026 at 9:00 AM. Enter Team Name
+            to select your challenge.
+          </p>
+          <span class="action-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ================= HACKATHON INSTRUCTIONS ================= -->
+    <main class="participate-page">
+      <section class="about-section reveal">
+        <p class="eyebrow">Official Guidelines</p>
+        <h3 class="section-title">HACKATHON INSTRUCTIONS</h3>
+        <div
+          style="
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(212, 168, 67, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-top: 1.5rem;
+            backdrop-filter: blur(14px);
+          "
+        >
+          <ul
+            style="
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+              gap: 0.8rem 2rem;
+              color: var(--cream-60);
+              font-size: 0.9rem;
+              line-height: 1.7;
+              padding-left: 1.25rem;
+            "
+          >
+            <li><strong>Date:</strong> 28/08/2026</li>
+            <li>
+              All participants must report to the Grace College Auditorium by
+              <strong>9:00 AM</strong>.
+            </li>
+            <li>The hackathon will conclude at <strong>5:00 PM</strong>.</li>
+            <li>
+              Per Head Online payment cost <strong>₹250</strong>. Offline
+              payment cost <strong>₹300</strong>.
+            </li>
+            <li>
+              The last date for registration is 24/08/2026. Please make sure
+              that you complete your registration before the deadline.
+            </li>
+            <li>
+              Each team can have a maximum of <strong>3 participants</strong>.
+            </li>
+            <li>
+              A WhatsApp group will be created, and the team leaders can join
+              the group.
+            </li>
+            <li>
+              Each team must prepare a
+              <strong>PowerPoint Presentation (PPT)</strong> and bring it with
+              them.
+            </li>
+            <li>
+              Each team will be given <strong>5 minutes</strong> to present and
+              explain their PPT.
+            </li>
+            <li>
+              Participants must bring their own laptops for the hackathon.
+            </li>
+            <li>
+              Once you have registered, you will be able to select your
+              preferred problem statement one day before the hackathon.
+              Registrations will not be accepted after the deadline.
+            </li>
+            <li>
+              The problem statements will be released one day before the
+              hackathon on <strong>27-08-2026 at 9:00 AM</strong>.
+            </li>
+            <li>
+              Participants must develop their website at the hackathon venue
+              based on the selected problem statement.
+            </li>
+            <li>
+              Cash prizes will be awarded to the 1st, 2nd, and 3rd place
+              winners.
+            </li>
+            <li>Certificates will be provided to all participants.</li>
+            <li>Lunch will be provided for all participants.</li>
+          </ul>
+
+          <div
+            style="
+              margin-top: 2rem;
+              padding-top: 1.5rem;
+              border-top: 1px solid rgba(255, 255, 255, 0.08);
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              flex-wrap: wrap;
+              gap: 1rem;
+            "
+          >
+            <div>
+              <h4
+                style="
+                  font-family: var(--font-display);
+                  font-size: 1.1rem;
+                  color: var(--gold);
+                  margin-bottom: 0.25rem;
+                "
+              >
+                Contact Details
+              </h4>
+              <p style="font-size: 0.88rem; color: var(--cream-60); margin: 0">
+                Phone:
+                <strong style="color: var(--cream)">+91 8072584827</strong> |
+                Email:
+                <a
+                  href="mailto:zyphor26cse@gmail.com"
+                  style="color: var(--gold)"
+                  >zyphor26cse@gmail.com</a
+                >
+              </p>
+            </div>
+            <a
+              href="register.html"
+              class="nav-link nav-link--cta"
+              style="padding: 10px 24px"
+              >Register Team Now &rarr;</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- =========================================================
+     ZYPHOR'26 — VENUE / LOCATION
+     ========================================================= -->
+
+    <section class="venue-section" id="venue">
+      <div class="venue-container">
+        <div class="venue-content">
+          <span class="venue-label">EVENT VENUE</span>
+
+          <h2>Grace College of Engineering</h2>
+
+          <p class="venue-address">Mullakadu, Thoothukudi, Tamil Nadu</p>
+
+          <p class="venue-description">
+            Join us at Grace College Auditorium for ZYPHOR'26 National Level
+            Technical Hackathon.
+          </p>
+
+          <a
+            href="https://www.google.com/maps/place/Grace+College+of+Engineering/@8.723915,78.1060868,17z/data=!3m1!4b1!4m6!3m5!1s0x3b03f2088748fd11:0xbed9dd387c1ef85f!8m2!3d8.723915!4d78.1086617!16s%2Fg%2F11r8l4gm2?entry=ttu"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="venue-map-btn"
+          >
+            <span>📍</span>
+            VIEW ON GOOGLE MAPS
+          </a>
+        </div>
+
+        <div class="venue-map">
+          <iframe
+            src="https://www.google.com/maps?q=8.723915,78.1086617&z=17&output=embed"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+          >
+          </iframe>
+
+          <div class="map-overlay"></div>
         </div>
       </div>
     </section>
 
-  </main>
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+      <div class="footer-logo">
+        <img src="images/logo-transparent.png" alt="ZYPHOR'26" />
+      </div>
 
-  <!-- =========================================================
-     ZYPHOR'26 — VENUE / LOCATION
-     ========================================================= -->
+      <p>ZYPHOR'26 — National Level Technical Hackathon</p>
+      <p>© 2026 ZYPHOR'26. All Rights Reserved.</p>
+    </footer>
 
-<section class="venue-section" id="venue">
+    <script src="galaxy.js"></script>
+    <script>
+      const siteHeader = document.getElementById("siteHeader");
+      window.addEventListener(
+        "scroll",
+        () => {
+          siteHeader.classList.toggle("scrolled", window.scrollY > 12);
+        },
+        { passive: true },
+      );
 
-    <div class="venue-container">
+      const navToggle = document.getElementById("navToggle");
+      const mainNav = document.getElementById("mainNav");
+      navToggle?.addEventListener("click", () => {
+        const open = mainNav.classList.toggle("is-open");
+        navToggle.setAttribute("aria-expanded", String(open));
+      });
 
-        <div class="venue-content">
+      const revealEls = document.querySelectorAll(".reveal");
+      if (revealEls.length) {
+        const obs = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add("is-visible");
+                obs.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
+        );
+        revealEls.forEach((el) => obs.observe(el));
+      }
 
-            <span class="venue-label">EVENT VENUE</span>
+      /* Home event countdown — 28 August 2026, 9:00 AM IST */
+      const homeCountdownTarget = new Date(
+        "2026-08-28T09:00:00+05:30",
+      ).getTime();
 
-            <h2>
-                Grace College of Engineering
-            </h2>
+      function updateHomeCountdown() {
+        const diff = Math.max(0, homeCountdownTarget - Date.now());
 
-            <p class="venue-address">
-                Mullakadu, Thoothukudi, Tamil Nadu
-            </p>
+        const days = Math.floor(diff / 86400000);
+        const hours = Math.floor((diff % 86400000) / 3600000);
+        const minutes = Math.floor((diff % 3600000) / 60000);
+        const seconds = Math.floor((diff % 60000) / 1000);
 
-            <p class="venue-description">
-                Join us at Grace College Auditorium for
-                ZYPHOR'26 National Level Technical Hackathon.
-            </p>
+        const set = (id, value) => {
+          const el = document.getElementById(id);
+          if (el) el.textContent = String(value).padStart(2, "0");
+        };
 
-            <a
-                href="https://www.google.com/maps/place/Grace+College+of+Engineering/@8.723915,78.1060868,17z/data=!3m1!4b1!4m6!3m5!1s0x3b03f2088748fd11:0xbed9dd387c1ef85f!8m2!3d8.723915!4d78.1086617!16s%2Fg%2F11r8l4gm2?entry=ttu"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="venue-map-btn"
-            >
-                <span>📍</span>
-                VIEW ON GOOGLE MAPS
-            </a>
+        set("homeDays", days);
+        set("homeHours", hours);
+        set("homeMinutes", minutes);
+        set("homeSeconds", seconds);
+      }
 
-        </div>
-
-        <div class="venue-map">
-
-            <iframe
-                src="https://www.google.com/maps?q=8.723915,78.1086617&z=17&output=embed"
-                loading="lazy"
-                allowfullscreen
-                referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-
-            <div class="map-overlay"></div>
-
-        </div>
-
-    </div>
-
-</section>
-
-  <!-- ================= FOOTER ================= -->
-  <footer class="site-footer">
-    <div class="footer-logo">
-        <img src="images/logo-transparent.png" alt="ZYPHOR'26">
-    </div>
-
-    <p>ZYPHOR'26 — National Level Technical Hackathon</p>
-    <p>© 2026 ZYPHOR'26. All Rights Reserved.</p>
-</footer>
-
-  <script src="galaxy.js"></script>
-  <script>
-    const siteHeader = document.getElementById("siteHeader");
-    window.addEventListener("scroll", () => {
-      siteHeader.classList.toggle("scrolled", window.scrollY > 12);
-    }, { passive: true });
-
-    const navToggle = document.getElementById("navToggle");
-    const mainNav = document.getElementById("mainNav");
-    navToggle?.addEventListener("click", () => {
-      const open = mainNav.classList.toggle("is-open");
-      navToggle.setAttribute("aria-expanded", String(open));
-    });
-
-    const revealEls = document.querySelectorAll(".reveal");
-    if (revealEls.length) {
-      const obs = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            e.target.classList.add("is-visible");
-            obs.unobserve(e.target);
-          }
-        });
-      }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
-      revealEls.forEach(el => obs.observe(el));
-    }
-
-    /* Home event countdown — 28 August 2026, 9:00 AM IST */
-    const homeCountdownTarget = new Date("2026-08-28T09:00:00+05:30").getTime();
-
-    function updateHomeCountdown() {
-      const diff = Math.max(0, homeCountdownTarget - Date.now());
-
-      const days = Math.floor(diff / 86400000);
-      const hours = Math.floor((diff % 86400000) / 3600000);
-      const minutes = Math.floor((diff % 3600000) / 60000);
-      const seconds = Math.floor((diff % 60000) / 1000);
-
-      const set = (id, value) => {
-        const el = document.getElementById(id);
-        if (el) el.textContent = String(value).padStart(2, "0");
-      };
-
-      set("homeDays", days);
-      set("homeHours", hours);
-      set("homeMinutes", minutes);
-      set("homeSeconds", seconds);
-    }
-
-    updateHomeCountdown();
-    setInterval(updateHomeCountdown, 1000);
-  </script>
-</body>
-
+      updateHomeCountdown();
+      setInterval(updateHomeCountdown, 1000);
+    </script>
+  </body>
 </html>
