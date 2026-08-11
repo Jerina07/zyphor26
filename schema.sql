@@ -228,3 +228,100 @@ ON storage.objects
 FOR SELECT
 TO anon, authenticated
 USING (bucket_id = 'payment-screenshots');
+
+-- =========================================================
+-- PROBLEM STATEMENT CLAIMS
+-- One problem statement can be selected by only ONE team
+-- One team can select only ONE problem statement
+-- =========================================================
+
+CREATE TABLE IF NOT EXISTS public.statement_claims (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+
+    statement_id TEXT NOT NULL UNIQUE,
+
+    team_id UUID NOT NULL,
+
+    domain TEXT NOT NULL,
+
+    statement_data JSONB NOT NULL,
+
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+
+-- =========================================================
+-- ATOMIC PROBLEM STATEMENT SELECTION
+-- =========================================================
+
+CREATE OR REPLACE FUNCTION public.claim_problem_statement(
+    p_team_id UUID,
+    p_statement_id TEXT,
+    p_statement JSONB
+)
+RETURNS JSONB
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public
+AS $$
+BEGIN
+
+    -- A team can select ONLY ONE problem statement
+    IF EXISTS (
+        SELECT 1
+        FROM public.statement_claims
+        WHERE team_id = p_team_id
+    ) THEN
+
+        RAISE EXCEPTION
+            'Your team has already selected a problem statement.';
+
+    END IF;
+
+
+    -- A problem statement can be selected by ONLY ONE team
+    IF EXISTS (
+        SELECT 1
+        FROM public.statement_claims
+        WHERE statement_id = p_statement_id
+    ) THEN
+
+        RAISE EXCEPTION
+            'This problem statement has already been selected by another team.';
+
+    END IF;
+
+
+    -- Save the claim
+    INSERT INTO public.statement_claims (
+        statement_id,
+        team_id,
+        domain,
+        statement_data
+    )
+    VALUES (
+        p_statement_id,
+        p_team_id,
+        CASE
+            WHEN p_statement_id LIKE 'AI%' THEN 'AI'
+            WHEN p_statement_id LIKE 'IOT%' THEN 'IOT'
+            ELSE 'OTHER'
+        END,
+        p_statement
+    );
+
+
+    RETURN p_statement;
+
+END;
+$$;
+
+
+-- Allow the website to call the function
+GRANT EXECUTE
+ON FUNCTION public.claim_problem_statement(
+    UUID,
+    TEXT,
+    JSONB
+)
+TO anon, authenticated;
