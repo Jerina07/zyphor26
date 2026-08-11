@@ -26,10 +26,74 @@ export async function upsertTeam({ teamName, domain, teamLeader, numMembers, mem
   ).select().single();
 }
 
-export async function getTeamByName(teamName) {
-  const norm = (teamName || "").trim();
-  if (!norm) return { data: null, error: null };
-  return supabase.from("teams").select("*").ilike("team_name", norm).maybeSingle();
+
+export async function getAuthenticatedTeam() {
+
+    // Check whether a user is logged in
+    const {
+        data: { user },
+        error: authError
+    } = await supabase.auth.getUser();
+
+    if (authError || !user) {
+        return {
+            data: null,
+            error: authError || new Error("Not logged in")
+        };
+    }
+
+    // Find the team belonging to the logged-in user
+    const { data, error } = await supabase
+        .from("teams")
+        .select("*")
+        .eq("auth_user_id", user.id)
+        .maybeSingle();
+
+    if (error) {
+        return {
+            data: null,
+            error
+        };
+    }
+
+    if (!data) {
+        return {
+            data: null,
+            error: new Error(
+                "Your account is not linked to a registered team."
+            )
+        };
+    }
+
+    // Check whether this team is actually registered
+    const { data: registration, error: registrationError } =
+        await supabase
+            .from("registrations")
+            .select("id, team_id, team_name, payment_status")
+            .eq("team_id", data.id)
+            .maybeSingle();
+
+    if (registrationError) {
+        return {
+            data: null,
+            error: registrationError
+        };
+    }
+
+    if (!registration) {
+        return {
+            data: null,
+            error: new Error(
+                "Your team is not registered."
+            )
+        };
+    }
+
+    return {
+        data,
+        registration,
+        error: null
+    };
 }
 
 export async function saveTeamStatement(teamId, statementObj) {
