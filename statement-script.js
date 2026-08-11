@@ -1,288 +1,360 @@
 /* =========================================================
-   ZYPHOR'26 — statement-script.js
-   Statement unlock countdown, Team lookup & Statement selection
+   ZYPHOR'26 — register-script.js
+   Registration form logic with Veg/Non-Veg counters & UPI verification
    ========================================================= */
 
-import { DOMAIN_STATEMENTS } from "./statements-data.js";
 import {
   getTeamByName,
-  getClaimedStatementIds,
-  claimProblemStatement
+  upsertRegistration,
+  uploadPaymentScreenshot
 } from "./supabase-client.js";
 
-// Target Release Date: 27-08-2026 09:00:00 AM IST
-const UNLOCK_DATE = Date.now() + (5 * 60 * 1000);
+/* ----------------------------------------------------------
+   Elements & State
+---------------------------------------------------------- */
+const form           = document.getElementById("registrationForm");
+const regTeamName    = document.getElementById("regTeamName");
+const regTeamStatus  = document.getElementById("regTeamStatus");
+const regSubmitBtn   = document.getElementById("regSubmitBtn");
+const regSubmitText  = document.getElementById("regSubmitText");
+const regSpinner     = document.getElementById("regSpinner");
+const regFormStatus  = document.getElementById("regFormStatus");
 
-let selectedTeamData = null;
-let selectedStatementObj = null;
-let claimedStatementIds = new Set();
+let resolvedTeam = null;
+let currentMaxMembers = 3; // Default 3 members
+let countVeg = 3;
+let countNonVeg = 0;
 
 /* ----------------------------------------------------------
-   Countdown & Unlock Check
+   Validation helpers
 ---------------------------------------------------------- */
-const stmtLockCard     = document.getElementById("stmtLockCard");
-const stmtUnlockedCard = document.getElementById("stmtUnlockedCard");
-
-function updateCountdown() {
-  const now = new Date().getTime();
-  const diff = UNLOCK_DATE - now;
-
-  if (diff <= 0) {
-    // Unlocked automatically!
-    unlockStatementsPage();
-    return;
-  }
-
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-  const secs = Math.floor((diff % (1000 * 60)) / 1000);
-
-  document.getElementById("cdDays").textContent  = String(days).padStart(2, "0");
-  document.getElementById("cdHours").textContent = String(hours).padStart(2, "0");
-  document.getElementById("cdMins").textContent  = String(mins).padStart(2, "0");
-  document.getElementById("cdSecs").textContent  = String(secs).padStart(2, "0");
+function showErr(id, msg) {
+  const el = document.querySelector(`[data-error="${id}"]`);
+  const fi = document.getElementById(id);
+  if (el) { el.textContent = msg; el.classList.add("visible"); }
+  if (fi) fi.closest(".reg-field")?.classList.add("has-error");
 }
-
-let countdownInterval = setInterval(updateCountdown, 1000);
-updateCountdown();
-
-function unlockStatementsPage() {
-  stmtLockCard.hidden = true;
-  stmtUnlockedCard.hidden = false;
+function clearErr(id) {
+  const el = document.querySelector(`[data-error="${id}"]`);
+  const fi = document.getElementById(id);
+  if (el) { el.textContent = ""; el.classList.remove("visible"); }
+  if (fi) fi.closest(".reg-field")?.classList.remove("has-error");
+}
+function clearAllErrors() {
+  document.querySelectorAll(".reg-field-error").forEach(e => { e.textContent = ""; e.classList.remove("visible"); });
+  document.querySelectorAll(".has-error").forEach(e => e.classList.remove("has-error"));
 }
 
 /* ----------------------------------------------------------
-   Team Lookup Form
+   Team Name Verification
 ---------------------------------------------------------- */
-const teamLookupForm   = document.getElementById("teamLookupForm");
-const stmtTeamNameInput = document.getElementById("stmtTeamNameInput");
-const btnStmtLookup    = document.getElementById("btnStmtLookup");
-const stmtLookupStatus = document.getElementById("stmtLookupStatus");
-const stmtListSection  = document.getElementById("stmtListSection");
+let teamLookupTimer = null;
 
-teamLookupForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  stmtLookupStatus.textContent = "";
-  stmtLookupStatus.className = "stmt-lookup-status";
+regTeamName.addEventListener("input", () => {
+  clearErr("regTeamName");
+  resolvedTeam = null;
+  regTeamStatus.textContent = "";
+  regTeamStatus.className = "reg-team-status";
+  clearTimeout(teamLookupTimer);
 
-  const nameVal = stmtTeamNameInput.value.trim();
-  if (!nameVal) {
-    stmtLookupStatus.textContent = "Please enter your team name.";
-    stmtLookupStatus.classList.add("error");
-    return;
+  const val = regTeamName.value.trim();
+  if (!val) return;
+
+  regTeamStatus.textContent = "Verifying team…";
+  regTeamStatus.className = "reg-team-status checking";
+
+  teamLookupTimer = setTimeout(async () => {
+    try {
+      const { data, error } = await getTeamByName(val);
+      if (error || !data) {
+        regTeamStatus.textContent = "✗ Team not found — submit Problem Statement first";
+        regTeamStatus.className = "reg-team-status error";
+        resolvedTeam = null;
+      } else {
+        resolvedTeam = data;
+        regTeamStatus.textContent = `✓ Found: ${data.team_name} (${data.domain} Domain)`;
+        regTeamStatus.className = "reg-team-status success";
+        clearErr("regTeamName");
+
+        // Sync team members size from Problem Statement if available
+        if (data.num_members) {
+          const radio = document.querySelector(`input[name="numMembers"][value="${data.num_members}"]`);
+          if (radio) {
+            radio.checked = true;
+            updateMemberCountAndPricing(parseInt(data.num_members));
+          }
+        }
+      }
+    } catch (e) {
+      regTeamStatus.textContent = "Could not verify team name";
+      regTeamStatus.className = "reg-team-status error";
+    }
+  }, 600);
+});
+
+/* ----------------------------------------------------------
+   Dynamic Members & Food Counter Controls
+---------------------------------------------------------- */
+const numMembersRadios = document.querySelectorAll('input[name="numMembers"]');
+const totalMembersTarget = document.getElementById("totalMembersTarget");
+const countVegDisplay    = document.getElementById("countVegDisplay");
+const countNonVegDisplay = document.getElementById("countNonVegDisplay");
+const currentSumDisplay  = document.getElementById("currentSumDisplay");
+const maxMembersDisplay  = document.getElementById("maxMembersDisplay");
+
+const calcMemberCount = document.getElementById("calcMemberCount");
+const calcTotalAmount = document.getElementById("calcTotalAmount");
+
+numMembersRadios.forEach(radio => {
+  radio.addEventListener("change", () => {
+    updateMemberCountAndPricing(parseInt(radio.value));
+  });
+});
+
+function updateMemberCountAndPricing(members) {
+  currentMaxMembers = members;
+  
+  // Default Veg to max, Non-Veg to 0
+  countVeg = members;
+  countNonVeg = 0;
+
+  totalMembersTarget.textContent = members;
+  maxMembersDisplay.textContent  = members;
+
+  // Update Pricing: ₹250 per member
+  const totalFee = members * 250;
+  calcMemberCount.textContent = members;
+  calcTotalAmount.textContent = `₹${totalFee}`;
+  regSubmitText.textContent   = `Submit Registration · ₹${totalFee}`;
+
+  renderFoodCounters();
+}
+
+function renderFoodCounters() {
+  countVegDisplay.textContent    = countVeg;
+  countNonVegDisplay.textContent = countNonVeg;
+  currentSumDisplay.textContent  = countVeg + countNonVeg;
+
+  // Button disabled states
+  document.getElementById("btnVegMinus").disabled    = (countVeg <= 0);
+  document.getElementById("btnVegPlus").disabled     = (countVeg + countNonVeg >= currentMaxMembers);
+  document.getElementById("btnNonVegMinus").disabled = (countNonVeg <= 0);
+  document.getElementById("btnNonVegPlus").disabled  = (countVeg + countNonVeg >= currentMaxMembers);
+}
+
+// Counter button listeners
+document.getElementById("btnVegPlus").addEventListener("click", () => {
+  if (countVeg + countNonVeg < currentMaxMembers) {
+    countVeg++;
+    if (countNonVeg > 0) countNonVeg--;
+    renderFoodCounters();
   }
-
-  btnStmtLookup.disabled = true;
-  stmtLookupStatus.textContent = "Searching team database…";
-
-  try {
-    const { data, error } = await getTeamByName(nameVal);
-    btnStmtLookup.disabled = false;
-
-    if (error || !data) {
-      stmtLookupStatus.textContent = "✗ Team not found. Please register your team in Problem Statement page first.";
-      stmtLookupStatus.classList.add("error");
-      return;
-    }
-
-    selectedTeamData = data;
-    stmtLookupStatus.textContent = `✓ Found Team "${data.team_name}" (${data.domain} Domain)`;
-    stmtLookupStatus.classList.add("success");
-
-    // Check if team already selected a statement
-    if (data.selected_statement) {
-      try {
-        const parsed = JSON.parse(data.selected_statement);
-        showConfirmedPanel(parsed);
-        return;
-      } catch(e) {}
-    }
-
-    await renderStatementsForDomain(data.domain);
-
-    document.getElementById("displayTeamName").textContent   = data.team_name;
-    document.getElementById("displayTeamDomain").textContent = data.domain + " Domain";
-
-    stmtListSection.hidden = false;
-    stmtListSection.scrollIntoView({ behavior: "smooth" });
-
-  } catch (err) {
-    btnStmtLookup.disabled = false;
-    stmtLookupStatus.textContent = "Lookup failed: " + (err.message || "Unknown error");
-    stmtLookupStatus.classList.add("error");
+});
+document.getElementById("btnVegMinus").addEventListener("click", () => {
+  if (countVeg > 0) {
+    countVeg--;
+    countNonVeg++;
+    renderFoodCounters();
+  }
+});
+document.getElementById("btnNonVegPlus").addEventListener("click", () => {
+  if (countVeg + countNonVeg < currentMaxMembers) {
+    countNonVeg++;
+    if (countVeg > 0) countVeg--;
+    renderFoodCounters();
+  }
+});
+document.getElementById("btnNonVegMinus").addEventListener("click", () => {
+  if (countNonVeg > 0) {
+    countNonVeg--;
+    countVeg++;
+    renderFoodCounters();
   }
 });
 
 /* ----------------------------------------------------------
-   Render Statements
+   UPI Payment Submission + Screenshot Verification
 ---------------------------------------------------------- */
-const stmtCardsGrid = document.getElementById("stmtCardsGrid");
+const upiInput = document.getElementById("regUpiId");
+const paymentInput = document.getElementById("paymentScreenshot");
+const paymentPreview = document.getElementById("paymentPreview");
+const paymentUploadTitle = document.getElementById("paymentUploadTitle");
+const MAX_PAYMENT_SCREENSHOT = 2 * 1024 * 1024;
 
-async function renderStatementsForDomain(domain) {
-  const statements = DOMAIN_STATEMENTS[domain] || DOMAIN_STATEMENTS.AI;
-  stmtCardsGrid.innerHTML = "";
+let paymentScreenshotFile = null;
 
-  // Read already-claimed statements before showing the choices.
-  const { data: claimedRows, error: claimedError } =
-    await getClaimedStatementIds(domain);
+paymentInput?.addEventListener("change", () => {
+  const file = paymentInput.files?.[0];
 
-  if (claimedError) {
-    console.error("Could not load statement availability:", claimedError);
-    stmtCardsGrid.innerHTML = `
-      <p class="stmt-availability-error">
-        Could not load statement availability. Please refresh and try again.
-      </p>`;
+  clearErr("paymentScreenshot");
+  paymentScreenshotFile = null;
+
+  if (!file) {
+    if (paymentPreview) paymentPreview.hidden = true;
     return;
   }
 
-  claimedStatementIds = new Set(
-    (claimedRows || []).map(row => row.statement_id)
-  );
-
-  let firstAvailable = true;
-
-  statements.forEach((item) => {
-    const claimed = claimedStatementIds.has(item.id);
-    const label = document.createElement("label");
-
-    label.className = "stmt-card" + (claimed ? " stmt-card--claimed" : "");
-    if (!claimed) label.setAttribute("for", `stmt_${item.id}`);
-
-    const checked = !claimed && firstAvailable;
-    if (checked) firstAvailable = false;
-
-    label.innerHTML = `
-      <input
-        type="radio"
-        name="selectedStatementId"
-        id="stmt_${item.id}"
-        value="${item.id}"
-        class="stmt-card-radio"
-        ${checked ? "checked" : ""}
-        ${claimed ? "disabled" : ""}
-      >
-
-      <div class="stmt-card-inner">
-        <div class="stmt-card-code">${escapeHtml(item.id)}</div>
-
-        <div class="stmt-card-body">
-          <h3 class="stmt-card-title">${escapeHtml(item.title)}</h3>
-          <p class="stmt-card-desc">${escapeHtml(item.description)}</p>
-
-          <div class="stmt-card-meta">
-            <span class="stmt-tag">${escapeHtml(item.category)}</span>
-            <span class="stmt-tag">${escapeHtml(item.level)}</span>
-            ${
-              claimed
-                ? '<span class="stmt-tag stmt-tag--claimed">Already Selected</span>'
-                : '<span class="stmt-tag stmt-tag--available">Available</span>'
-            }
-          </div>
-        </div>
-
-        <div class="stmt-card-radio-mark"></div>
-      </div>
-    `;
-
-    stmtCardsGrid.appendChild(label);
-  });
-
-  if (firstAvailable) {
-    const note = document.createElement("p");
-    note.className = "stmt-availability-error";
-    note.textContent =
-      "All problem statements in this domain have already been selected by other teams.";
-    stmtCardsGrid.appendChild(note);
-
-    btnConfirmStatement.disabled = true;
-  } else {
-    btnConfirmStatement.disabled = false;
+  if (!file.type.startsWith("image/")) {
+    paymentInput.value = "";
+    showErr("paymentScreenshot", "Please upload a PNG, JPG or WEBP image.");
+    return;
   }
-}
+
+  if (file.size > MAX_PAYMENT_SCREENSHOT) {
+    paymentInput.value = "";
+    showErr("paymentScreenshot", "Screenshot must be smaller than 2 MB.");
+    return;
+  }
+
+  paymentScreenshotFile = file;
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    if (paymentPreview) {
+      paymentPreview.src = reader.result;
+      paymentPreview.hidden = false;
+    }
+    if (paymentUploadTitle) {
+      paymentUploadTitle.textContent = file.name;
+    }
+  };
+  reader.readAsDataURL(file);
+});
+
 
 /* ----------------------------------------------------------
-   Submit Selected Statement
+   Form Submit
+   Payment is submitted for manual verification.
 ---------------------------------------------------------- */
-const statementSelectForm = document.getElementById("statementSelectForm");
-const btnConfirmStatement = document.getElementById("btnConfirmStatement");
-const btnConfirmText      = document.getElementById("btnConfirmText");
-
-statementSelectForm.addEventListener("submit", async (e) => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
+  clearAllErrors();
+  regFormStatus.textContent = "";
 
-  if (!selectedTeamData) return;
+  const teamNameVal  = regTeamName.value.trim();
+  const studentName  = document.getElementById("regStudentName").value.trim();
+  const email        = document.getElementById("regEmail").value.trim();
+  const collegeName  = document.getElementById("regCollege").value.trim();
+  const department   = document.getElementById("regDept").value.trim();
+  const confirmCheck = document.getElementById("regConfirmCheck");
+  const upiId        = upiInput?.value.trim() || "";
 
-  const checkedRadio = document.querySelector('input[name="selectedStatementId"]:checked');
-  if (!checkedRadio) {
-    alert("Please select a problem statement.");
+  let ok = true;
+
+  if (!teamNameVal) {
+    showErr("regTeamName", "Please enter your team name.");
+    ok = false;
+  } else if (!resolvedTeam) {
+    showErr("regTeamName", "Team not found. Please complete the Problem Statement first.");
+    ok = false;
+  }
+
+  if (!studentName) {
+    showErr("regStudentName", "Please enter your student name.");
+    ok = false;
+  }
+
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showErr("regEmail", "Please enter a valid email address.");
+    ok = false;
+  }
+
+  if (!collegeName) {
+    showErr("regCollege", "Please enter your college name.");
+    ok = false;
+  }
+
+  if (!department) {
+    showErr("regDept", "Please enter your department.");
+    ok = false;
+  }
+
+  if (!upiId || !/^[^\s@]+@[^\s@]+$/.test(upiId)) {
+    showErr("regUpiId", "Please enter a valid UPI ID.");
+    ok = false;
+  }
+
+  if (!paymentScreenshotFile) {
+    showErr("paymentScreenshot", "Please upload your payment screenshot.");
+    ok = false;
+  }
+
+  if (!confirmCheck.checked) {
+    showErr("regConfirmCheck", "Please confirm that the information is correct.");
+    ok = false;
+  }
+
+  if (!ok) {
+    regFormStatus.textContent = "Please fix the highlighted fields.";
+    document.querySelector(".has-error, .reg-field-error.visible")
+      ?.scrollIntoView({ behavior: "smooth", block: "center" });
     return;
   }
 
-  const stmtId = checkedRadio.value;
-  const domain = selectedTeamData.domain || "AI";
-  const statementsList = DOMAIN_STATEMENTS[domain] || DOMAIN_STATEMENTS.AI;
-  const matchObj = statementsList.find(s => s.id === stmtId);
+  const totalAmount = currentMaxMembers * 250;
+  const foodSummaryText = `${countVeg} Veg, ${countNonVeg} Non-Veg`;
 
-  if (!matchObj) return;
-
-  // Extra client-side check for a better user experience.
-  if (claimedStatementIds.has(stmtId)) {
-    alert("This problem statement has already been selected by another team.");
-    await renderStatementsForDomain(domain);
-    return;
-  }
-
-  btnConfirmStatement.disabled = true;
-  btnConfirmText.textContent = "Locking Selection…";
+  regSubmitBtn.disabled = true;
+  regSubmitText.textContent = "Uploading Payment Proof…";
+  regSpinner.style.display = "inline-block";
 
   try {
-    /*
-      The RPC is atomic on the database. Even if another team
-      selects this same statement at the exact same moment,
-      only one team can win the UNIQUE statement_id claim.
-    */
-    const { data, error } = await claimProblemStatement(
-      selectedTeamData.id,
-      stmtId,
-      matchObj
+    const screenshotUrl = await uploadPaymentScreenshot(
+      paymentScreenshotFile,
+      teamNameVal
     );
 
-    if (error) throw error;
+    regSubmitText.textContent = "Submitting Registration…";
 
-    const confirmedStatement = data || matchObj;
-    showConfirmedPanel(confirmedStatement);
+    const { error: regErr } = await upsertRegistration({
+      teamId: resolvedTeam.id,
+      teamName: teamNameVal,
+      studentName,
+      email,
+      collegeName,
+      department,
+      foodPref: foodSummaryText,
+      vegCount: countVeg,
+      nonVegCount: countNonVeg,
+      totalAmount,
+      upiId,
+      paymentId: null,
+      paymentScreenshotUrl: screenshotUrl,
+      paymentStatus: "Pending Verification"
+    });
+
+    if (regErr) throw regErr;
+
+    document.getElementById("regSuccessTeam").textContent = teamNameVal;
+    document.getElementById("regMain").hidden = true;
+    document.getElementById("regSuccessOverlay").hidden = false;
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
 
   } catch (err) {
-    console.error("Statement claim failed:", err);
+    console.error("Registration save error:", err);
 
-    const message = err?.message || "";
+    regFormStatus.textContent =
+      "Submission failed: " +
+      (err.message || "Please try again.");
 
-    if (message.toLowerCase().includes("already selected")) {
-      alert("This problem statement has already been selected by another team. Please choose another one.");
-      await renderStatementsForDomain(domain);
-    } else {
-      alert("Could not lock the statement: " + message);
-    }
+    regSubmitBtn.disabled = false;
+    regSubmitText.textContent =
+      `Submit Registration · ₹${totalAmount}`;
 
-    btnConfirmStatement.disabled = false;
-    btnConfirmText.textContent = "Confirm & Lock Selected Statement";
+    regSpinner.style.display = "none";
   }
 });
 
-function showConfirmedPanel(stmtObj) {
-  document.getElementById("stmtLookupSection").hidden = true;
-  document.getElementById("stmtListSection").hidden   = true;
+if (registrationSuccessful) {
 
-  document.getElementById("confirmedTeamDisplay").textContent = selectedTeamData ? selectedTeamData.team_name : "";
-  document.getElementById("confCode").textContent  = stmtObj.id;
-  document.getElementById("confTitle").textContent = stmtObj.title;
-  document.getElementById("confDesc").textContent  = stmtObj.description;
+    // Show success message
+    document.getElementById("successMessage").style.display = "block";
 
-  document.getElementById("stmtSuccessBox").hidden = false;
-  document.getElementById("stmtSuccessBox").scrollIntoView({ behavior: "smooth" });
+    // Show WhatsApp invite ONLY after submission
+    document.getElementById("whatsappInvite").style.display = "block";
 }
 
-function escapeHtml(str) {
-  return String(str ?? "").replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
-}
+
+/* Initial counter render */
+updateMemberCountAndPricing(3);

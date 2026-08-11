@@ -12,21 +12,51 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON);
 /* -------------------------------------------------------
    TEAMS
 ------------------------------------------------------- */
-export async function upsertTeam({ teamName, domain, teamLeader, numMembers, memberNames, selectedStatement = null }) {
-  return supabase.from("teams").upsert(
-    {
-      team_name: teamName,
-      domain,
-      team_leader: teamLeader,
-      num_members: numMembers,
-      member_names: memberNames,
-      selected_statement: selectedStatement
-    },
-    { onConflict: "team_name" }
-  ).select().single();
+export async function upsertTeam({
+  teamName,
+  domain,
+  teamLeader,
+  numMembers,
+  memberNames,
+  selectedStatement = null
+}) {
+  return supabase
+    .from("teams")
+    .upsert(
+      {
+        team_name: teamName,
+        domain,
+        team_leader: teamLeader,
+        num_members: numMembers,
+        member_names: memberNames,
+        selected_statement: selectedStatement
+      },
+      { onConflict: "team_name" }
+    )
+    .select()
+    .single();
 }
 
 
+/* -------------------------------------------------------
+   GET TEAM BY NAME
+------------------------------------------------------- */
+export async function getTeamByName(teamName) {
+  const norm = (teamName || "").trim();
+
+  if (!norm) {
+    return {
+      data: null,
+      error: null
+    };
+  }
+
+  return supabase
+    .from("teams")
+    .select("*")
+    .ilike("team_name", norm)
+    .maybeSingle();
+}
 export async function getAuthenticatedTeam() {
 
     // Check whether a user is logged in

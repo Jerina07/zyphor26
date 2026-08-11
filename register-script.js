@@ -175,51 +175,121 @@ document.getElementById("btnNonVegMinus").addEventListener("click", () => {
 /* ----------------------------------------------------------
    UPI Payment Submission + Screenshot Verification
 ---------------------------------------------------------- */
+
 const upiInput = document.getElementById("regUpiId");
 const paymentInput = document.getElementById("paymentScreenshot");
 const paymentPreview = document.getElementById("paymentPreview");
 const paymentUploadTitle = document.getElementById("paymentUploadTitle");
-const MAX_PAYMENT_SCREENSHOT = 2 * 1024 * 1024;
+
+const MAX_PAYMENT_SCREENSHOT = 2 * 1024 * 1024; // 2 MB
 
 let paymentScreenshotFile = null;
 
-paymentInput?.addEventListener("change", () => {
-  const file = paymentInput.files?.[0];
 
-  clearErr("paymentScreenshot");
-  paymentScreenshotFile = null;
+/* ----------------------------------------------------------
+   PAYMENT SCREENSHOT UPLOAD
+---------------------------------------------------------- */
 
-  if (!file) {
-    if (paymentPreview) paymentPreview.hidden = true;
-    return;
-  }
+if (paymentInput) {
 
-  if (!file.type.startsWith("image/")) {
-    paymentInput.value = "";
-    showErr("paymentScreenshot", "Please upload a PNG, JPG or WEBP image.");
-    return;
-  }
+    paymentInput.addEventListener("change", function () {
 
-  if (file.size > MAX_PAYMENT_SCREENSHOT) {
-    paymentInput.value = "";
-    showErr("paymentScreenshot", "Screenshot must be smaller than 2 MB.");
-    return;
-  }
+        const file = this.files && this.files[0];
 
-  paymentScreenshotFile = file;
+        paymentScreenshotFile = null;
 
-  const reader = new FileReader();
-  reader.onload = () => {
-    if (paymentPreview) {
-      paymentPreview.src = reader.result;
-      paymentPreview.hidden = false;
-    }
-    if (paymentUploadTitle) {
-      paymentUploadTitle.textContent = file.name;
-    }
-  };
-  reader.readAsDataURL(file);
-});
+        /* No file selected */
+        if (!file) {
+            if (paymentPreview) {
+                paymentPreview.hidden = true;
+                paymentPreview.removeAttribute("src");
+            }
+
+            if (paymentUploadTitle) {
+                paymentUploadTitle.textContent =
+                    "Upload Payment Screenshot";
+            }
+
+            return;
+        }
+
+
+        /* Check image type */
+        const allowedTypes = [
+            "image/png",
+            "image/jpeg",
+            "image/webp"
+        ];
+
+        if (!allowedTypes.includes(file.type)) {
+
+            alert("Please upload a PNG, JPG or WEBP image.");
+
+            paymentInput.value = "";
+
+            if (paymentPreview) {
+                paymentPreview.hidden = true;
+                paymentPreview.removeAttribute("src");
+            }
+
+            return;
+        }
+
+
+        /* Check file size */
+        if (file.size > MAX_PAYMENT_SCREENSHOT) {
+
+            alert("Screenshot must be smaller than 2 MB.");
+
+            paymentInput.value = "";
+
+            if (paymentPreview) {
+                paymentPreview.hidden = true;
+                paymentPreview.removeAttribute("src");
+            }
+
+            return;
+        }
+
+
+        /* Store selected file */
+        paymentScreenshotFile = file;
+
+
+        /* Show filename */
+        if (paymentUploadTitle) {
+            paymentUploadTitle.textContent = file.name;
+        }
+
+
+        /* Preview screenshot */
+        const reader = new FileReader();
+
+        reader.onload = function (event) {
+
+            if (paymentPreview) {
+
+                paymentPreview.src = event.target.result;
+
+                paymentPreview.hidden = false;
+            }
+
+        };
+
+        reader.onerror = function () {
+
+            alert("Could not read the screenshot. Please try another image.");
+
+            paymentInput.value = "";
+            paymentScreenshotFile = null;
+
+        };
+
+        reader.readAsDataURL(file);
+
+    });
+
+}
 
 
 /* ----------------------------------------------------------
