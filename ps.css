@@ -386,6 +386,58 @@
   box-shadow: 0 0 0 3px rgba(212,168,67,0.1);
 }
 .ps-select { appearance: none; cursor: pointer; }
+/* =========================================================
+   ZYPHOR'26 — TEAM SIZE DROPDOWN
+   ========================================================= */
+
+.ps-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  cursor: pointer;
+
+  /* Gold dropdown arrow */
+  background-image:
+    linear-gradient(45deg, transparent 50%, #d4a843 50%),
+    linear-gradient(135deg, #d4a843 50%, transparent 50%);
+
+  background-position:
+    calc(100% - 18px) 50%,
+    calc(100% - 12px) 50%;
+
+  background-size:
+    6px 6px,
+    6px 6px;
+
+  background-repeat: no-repeat;
+
+  padding-right: 2.8rem;
+}
+
+/* Dropdown options */
+.ps-select option {
+  background: #0d0d0d;
+  color: #ffffff;
+  font-family: var(--font-body);
+}
+
+/* Placeholder */
+.ps-select option:first-child {
+  color: rgba(255,255,255,0.45);
+}
+
+/* Hover */
+.ps-select:hover {
+  border-color: rgba(212,168,67,0.5);
+}
+
+/* Focus */
+.ps-select:focus {
+  border-color: rgba(212,168,67,0.7);
+  background-color: rgba(212,168,67,0.04);
+  box-shadow: 0 0 0 3px rgba(212,168,67,0.1);
+}
 .ps-textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
 .ps-field.has-error .ps-input { border-color: rgba(248,113,113,0.6); }
 
