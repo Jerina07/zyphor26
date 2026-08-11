@@ -48,7 +48,7 @@ document.getElementById("lockBtn").addEventListener("click", () => {
   document.getElementById("gatePasscode").value = "";
 });
 
-document.getElementById("refreshBtn").addEventListener("click", loadTeams);
+document.getElementById("refreshBtn")?.addEventListener("click", loadTeams);
 
 /* ----------------------------------------------------------
    Load & Compute Metrics & Render Table
@@ -57,18 +57,35 @@ let allTeams = [];
 
 async function loadTeams() {
   showLoading(true);
+
   try {
-    allTeams = await getAllTeamsFull();
+    console.log("Loading teams from Supabase...");
+
+    const result = await getAllTeamsFull();
+
+    console.log("Supabase teams result:", result);
+
+    allTeams = result || [];
+
     computeMetrics(allTeams);
     renderTable();
+
+    if (allTeams.length === 0) {
+      console.warn("No teams returned from Supabase.");
+      showToast("No teams found in Supabase.", "info");
+    }
+
   } catch (err) {
     console.error("Failed to load teams:", err);
-    showToast("Failed to load data: " + (err.message || "Unknown error"), "error");
+
+    showToast(
+      "Failed to load data: " + (err.message || "Unknown error"),
+      "error"
+    );
   } finally {
     showLoading(false);
   }
 }
-
 function showLoading(show) {
   document.getElementById("dashLoading").hidden = !show;
   document.getElementById("teamsTable").hidden  = show;
@@ -270,5 +287,11 @@ function csvEsc(v) {
   return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
 }
 function escHtml(str) {
-  return String(str ?? "").replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+  return String(str ?? "").replace(/[&<>"']/g, m => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;"
+  }[m]));
 }

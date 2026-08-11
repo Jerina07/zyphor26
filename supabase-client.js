@@ -202,11 +202,22 @@ export async function uploadPaymentScreenshot(file, teamName) {
    ADMIN / HOST DATA
 ------------------------------------------------------- */
 export async function getAllTeamsFull() {
-  const { data, error } = await supabase.from("teams").select("*, domain_answers(*), registrations(*)").order("created_at", { ascending: false });
+  const { data, error } = await supabase
+    .from("teams")
+    .select(`
+      *,
+      domain_answers(*),
+      registrations(*)
+    `)
+    .order("created_at", { ascending: false });
+
   if (error) {
-    console.warn("getAllTeamsFull error:", error);
-    return [];
+    console.error("getAllTeamsFull Supabase error:", error);
+    throw error;
   }
+
+  console.log("getAllTeamsFull data:", data);
+
   return data || [];
 }
 
