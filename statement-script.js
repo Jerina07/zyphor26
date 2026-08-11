@@ -11,7 +11,7 @@ import {
 } from "./supabase-client.js";
 
 // Target Release Date: 27-08-2026 09:00:00 AM IST
-const UNLOCK_DATE = new Date("2026-08-27T09:00:00+05:30").getTime();
+const UNLOCK_DATE = Date.now() + (5 * 60 * 1000);
 
 let selectedTeamData = null;
 let selectedStatementObj = null;
