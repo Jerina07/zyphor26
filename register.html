@@ -1,216 +1,578 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Register — ZYPHOR'26 Hackathon</title>
-<meta name="description" content="Register your team for ZYPHOR'26 Hackathon at Grace College of Engineering. Pay by UPI and upload your payment screenshot for verification." />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="register.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register — ZYPHOR'26 Hackathon</title>
+    <meta
+      name="description"
+      content="Register your team for ZYPHOR'26 Hackathon at Grace College of Engineering. Pay by UPI and upload your payment screenshot for verification."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="register.css" />
+  </head>
+  <body class="reg-body">
+    <!-- 3D Galaxy Canvas Element -->
+    <canvas id="galaxyCanvas"></canvas>
+    <div class="grain-overlay" aria-hidden="true"></div>
 
-</head>
-<body class="reg-body">
+    <!-- HEADER -->
+    <header class="site-header" id="siteHeader">
+      <div class="header-inner">
+        <a href="index.html" class="site-logo" aria-label="ZYPHOR'26 Home">
+          <img
+            src="images/logo-transparent.png"
+            alt="ZYPHOR'26"
+            class="site-logo-img"
+          />
+        </a>
+        <nav class="main-nav" id="mainNav">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="application.html" class="nav-link">application</a>
+          <a href="problem-statement.html" class="nav-link">
+            problem Statement</a
+          >
+          <a
+            href="register.html"
+            class="nav-link nav-link--active nav-link--cta"
+            >Register Now</a
+          >
+        </nav>
+        <button
+          class="nav-toggle"
+          id="navToggle"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
 
-<!-- 3D Galaxy Canvas Element -->
-<canvas id="galaxyCanvas"></canvas>
-<div class="grain-overlay" aria-hidden="true"></div>
-
-<!-- HEADER -->
-<header class="site-header" id="siteHeader">
-  <div class="header-inner">
-    <a href="index.html" class="site-logo" aria-label="ZYPHOR'26 Home">
-      <img src="images/logo-transparent.png" alt="ZYPHOR'26" class="site-logo-img">
-    </a>
-    <nav class="main-nav" id="mainNav">
-      <a href="index.html" class="nav-link">Home</a>
-      <a href="application.html" class="nav-link">application</a>
-      <a href="problem-statement.html" class="nav-link"> problem Statement</a>
-      <a href="register.html" class="nav-link nav-link--active nav-link--cta">Register Now</a>
-    </nav>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</header>
-
-<!-- PAGE HERO -->
-<section class="reg-hero">
-  <div class="reg-hero-bg" aria-hidden="true">
-    <div class="reg-hero-glow"></div>
-  </div>
-  <div class="reg-hero-content">
-    <p class="eyebrow">Step 2 of Registration</p>
-    <h1 class="reg-hero-title">Team<span class="hero-title-accent"> Registration &amp; Payment</span></h1>
-    <p class="reg-hero-sub">Enter student details, specify food preferences, and pay via UPI (₹250 per member) and upload your payment proof.</p>
-    <div class="reg-hero-notice">
-      <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M10 6v4M10 13v1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-      <span>You must complete the <a href="problem-statement.html">Problem Statement</a> page first to create your Team Name.</span>
-    </div>
-  </div>
-</section>
-
-<!-- MAIN REGISTRATION FORM -->
-<main class="reg-main" id="regMain">
-  <div class="reg-card">
-    <form id="registrationForm" class="reg-form" novalidate>
-
-      <!-- Step indicator strip -->
-      <div class="reg-steps-strip">
-        <div class="reg-step-item done">
-          <div class="reg-step-dot">✓</div>
-          <span>Problem Statement</span>
-        </div>
-        <div class="reg-step-connector"></div>
-        <div class="reg-step-item active">
-          <div class="reg-step-dot">2</div>
-          <span>Registration &amp; Payment</span>
+    <!-- PAGE HERO -->
+    <section class="reg-hero">
+      <div class="reg-hero-bg" aria-hidden="true">
+        <div class="reg-hero-glow"></div>
+      </div>
+      <div class="reg-hero-content">
+        <p class="eyebrow">Step 2 of Registration</p>
+        <h1 class="reg-hero-title">
+          Team<span class="hero-title-accent"> Registration &amp; Payment</span>
+        </h1>
+        <p class="reg-hero-sub">
+          Enter student details, specify food preferences, and pay via UPI (₹250
+          per member) and upload your payment proof.
+        </p>
+        <div class="reg-hero-notice">
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <circle
+              cx="10"
+              cy="10"
+              r="9"
+              stroke="currentColor"
+              stroke-width="1.5"
+            />
+            <path
+              d="M10 6v4M10 13v1"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            />
+          </svg>
+          <span
+            >You must complete the
+            <a href="problem-statement.html">Problem Statement</a> page first to
+            create your Team Name.</span
+          >
         </div>
       </div>
+    </section>
 
-      <!-- ── SECTION 1: Student & Team Details ── -->
-      <div class="reg-section">
-        <h2 class="reg-section-title">
-          <span class="reg-section-num">01</span>
-          Student Information
-        </h2>
-        <div class="reg-field-grid">
-
-          <div class="reg-field reg-field--full">
-            <label for="regTeamName" class="reg-label">TEAM NAME <span class="req">*</span></label>
-            <div class="reg-team-name-wrap">
-              <input type="text" id="regTeamName" name="teamName" class="reg-input" placeholder="Must match your Problem Statement team name" required autocomplete="off">
-              <span class="reg-team-status" id="regTeamStatus" aria-live="polite"></span>
+    <!-- MAIN REGISTRATION FORM -->
+    <main class="reg-main" id="regMain">
+      <div class="reg-card">
+        <form id="registrationForm" class="reg-form" novalidate>
+          <!-- Step indicator strip -->
+          <div class="reg-steps-strip">
+            <div class="reg-step-item done">
+              <div class="reg-step-dot">✓</div>
+              <span>Problem Statement</span>
             </div>
-            <p class="reg-field-hint">Enter the exact team name created in the Problem Statement form.</p>
-            <p class="reg-field-error" data-error="regTeamName"></p>
-          </div>
-
-          <div class="reg-field">
-            <label for="regStudentName" class="reg-label">STUDENT NAME <span class="req">*</span></label>
-            <input type="text" id="regStudentName" name="studentName" class="reg-input"  required>
-            <p class="reg-field-error" data-error="regStudentName"></p>
-          </div>
-
-          <div class="reg-field">
-            <label for="regEmail" class="reg-label">EMAIL ID <span class="req">*</span></label>
-            <input type="email" id="regEmail" name="email" class="reg-input"  required>
-            <p class="reg-field-error" data-error="regEmail"></p>
-          </div>
-
-          <div class="reg-field">
-            <label for="regCollege" class="reg-label">COLLEGE NAME <span class="req">*</span></label>
-            <input type="text" id="regCollege" name="collegeName" class="reg-input"  required>
-            <p class="reg-field-error" data-error="regCollege"></p>
-          </div>
-
-          <div class="reg-field">
-            <label for="regDept" class="reg-label">DEPARTMENT <span class="req">*</span></label>
-            <input type="text" id="regDept" name="department" class="reg-input" placeholder="e.g. CSE, IT, ECE" required>
-            <p class="reg-field-error" data-error="regDept"></p>
-          </div>
-          
-          <div class="reg-field">
-    <label for="regYear" class="reg-label">
-        YEAR OF STUDY <span class="req">*</span>
-    </label>
-
-    <select id="regYear" name="yearOfStudy" class="reg-input" required>
-        <option value="">Select Year</option>
-        <option value="1">1st Year</option>
-        <option value="2">2nd Year</option>
-        <option value="3">3rd Year</option>
-        <option value="4">4th Year</option>
-    </select>
-
-    <p class="reg-field-error" data-error="regYear"></p>
-</div>
-
-          <div class="reg-field reg-field--full">
-            <label for="regNumMembers" class="reg-label">NUMBER OF MEMBERS <span class="req">*</span></label>
-            <div class="reg-radio-group" role="group" aria-label="Number of members">
-              <label class="reg-radio-label" for="mem1">
-                <input type="radio" id="mem1" name="numMembers" value="1" class="reg-radio">
-                <span class="reg-radio-btn">1 Member</span>
-              </label>
-              <label class="reg-radio-label" for="mem2">
-                <input type="radio" id="mem2" name="numMembers" value="2" class="reg-radio">
-                <span class="reg-radio-btn">2 Members</span>
-              </label>
-              <label class="reg-radio-label" for="mem3">
-                <input type="radio" id="mem3" name="numMembers" value="3" class="reg-radio" checked>
-                <span class="reg-radio-btn">3 Members</span>
-              </label>
+            <div class="reg-step-connector"></div>
+            <div class="reg-step-item active">
+              <div class="reg-step-dot">2</div>
+              <span>Registration &amp; Payment</span>
             </div>
-            <p class="reg-field-error" data-error="regNumMembers"></p>
           </div>
 
-        </div>
-      </div><!-- /section 1 -->
+          <!-- ── SECTION 1: Student & Team Details ── -->
+          <div class="reg-section">
+            <h2 class="reg-section-title">
+              <span class="reg-section-num">01</span>
+              Student Information
+            </h2>
+            <div class="reg-field-grid">
+              <div class="reg-field reg-field--full">
+                <label for="regTeamName" class="reg-label"
+                  >TEAM NAME <span class="req">*</span></label
+                >
+                <div class="reg-team-name-wrap">
+                  <input
+                    type="text"
+                    id="regTeamName"
+                    name="teamName"
+                    class="reg-input"
+                    placeholder="Must match your Problem Statement team name"
+                    required
+                    autocomplete="off"
+                  />
+                  <span
+                    class="reg-team-status"
+                    id="regTeamStatus"
+                    aria-live="polite"
+                  ></span>
+                </div>
+                <p class="reg-field-hint">
+                  Enter the exact team name created in the Problem Statement
+                  form.
+                </p>
+                <p class="reg-field-error" data-error="regTeamName"></p>
+              </div>
 
+              <div class="reg-field">
+                <label for="regStudentName" class="reg-label"
+                  >STUDENT NAME <span class="req">*</span></label
+                >
+                <input
+                  type="text"
+                  id="regStudentName"
+                  name="studentName"
+                  class="reg-input"
+                  required
+                />
+                <p class="reg-field-error" data-error="regStudentName"></p>
+              </div>
 
-      <!-- ── SECTION 2: Dynamic Food Counter ── -->
-      <div class="reg-section">
-        <h2 class="reg-section-title">
-          <span class="reg-section-num">02</span>
-          Food Preference (Veg / Non-Veg Counters)
-        </h2>
-        <p class="reg-section-desc">Set your team's meal preferences. Combined Veg + Non-Veg count must equal total team members (<strong id="totalMembersTarget">3</strong>).</p>
+              <div class="reg-field">
+                <label for="regEmail" class="reg-label"
+                  >EMAIL ID <span class="req">*</span></label
+                >
+                <input
+                  type="email"
+                  id="regEmail"
+                  name="email"
+                  class="reg-input"
+                  required
+                />
+                <p class="reg-field-error" data-error="regEmail"></p>
+              </div>
 
-        <div class="food-counters-box">
+              <div class="reg-field">
+                <label for="regCollege" class="reg-label"
+                  >COLLEGE NAME <span class="req">*</span></label
+                >
+                <input
+                  type="text"
+                  id="regCollege"
+                  name="collegeName"
+                  class="reg-input"
+                  required
+                />
+                <p class="reg-field-error" data-error="regCollege"></p>
+              </div>
 
-          <!-- Veg Counter -->
-          <div class="food-counter-card">
-            <div class="fc-info">
-              <span class="fc-icon veg-icon">🟢</span>
-              <div>
-                <h4 class="fc-title">Veg Meal</h4>
-                <p class="fc-sub">Vegetarian food option</p>
+              <div class="reg-field">
+                <label for="regDept" class="reg-label"
+                  >DEPARTMENT <span class="req">*</span></label
+                >
+                <input
+                  type="text"
+                  id="regDept"
+                  name="department"
+                  class="reg-input"
+                  placeholder="e.g. CSE, IT, ECE"
+                  required
+                />
+                <p class="reg-field-error" data-error="regDept"></p>
+              </div>
+
+              <div class="reg-field">
+                <label for="regYear" class="reg-label">
+                  YEAR OF STUDY <span class="req">*</span>
+                </label>
+
+                <select
+                  id="regYear"
+                  name="yearOfStudy"
+                  class="reg-input"
+                  required
+                >
+                  <option value="">Select Year</option>
+                  <option value="1">1st Year</option>
+                  <option value="2">2nd Year</option>
+                  <option value="3">3rd Year</option>
+                  <option value="4">4th Year</option>
+                </select>
+
+                <p class="reg-field-error" data-error="regYear"></p>
+              </div>
+
+              <div class="reg-field reg-field--full">
+                <label for="regNumMembers" class="reg-label"
+                  >NUMBER OF MEMBERS <span class="req">*</span></label
+                >
+                <div
+                  class="reg-radio-group"
+                  role="group"
+                  aria-label="Number of members"
+                >
+                  <label class="reg-radio-label" for="mem1">
+                    <input
+                      type="radio"
+                      id="mem1"
+                      name="numMembers"
+                      value="1"
+                      class="reg-radio"
+                    />
+                    <span class="reg-radio-btn">1 Member</span>
+                  </label>
+                  <label class="reg-radio-label" for="mem2">
+                    <input
+                      type="radio"
+                      id="mem2"
+                      name="numMembers"
+                      value="2"
+                      class="reg-radio"
+                    />
+                    <span class="reg-radio-btn">2 Members</span>
+                  </label>
+                  <label class="reg-radio-label" for="mem3">
+                    <input
+                      type="radio"
+                      id="mem3"
+                      name="numMembers"
+                      value="3"
+                      class="reg-radio"
+                      checked
+                    />
+                    <span class="reg-radio-btn">3 Members</span>
+                  </label>
+                </div>
+                <p class="reg-field-error" data-error="regNumMembers"></p>
               </div>
             </div>
-            <div class="fc-controls">
-              <button type="button" class="fc-btn" id="btnVegMinus" aria-label="Decrease Veg">–</button>
-              <span class="fc-count" id="countVegDisplay">3</span>
-              <button type="button" class="fc-btn" id="btnVegPlus" aria-label="Increase Veg">+</button>
-            </div>
           </div>
+          <!-- /section 1 -->
 
-          <!-- Non-Veg Counter -->
-          <div class="food-counter-card">
-            <div class="fc-info">
-              <span class="fc-icon nonveg-icon">🔴</span>
-              <div>
-                <h4 class="fc-title">Non-Veg Meal</h4>
-                <p class="fc-sub">Non-vegetarian food option</p>
+          <!-- ── SECTION 2: Dynamic Food Counter ── -->
+          <div class="reg-section">
+            <h2 class="reg-section-title">
+              <span class="reg-section-num">02</span>
+              Food Preference (Veg / Non-Veg Counters)
+            </h2>
+            <p class="reg-section-desc">
+              Set your team's meal preferences. Combined Veg + Non-Veg count
+              must equal total team members (<strong id="totalMembersTarget"
+                >3</strong
+              >).
+            </p>
+
+            <div class="food-counters-box">
+              <!-- Veg Counter -->
+              <div class="food-counter-card">
+                <div class="fc-info">
+                  <span class="fc-icon veg-icon">🟢</span>
+                  <div>
+                    <h4 class="fc-title">Veg Meal</h4>
+                    <p class="fc-sub">Vegetarian food option</p>
+                  </div>
+                </div>
+                <div class="fc-controls">
+                  <button
+                    type="button"
+                    class="fc-btn"
+                    id="btnVegMinus"
+                    aria-label="Decrease Veg"
+                  >
+                    –
+                  </button>
+                  <span class="fc-count" id="countVegDisplay">3</span>
+                  <button
+                    type="button"
+                    class="fc-btn"
+                    id="btnVegPlus"
+                    aria-label="Increase Veg"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              <!-- Non-Veg Counter -->
+              <div class="food-counter-card">
+                <div class="fc-info">
+                  <span class="fc-icon nonveg-icon">🔴</span>
+                  <div>
+                    <h4 class="fc-title">Non-Veg Meal</h4>
+                    <p class="fc-sub">Non-vegetarian food option</p>
+                  </div>
+                </div>
+                <div class="fc-controls">
+                  <button
+                    type="button"
+                    class="fc-btn"
+                    id="btnNonVegMinus"
+                    aria-label="Decrease Non-Veg"
+                  >
+                    –
+                  </button>
+                  <span class="fc-count" id="countNonVegDisplay">0</span>
+                  <button
+                    type="button"
+                    class="fc-btn"
+                    id="btnNonVegPlus"
+                    aria-label="Increase Non-Veg"
+                  >
+                    +
+                  </button>
+                </div>
               </div>
             </div>
-            <div class="fc-controls">
-              <button type="button" class="fc-btn" id="btnNonVegMinus" aria-label="Decrease Non-Veg">–</button>
-              <span class="fc-count" id="countNonVegDisplay">0</span>
-              <button type="button" class="fc-btn" id="btnNonVegPlus" aria-label="Increase Non-Veg">+</button>
+
+            <div class="food-summary-strip">
+              <span
+                >Combined Total: <strong id="currentSumDisplay">3</strong> /
+                <strong id="maxMembersDisplay">3</strong></span
+              >
+              <span class="fs-check" id="fsCheckBadge">✓ Balanced</span>
             </div>
           </div>
+          <!-- /section 2 -->
 
+          <!-- ── SECTION 3: UPI Payment & Verification ── -->
+          <div class="reg-section">
+            <h2 class="reg-section-title">
+              <span class="reg-section-num">03</span>
+              Payment Details
+            </h2>
+
+            <p class="reg-section-desc payment-intro">
+              Scan the official QR code, pay the exact registration amount, then
+              enter the UPI ID used for payment and upload the payment
+              screenshot.
+            </p>
+
+            <div class="payment-calc-card">
+              <div class="pcalc-row">
+                <span>Registration Fee per Member:</span>
+                <strong>₹250</strong>
+              </div>
+              <div class="pcalc-row">
+                <span>Team Members Count:</span>
+                <strong id="calcMemberCount">3</strong>
+              </div>
+              <div class="pcalc-divider"></div>
+              <div class="pcalc-row pcalc-total">
+                <span>Total Payable Amount:</span>
+                <strong id="calcTotalAmount">₹750</strong>
+              </div>
+            </div>
+
+            <div class="upi-payment-grid">
+              <div class="upi-qr-card">
+                <span class="upi-card-label">OFFICIAL ZYPHOR'26 UPI</span>
+
+                <div class="upi-qr-frame">
+                  <img
+                    src="images/qr.jpeg"
+                    alt="ZYPHOR'26 UPI payment QR code"
+                  />
+                </div>
+
+                <p class="upi-payee">
+                  UPI ID:
+                  <strong>jerlinfelcia-1@okaxis</strong>
+                </p>
+
+                <p class="upi-qr-hint">
+                  Scan with any UPI app and pay the exact amount shown above.
+                </p>
+              </div>
+
+              <div class="upi-details-card">
+                <div class="reg-field">
+                  <label for="regUpiId" class="reg-label">
+                    UPI ID USED FOR PAYMENT <span class="req">*</span>
+                  </label>
+
+                  <input
+                    type="text"
+                    id="regUpiId"
+                    name="upiId"
+                    class="reg-input"
+                    placeholder="example@upi"
+                    autocomplete="off"
+                    required
+                  />
+
+                  <p class="reg-field-hint">
+                    Enter the UPI ID from the account/app you used to pay.
+                  </p>
+
+                  <p class="reg-field-error" data-error="regUpiId"></p>
+                </div>
+
+                <div class="reg-field">
+                  <label for="paymentScreenshot" class="reg-label">
+                    PAYMENT SCREENSHOT <span class="req">*</span>
+                  </label>
+
+                  <label class="payment-upload-box" for="paymentScreenshot">
+                    <input
+                      type="file"
+                      id="paymentScreenshot"
+                      name="paymentScreenshot"
+                      accept="image/png,image/jpeg,image/webp"
+                      required
+                    />
+
+                    <div class="payment-upload-content">
+                      <span class="payment-upload-icon">↑</span>
+
+                      <span
+                        class="payment-upload-title"
+                        id="paymentUploadTitle"
+                      >
+                        Upload Payment Screenshot
+                      </span>
+
+                      <span class="payment-upload-sub">
+                        PNG, JPG or WEBP · Maximum 2 MB
+                      </span>
+                    </div>
+
+                    <img
+                      id="paymentPreview"
+                      class="payment-preview"
+                      alt="Payment screenshot preview"
+                      hidden
+                    />
+                  </label>
+
+                  <p class="reg-field-hint">
+                    Keep the transaction amount, date and payment status
+                    visible.
+                  </p>
+
+                  <p class="reg-field-error" data-error="paymentScreenshot"></p>
+                </div>
+
+                <div class="payment-verification-note">
+                  <span class="payment-note-icon">✓</span>
+                  <span>
+                    Payment will be marked
+                    <strong>Pending Verification</strong>. The organizers will
+                    verify the screenshot before confirming your registration.
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /section 3 -->
+
+          <!-- ── SUBMIT & PAYMENT TRIGGER ── -->
+          <div class="reg-submit-section">
+            <label class="reg-confirm-label">
+              <input
+                type="checkbox"
+                id="regConfirmCheck"
+                name="confirmCheck"
+                class="reg-confirm-check"
+              />
+              <span class="reg-confirm-custom" aria-hidden="true"></span>
+              <span
+                >I confirm that all student details and food preferences are
+                correct.</span
+              >
+            </label>
+            <p class="reg-field-error" data-error="regConfirmCheck"></p>
+
+            <button type="submit" class="btn-reg-submit" id="regSubmitBtn">
+              <span id="regSubmitText">Submit Registration · ₹750</span>
+              <svg
+                class="btn-spinner"
+                id="regSpinner"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+                style="display: none"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="9"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-dasharray="40 20"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </button>
+
+            <p
+              class="reg-form-status"
+              id="regFormStatus"
+              role="status"
+              aria-live="polite"
+            ></p>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <!-- SUCCESS OVERLAY (Post-Payment Confirmed) -->
+    <div class="reg-success-overlay" id="regSuccessOverlay" hidden>
+      <div class="reg-success-card">
+        <div class="reg-success-icon" aria-hidden="true">
+          <svg viewBox="0 0 80 80" fill="none">
+            <circle
+              cx="40"
+              cy="40"
+              r="38"
+              stroke="#4ade80"
+              stroke-width="2"
+              opacity="0.2"
+            />
+            <circle
+              cx="40"
+              cy="40"
+              r="28"
+              stroke="#4ade80"
+              stroke-width="1.5"
+              opacity="0.4"
+            />
+            <path
+              d="M24 40l10 10 22-22"
+              stroke="#4ade80"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
         </div>
-
-        <div class="food-summary-strip">
-          <span>Combined Total: <strong id="currentSumDisplay">3</strong> / <strong id="maxMembersDisplay">3</strong></span>
-          <span class="fs-check" id="fsCheckBadge">✓ Balanced</span>
+        <div class="reg-status-badge">
+          Payment Submitted · Pending Verification
         </div>
-      </div><!-- /section 2 -->
-
-
-      <!-- ── SECTION 3: UPI Payment & Verification ── -->
-      <div class="reg-section">
-        <h2 class="reg-section-title">
-          <span class="reg-section-num">03</span>
-          Payment Details
-        </h2>
-
-        <p class="reg-section-desc payment-intro">
-          Scan the official QR code, pay the exact registration amount, then enter the UPI ID used for payment and upload the payment screenshot.
+        <h2 class="reg-success-title">Registration Complete!</h2>
+        <p class="reg-success-desc">
+          Team <strong id="regSuccessTeam"></strong> has been registered. Your
+          payment screenshot is now <strong>Pending Verification</strong>.
         </p>
 
         <div class="payment-calc-card">
@@ -284,19 +646,23 @@
         id="paymentScreenshot"
         name="paymentScreenshot"
         accept="image/png,image/jpeg,image/webp"
-        required
     >
 
     <div class="payment-upload-content">
+
         <span class="payment-upload-icon">↑</span>
 
-        <span class="payment-upload-title" id="paymentUploadTitle">
+        <span
+            class="payment-upload-title"
+            id="paymentUploadTitle"
+        >
             Upload Payment Screenshot
         </span>
 
         <span class="payment-upload-sub">
             PNG, JPG or WEBP · Maximum 2 MB
         </span>
+
     </div>
 
     <img
@@ -340,69 +706,62 @@
         <button type="submit" class="btn-reg-submit" id="regSubmitBtn">
           <span id="regSubmitText">Submit Registration · ₹750</span>
           <svg class="btn-spinner" id="regSpinner" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="display:none">
-            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" stroke-dasharray="40 20" stroke-linecap="round"/>
+            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" stroke-dasharray="40 20" stroke-linecap="round
+        <div class="reg-release-card">
+          <svg viewBox="0 0 24 24" fill="none" class="rel-icon">
+            <path
+              d="M12 8v4l3 3"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            />
+            <circle
+              cx="12"
+              cy="12"
+              r="9"
+              stroke="currentColor"
+              stroke-width="1.8"
+            />
+
           </svg>
-        </button>
+          <p class="rel-text">
+            Your problem statement will be released on
+            <strong>27-08-2026 at 9:00 AM</strong>.
+          </p>
+        </div>
 
-        <p class="reg-form-status" id="regFormStatus" role="status" aria-live="polite"></p>
+        <div class="reg-success-actions">
+          <a href="problem-statement.html" class="btn-reg-submit"
+            >View Statement Release Page &rarr;</a
+          >
+        </div>
       </div>
-
-    </form>
-  </div>
-</main>
-
-
-<!-- SUCCESS OVERLAY (Post-Payment Confirmed) -->
-<div class="reg-success-overlay" id="regSuccessOverlay" hidden>
-  <div class="reg-success-card">
-    <div class="reg-success-icon" aria-hidden="true">
-      <svg viewBox="0 0 80 80" fill="none">
-        <circle cx="40" cy="40" r="38" stroke="#4ade80" stroke-width="2" opacity="0.2"/>
-        <circle cx="40" cy="40" r="28" stroke="#4ade80" stroke-width="1.5" opacity="0.4"/>
-        <path d="M24 40l10 10 22-22" stroke="#4ade80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
-    <div class="reg-status-badge">Payment Submitted · Pending Verification</div>
-    <h2 class="reg-success-title">Registration Complete!</h2>
-    <p class="reg-success-desc">Team <strong id="regSuccessTeam"></strong> has been registered. Your payment screenshot is now <strong>Pending Verification</strong>.</p>
-    
-    <div class="reg-release-card">
-      <svg viewBox="0 0 24 24" fill="none" class="rel-icon"><path d="M12 8v4l3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/></svg>
-      <p class="rel-text">Your problem statement will be released on <strong>27-08-2026 at 9:00 AM</strong>.</p>
     </div>
 
-    <div class="reg-success-actions">
-      <a href="statement.html" class="btn-reg-submit">View Statement Release Page &rarr;</a>
-    </div>
-  </div>
-</div>
+    <div id="whatsappInvite" class="whatsapp-invite" style="display: none">
+      <p>Registration submitted successfully!</p>
 
-<div id="whatsappInvite" class="whatsapp-invite" style="display: none;">
-
-    <p>Registration submitted successfully!</p>
-
-    <a
+      <a
         href="https://chat.whatsapp.com/G2lvdHsS14WLOssWlHUsme?s=cl&p=a&ilr=1"
         target="_blank"
         rel="noopener noreferrer"
         class="whatsapp-btn"
-    >
+      >
         Join Official WhatsApp Group →
-    </a>
-
-</div>
-
- <!-- ================= FOOTER ================= -->
-  <footer class="site-footer">
-    <div class="footer-logo">
-        <img src="images/logo-transparent.png" alt="ZYPHOR'26">
+      </a>
     </div>
 
-    <p>ZYPHOR'26 — National Level Technical Hackathon</p>
-    <p>© 2026 ZYPHOR'26. All Rights Reserved.</p>
-</footer>
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+      <div class="footer-logo">
+        <img src="images/logo-transparent.png" alt="ZYPHOR'26" />
+      </div>
 
-<script src="galaxy.js"></script>
-<script type="module" src="register-script.js"></script>
-</body>
+      <p>ZYPHOR'26 — National Level Technical Hackathon</p>
+      <p>© 2026 ZYPHOR'26. All Rights Reserved.</p>
+    </footer>
+
+    <script src="galaxy.js"></script>
+    <script type="module" src="register-script.js"></script>
+  </body>
 </html>

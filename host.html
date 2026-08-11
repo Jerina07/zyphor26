@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>ZYPHOR'26 — Host Dashboard</title>
-<meta name="robots" content="noindex, nofollow">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="host.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>ZYPHOR'26 — Host Dashboard</title>
+
+  <!-- ZYPHOR'26 Logo -->
+  <link rel="icon" type="image/png" href="images/logo-transparent.png">
+
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="host.css">
 </head>
 <body class="host-body">
 
@@ -42,21 +50,18 @@
 
   <header class="dash-header">
     <div class="dash-brand">
-      <span class="brand-mark" aria-hidden="true">Z</span>
-      <div class="dash-brand-text">
-        <h1>ZYPHOR'26 — Host Dashboard</h1>
-        <p>Organizer Control Panel &amp; Real-time Registrations</p>
-      </div>
-    </div>
+  <div class="brand-mark">
+    <img src="images/logo-transparent.png" alt="ZYPHOR'26 Logo">
+  </div>
+
+  <div class="dash-brand-text">
+    <h1>ZYPHOR'26 — Host Dashboard</h1>
+    <p>Organizer Control Panel &amp; Real-time Registrations</p>
+  </div>
+</div>
     <div class="dash-actions">
-      <a href="statement.html" class="dash-action-btn" target="_blank">
-        <svg viewBox="0 0 20 20" fill="none"><path d="M4 4h12v12H4z" stroke="currentColor" stroke-width="1.5"/><path d="M7 8h6M7 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        Statement Page
-      </a>
-      <button class="dash-action-btn" id="refreshBtn" type="button" title="Refresh data">
-        <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10a6 6 0 1 0 1.2-3.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M4 5v3h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Refresh
-      </button>
+      
+      
       <button class="dash-action-btn" id="exportCsvBtn" type="button">
         <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 3v10M6 9l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 15h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         Export CSV

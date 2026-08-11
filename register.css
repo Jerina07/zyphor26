@@ -674,3 +674,17 @@
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(212, 168, 67, 0.25);
 }
+
+/* Registration closed state */
+#regSubmitBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  filter: grayscale(0.25);
+}
+
+#regSubmitBtn:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
