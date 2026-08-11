@@ -9,6 +9,16 @@ import {
   uploadPaymentScreenshot
 } from "./supabase-client.js";
 
+// ----------------------------------------------------------
+// REGISTRATION DEADLINE
+// ----------------------------------------------------------
+
+const REGISTRATION_DEADLINE = new Date("2026-08-24T23:59:59+05:30");
+
+function isRegistrationClosed() {
+    return new Date() > REGISTRATION_DEADLINE;
+}
+
 /* ----------------------------------------------------------
    Elements & State
 ---------------------------------------------------------- */
@@ -16,6 +26,21 @@ const form           = document.getElementById("registrationForm");
 const regTeamName    = document.getElementById("regTeamName");
 const regTeamStatus  = document.getElementById("regTeamStatus");
 const regSubmitBtn   = document.getElementById("regSubmitBtn");
+
+function updateRegistrationButton() {
+  if (isRegistrationClosed()) {
+    regSubmitBtn.disabled = true;
+
+    const submitText = document.getElementById("regSubmitText");
+
+    if (submitText) {
+      submitText.textContent = "Registration Closed";
+    }
+  }
+}
+
+updateRegistrationButton();
+
 const regSubmitText  = document.getElementById("regSubmitText");
 const regSpinner     = document.getElementById("regSpinner");
 const regFormStatus  = document.getElementById("regFormStatus");
@@ -173,33 +198,27 @@ document.getElementById("btnNonVegMinus").addEventListener("click", () => {
 });
 
 /* ----------------------------------------------------------
-   UPI Payment Submission + Screenshot Verification
+   PAYMENT SCREENSHOT UPLOAD
 ---------------------------------------------------------- */
 
-const upiInput = document.getElementById("regUpiId");
 const paymentInput = document.getElementById("paymentScreenshot");
 const paymentPreview = document.getElementById("paymentPreview");
 const paymentUploadTitle = document.getElementById("paymentUploadTitle");
 
-const MAX_PAYMENT_SCREENSHOT = 2 * 1024 * 1024; // 2 MB
+const MAX_PAYMENT_SCREENSHOT = 2 * 1024 * 1024;
 
 let paymentScreenshotFile = null;
 
-
-/* ----------------------------------------------------------
-   PAYMENT SCREENSHOT UPLOAD
----------------------------------------------------------- */
-
 if (paymentInput) {
-
     paymentInput.addEventListener("change", function () {
 
         const file = this.files && this.files[0];
 
-        paymentScreenshotFile = null;
+        console.log("Payment screenshot selected:", file);
 
-        /* No file selected */
         if (!file) {
+            paymentScreenshotFile = null;
+
             if (paymentPreview) {
                 paymentPreview.hidden = true;
                 paymentPreview.removeAttribute("src");
@@ -213,8 +232,6 @@ if (paymentInput) {
             return;
         }
 
-
-        /* Check image type */
         const allowedTypes = [
             "image/png",
             "image/jpeg",
@@ -222,74 +239,48 @@ if (paymentInput) {
         ];
 
         if (!allowedTypes.includes(file.type)) {
-
             alert("Please upload a PNG, JPG or WEBP image.");
-
-            paymentInput.value = "";
-
-            if (paymentPreview) {
-                paymentPreview.hidden = true;
-                paymentPreview.removeAttribute("src");
-            }
-
+            this.value = "";
+            paymentScreenshotFile = null;
             return;
         }
 
-
-        /* Check file size */
         if (file.size > MAX_PAYMENT_SCREENSHOT) {
-
             alert("Screenshot must be smaller than 2 MB.");
-
-            paymentInput.value = "";
-
-            if (paymentPreview) {
-                paymentPreview.hidden = true;
-                paymentPreview.removeAttribute("src");
-            }
-
+            this.value = "";
+            paymentScreenshotFile = null;
             return;
         }
 
-
-        /* Store selected file */
         paymentScreenshotFile = file;
 
-
-        /* Show filename */
         if (paymentUploadTitle) {
             paymentUploadTitle.textContent = file.name;
         }
 
-
-        /* Preview screenshot */
         const reader = new FileReader();
 
         reader.onload = function (event) {
-
             if (paymentPreview) {
-
                 paymentPreview.src = event.target.result;
-
                 paymentPreview.hidden = false;
             }
-
         };
 
         reader.onerror = function () {
-
             alert("Could not read the screenshot. Please try another image.");
 
             paymentInput.value = "";
             paymentScreenshotFile = null;
-
         };
 
         reader.readAsDataURL(file);
-
     });
-
 }
+
+
+
+
 
 
 /* ----------------------------------------------------------
@@ -298,6 +289,12 @@ if (paymentInput) {
 ---------------------------------------------------------- */
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
+
+if (isRegistrationClosed()) {
+    alert("Registration is closed. The deadline was 24 August 2026.");
+    return;
+}
+
   clearAllErrors();
   regFormStatus.textContent = "";
 
@@ -416,14 +413,6 @@ form.addEventListener("submit", async (e) => {
   }
 });
 
-if (registrationSuccessful) {
-
-    // Show success message
-    document.getElementById("successMessage").style.display = "block";
-
-    // Show WhatsApp invite ONLY after submission
-    document.getElementById("whatsappInvite").style.display = "block";
-}
 
 
 /* Initial counter render */
