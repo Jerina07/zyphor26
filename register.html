@@ -348,30 +348,129 @@
 </main>
 
 
-<!-- SUCCESS OVERLAY (Post-Payment Confirmed) -->
+<!-- SUCCESS OVERLAY -->
 <div class="reg-success-overlay" id="regSuccessOverlay" hidden>
-  <div class="reg-success-card">
-    <div class="reg-success-icon" aria-hidden="true">
-      <svg viewBox="0 0 80 80" fill="none">
-        <circle cx="40" cy="40" r="38" stroke="#4ade80" stroke-width="2" opacity="0.2"/>
-        <circle cx="40" cy="40" r="28" stroke="#4ade80" stroke-width="1.5" opacity="0.4"/>
-        <path d="M24 40l10 10 22-22" stroke="#4ade80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
-    <div class="reg-status-badge">Payment Submitted · Pending Verification</div>
-    <h2 class="reg-success-title">Registration Complete!</h2>
-    <p class="reg-success-desc">Team <strong id="regSuccessTeam"></strong> has been registered. Your payment screenshot is now <strong>Pending Verification</strong>.</p>
-    
-    <div class="reg-release-card">
-      <svg viewBox="0 0 24 24" fill="none" class="rel-icon"><path d="M12 8v4l3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/></svg>
-      <p class="rel-text">Your problem statement will be released on <strong>27-08-2026 at 9:00 AM</strong>.</p>
-    </div>
 
-    <div class="reg-success-actions">
-      <a href=" problem-statement.html" class="btn-reg-submit">View Statement Release Page &rarr;</a>
+    <div class="reg-success-card">
+
+        <div class="reg-success-icon" aria-hidden="true">
+            <svg viewBox="0 0 80 80" fill="none">
+                <circle cx="40" cy="40" r="38"
+                    stroke="#4ade80"
+                    stroke-width="2"
+                    opacity="0.2"/>
+
+                <circle cx="40" cy="40" r="28"
+                    stroke="#4ade80"
+                    stroke-width="1.5"
+                    opacity="0.4"/>
+
+                <path d="M24 40l10 10 22-22"
+                    stroke="#4ade80"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"/>
+            </svg>
+        </div>
+
+        <div class="reg-status-badge">
+            Payment Submitted · Pending Verification
+        </div>
+
+        <h2 class="reg-success-title">
+            Registration Complete!
+        </h2>
+
+        <p class="reg-success-desc">
+            Team <strong id="regSuccessTeam"></strong> has been registered.
+            Your payment screenshot is now
+            <strong>Pending Verification</strong>.
+        </p>
+
+
+        <!-- PROBLEM STATEMENT RELEASE -->
+        <div class="reg-release-card">
+
+            <svg viewBox="0 0 24 24"
+                fill="none"
+                class="rel-icon">
+
+                <path d="M12 8v4l3 3"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"/>
+
+                <circle cx="12" cy="12" r="9"
+                    stroke="currentColor"
+                    stroke-width="1.8"/>
+
+            </svg>
+
+            <p class="rel-text">
+                Your problem statement will be released on
+                <strong>27-08-2026 at 9:00 AM</strong>.
+            </p>
+
+        </div>
+
+
+        <!-- WHATSAPP INVITE -->
+        <div class="whatsapp-invite-card">
+
+            <div class="whatsapp-invite-top">
+
+                <div class="whatsapp-badge">
+                    <span>💬</span>
+                </div>
+
+                <div>
+                    <span class="whatsapp-kicker">
+                        OFFICIAL COMMUNITY
+                    </span>
+
+                    <h3>
+                        Join the ZYPHOR'26 WhatsApp Group
+                    </h3>
+                </div>
+
+            </div>
+
+            <p class="whatsapp-invite-text">
+                Stay connected with the organizing team
+                and receive important updates about the
+                hackathon.
+            </p>
+
+            <a
+                href="https://chat.whatsapp.com/G2lvdHsS14WLOssWlHUsme?s=cl&p=a&ilr=1"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-whatsapp"
+            >
+                JOIN OFFICIAL WHATSAPP GROUP
+                <span class="whatsapp-arrow">→</span>
+            </a>
+
+            <p class="whatsapp-note">
+                Please join the group after completing your registration.
+            </p>
+
+        </div>
+
+
+        <!-- VIEW STATEMENT PAGE -->
+        <div class="reg-success-actions">
+
+            <a
+                href="problem-statement.html"
+                class="btn-reg-submit"
+            >
+                View Statement Release Page →
+            </a>
+
+        </div>
+
     </div>
-  </div>
-   
 
     
    
@@ -379,24 +478,23 @@
 
 </div>
 
+
+
+<!-- FOOTER -->
 <footer class="site-footer">
-
-    <div class="footer-logo">
-        <img src="images/logo-transparent.png" alt="ZYPHOR'26">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="brand-mark" aria-hidden="true">Z</span>
+      <span class="brand-text">ZYPHOR<span class="brand-apos">'26</span></span>
     </div>
-
-    <p class="footer-title">
-        ZYPHOR'26 — National Level Technical Hackathon
-    </p>
-
-    <p class="footer-copy">
-        © 2026 ZYPHOR'26. All Rights Reserved.
-    </p>
-
+    <p>CSE / GRACE COLLEGE OF ENGINEERING</p>
+    <p>HOSTED BY ZYPHOR PANEL GCOE</p>
+    <p>28 AUGUST 2026 &nbsp;&middot;&nbsp; MULLAKADU, THOOTHUKUDI</p>
+    <div class="footer-rule" aria-hidden="true"></div>
+    <p class="footer-copyright">&copy; 2026 ZYPHOR'26. All Rights Reserved.</p>
+  </div>
 </footer>
 
-
-}
 <script src="galaxy.js"></script>
 <script type="module" src="register-script.js"></script>
 </body>

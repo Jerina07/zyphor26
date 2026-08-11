@@ -358,4 +358,3 @@ if (registrationSuccessful) {
 
 /* Initial counter render */
 updateMemberCountAndPricing(3);
-
