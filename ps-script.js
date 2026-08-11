@@ -169,14 +169,30 @@ document.getElementById("confirmPSBtn").addEventListener("click", async () => {
   try {
     const d = collectedData;
 
-    const { data: team, error: teamErr } = await upsertTeam({
-      teamName:    d.teamName,
-      domain:      d.domain,
-      teamLeader:  d.teamLeader,
-      numMembers:  d.numMembers,
-      memberNames: d.memberNames
-    });
-    if (teamErr) throw teamErr;
+    const result = await upsertTeam({
+  teamName: d.teamName,
+  domain: d.domain,
+  teamLeader: d.teamLeader,
+  numMembers: d.numMembers,
+  memberNames: d.memberNames
+});
+
+console.log("SUPABASE TEAM RESULT:", result);
+
+if (result.error) {
+  console.error("TEAM INSERT ERROR:", {
+    message: result.error.message,
+    details: result.error.details,
+    hint: result.error.hint,
+    code: result.error.code
+  });
+
+  throw result.error;
+}
+
+console.log("TEAM CREATED:", result.data);
+
+const team = result.data;
 
     document.getElementById("successTeamNameDisplay").textContent = d.teamName;
     document.getElementById("successDomainDisplay").textContent   = d.domain;
