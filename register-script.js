@@ -201,6 +201,7 @@ document.getElementById("btnNonVegMinus").addEventListener("click", () => {
    PAYMENT SCREENSHOT UPLOAD
 ---------------------------------------------------------- */
 
+const upiInput = document.getElementById("regUpiId");
 const paymentInput = document.getElementById("paymentScreenshot");
 const paymentPreview = document.getElementById("paymentPreview");
 const paymentUploadTitle = document.getElementById("paymentUploadTitle");
@@ -395,6 +396,11 @@ if (isRegistrationClosed()) {
     document.getElementById("regSuccessTeam").textContent = teamNameVal;
     document.getElementById("regMain").hidden = true;
     document.getElementById("regSuccessOverlay").hidden = false;
+    const whatsappInvite = document.getElementById("whatsappInvite");
+
+if (whatsappInvite) {
+  whatsappInvite.style.display = "block";
+}
 
     window.scrollTo({ top: 0, behavior: "smooth" });
 
