@@ -407,3 +407,78 @@
   text-align:center;
   line-height:1.6;
 }
+/* =========================================================
+   LOCKED RELEASE CARD — FIXED LAYOUT
+   ========================================================= */
+
+.stmt-lock-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.stmt-lock-badge {
+    margin-bottom: 1.25rem;
+}
+
+.stmt-lock-title {
+    margin: 0 0 0.75rem;
+}
+
+.stmt-lock-message {
+    max-width: 620px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+}
+
+.stmt-countdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    width: 100%;
+    margin: 0;
+}
+
+.cd-unit {
+    flex: 0 0 auto;
+}
+@media (max-width: 600px) {
+
+    .stmt-lock-card {
+        padding: 2.5rem 1.25rem;
+    }
+
+    .stmt-lock-title {
+        font-size: 1.8rem;
+    }
+
+    .stmt-lock-message {
+        font-size: 0.88rem;
+        margin-bottom: 2rem;
+    }
+
+    .stmt-countdown {
+        gap: 0.35rem;
+    }
+
+    .cd-unit {
+        min-width: 58px;
+        padding: 0.75rem 0.5rem;
+    }
+
+    .cd-unit span {
+        font-size: 1.7rem;
+    }
+
+    .cd-unit p {
+        font-size: 0.55rem;
+    }
+
+    .cd-sep {
+        font-size: 1.2rem;
+    }
+}

@@ -156,6 +156,68 @@
 
 </footer>
 <script src="galaxy.js"></script>
+  <!-- INLINE TIMER: runs independently, never blocked by module import errors -->
+  <script>
+    (function () {
+      const UNLOCK_DATE = new Date("2026-08-11T21:35:00+05:30");
+      var KEY = "zyphor26_problem_statements_unlocked";
+
+      var lockCard = document.getElementById("stmtLockCard");
+      var unlockedCard = document.getElementById("stmtUnlockedCard");
+
+      function isUnlocked() {
+        try {
+          if (localStorage.getItem(KEY) === "true") return true;
+        } catch (e) {}
+        if (Date.now() >= UNLOCK_DATE) {
+          try { localStorage.setItem(KEY, "true"); } catch (e) {}
+          return true;
+        }
+        return false;
+      }
+
+      function showUnlocked() {
+        if (lockCard) { lockCard.hidden = true; lockCard.style.display = "none"; }
+        if (unlockedCard) { unlockedCard.hidden = false; unlockedCard.style.display = "flex"; }
+      }
+
+      function showLocked() {
+        if (lockCard) { lockCard.hidden = false; lockCard.style.display = " "; }
+        if (unlockedCard) { unlockedCard.hidden = true; unlockedCard.style.display = "none"; }
+      }
+
+      function tick() {
+        if (isUnlocked()) {
+          showUnlocked();
+          clearInterval(timer);
+          return;
+        }
+        var diff = UNLOCK_DATE - Date.now();
+        var d = Math.floor(diff / 86400000);
+        var h = Math.floor((diff % 86400000) / 3600000);
+        var m = Math.floor((diff % 3600000) / 60000);
+        var s = Math.floor((diff % 60000) / 1000);
+        var pad = function (n) { return String(n).padStart(2, "0"); };
+        var dd = document.getElementById("cdDays");
+        var hh = document.getElementById("cdHours");
+        var mm = document.getElementById("cdMins");
+        var ss = document.getElementById("cdSecs");
+        if (dd) dd.textContent = pad(d);
+        if (hh) hh.textContent = pad(h);
+        if (mm) mm.textContent = pad(m);
+        if (ss) ss.textContent = pad(s);
+      }
+
+      var timer;
+      if (isUnlocked()) {
+        showUnlocked();
+      } else {
+        showLocked();
+        tick();
+        timer = setInterval(tick, 1000);
+      }
+    })();
+  </script>
 <script type="module" src="statement-script.js"></script>
 </body>
 </html>

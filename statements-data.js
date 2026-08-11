@@ -3,7 +3,8 @@
    Official Hackathon Problem Statements
    20 AI + 20 IoT
    ========================================================= */
-
+export const HACKATHON_NOTE =
+    "Problem statements for AI and IoT domains are released one day before the hackathon on 27-08-2026 at 9:00 AM.";
 export const DOMAIN_STATEMENTS = {
 
     /* =====================================================
