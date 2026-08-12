@@ -14,11 +14,7 @@
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link
-      rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin
-    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600;700&display=swap"
@@ -31,7 +27,6 @@
   </head>
 
   <body class="reg-body">
-
     <!-- =========================================================
          GALAXY BACKGROUND
     ========================================================== -->
@@ -40,20 +35,13 @@
 
     <div class="grain-overlay" aria-hidden="true"></div>
 
-
     <!-- =========================================================
          HEADER
     ========================================================== -->
 
     <header class="site-header" id="siteHeader">
-
       <div class="header-inner">
-
-        <a
-          href="index.html"
-          class="site-logo"
-          aria-label="ZYPHOR'26 Home"
-        >
+        <a href="index.html" class="site-logo" aria-label="ZYPHOR'26 Home">
           <img
             src="images/logo-transparent.png"
             alt="ZYPHOR'26"
@@ -61,21 +49,12 @@
           />
         </a>
 
-
         <nav class="main-nav" id="mainNav">
+          <a href="index.html" class="nav-link"> Home </a>
 
-          <a href="index.html" class="nav-link">
-            Home
-          </a>
+          <a href="application.html" class="nav-link"> Application </a>
 
-          <a href="application.html" class="nav-link">
-            Application
-          </a>
-
-          <a
-            href="problem-statement.html"
-            class="nav-link"
-          >
+          <a href="problem-statement.html" class="nav-link">
             Problem Statement
           </a>
 
@@ -85,9 +64,7 @@
           >
             Register Now
           </a>
-
         </nav>
-
 
         <button
           class="nav-toggle"
@@ -99,54 +76,33 @@
           <span></span>
           <span></span>
         </button>
-
       </div>
-
     </header>
-
 
     <!-- =========================================================
          PAGE HERO
     ========================================================== -->
 
     <section class="reg-hero">
-
-      <div
-        class="reg-hero-bg"
-        aria-hidden="true"
-      >
+      <div class="reg-hero-bg" aria-hidden="true">
         <div class="reg-hero-glow"></div>
       </div>
 
-
       <div class="reg-hero-content">
-
-        <p class="eyebrow">
-          Step 2 of Registration
-        </p>
+        <p class="eyebrow">Step 2 of Registration</p>
 
         <h1 class="reg-hero-title">
           Team
-          <span class="hero-title-accent">
-            Registration &amp; Payment
-          </span>
+          <span class="hero-title-accent"> Registration &amp; Payment </span>
         </h1>
 
-
         <p class="reg-hero-sub">
-          Enter student details, specify food preferences,
-          and pay via UPI (₹250 per member) and upload
-          your payment proof.
+          Enter student details, specify food preferences, and pay via UPI (₹250
+          per member) and upload your payment proof.
         </p>
 
-
         <div class="reg-hero-notice">
-
-          <svg
-            viewBox="0 0 20 20"
-            fill="none"
-            aria-hidden="true"
-          >
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
             <circle
               cx="10"
               cy="10"
@@ -165,110 +121,93 @@
 
           <span>
             You must complete the
-            <a href="problem-statement.html">
-              Problem Statement
-            </a>
+            <a href="problem-statement.html"> Problem Statement </a>
             page first to create your Team Name.
           </span>
-
         </div>
-
       </div>
-
     </section>
-
 
     <!-- =========================================================
          MAIN REGISTRATION FORM
     ========================================================== -->
 
-    <main
-      class="reg-main"
-      id="regMain"
-    >
+    <main class="reg-main" id="regMain">
+      <!-- =========================================================
+       REGISTRATION CLOSED MESSAGE
+  ========================================================== -->
+
+      <div
+        id="registrationClosedMessage"
+        class="registration-closed-message"
+        hidden
+      >
+        <div class="closed-icon">🔒</div>
+
+        <h2>Registration Closed</h2>
+
+        <p class="closed-date">
+          Registration closed on
+          <strong>24 August 2026 at 11:59 PM</strong>.
+        </p>
+
+        <span class="closed-thanks">
+          Thank you for your interest in ZYPHOR'26.
+        </span>
+      </div>
+
+      <!-- =========================================================
+       MAIN REGISTRATION FORM
+  ========================================================== -->
 
       <div class="reg-card">
+        <form id="registrationForm" class="reg-form" novalidate>
+          <!-- YOUR EXISTING CODE CONTINUES HERE -->
 
-        <form
-          id="registrationForm"
-          class="reg-form"
-          novalidate
-        >
-
+          <!-- STEP INDICATOR -->
+          ...
 
           <!-- =====================================================
                STEP INDICATOR
           ====================================================== -->
 
           <div class="reg-steps-strip">
-
             <div class="reg-step-item done">
+              <div class="reg-step-dot">✓</div>
 
-              <div class="reg-step-dot">
-                ✓
-              </div>
-
-              <span>
-                Problem Statement
-              </span>
-
+              <span> Problem Statement </span>
             </div>
-
 
             <div class="reg-step-connector"></div>
 
-
             <div class="reg-step-item active">
+              <div class="reg-step-dot">2</div>
 
-              <div class="reg-step-dot">
-                2
-              </div>
-
-              <span>
-                Registration &amp; Payment
-              </span>
-
+              <span> Registration &amp; Payment </span>
             </div>
-
           </div>
-
-
 
           <!-- =====================================================
                SECTION 01 — STUDENT INFORMATION
           ====================================================== -->
 
           <div class="reg-section">
-
             <h2 class="reg-section-title">
-
-              <span class="reg-section-num">
-                01
-              </span>
+              <span class="reg-section-num"> 01 </span>
 
               Student Information
-
             </h2>
 
-
             <div class="reg-field-grid">
-
-
               <!-- TEAM NAME -->
 
               <div class="reg-field reg-field--full">
-
-                <label
-                  for="regTeamName"
-                  class="reg-label"
-                >
+                <label for="regTeamName" class="reg-label">
                   TEAM NAME
                   <span class="req">*</span>
                 </label>
 
-
                 <div class="reg-team-name-wrap">
-
                   <input
                     type="text"
                     id="regTeamName"
@@ -279,43 +218,28 @@
                     autocomplete="off"
                   />
 
-
                   <span
                     class="reg-team-status"
                     id="regTeamStatus"
                     aria-live="polite"
                   ></span>
-
                 </div>
 
-
                 <p class="reg-field-hint">
-                  Enter the exact team name created in
-                  the Problem Statement form.
+                  Enter the exact team name created in the Problem Statement
+                  form.
                 </p>
 
-
-                <p
-                  class="reg-field-error"
-                  data-error="regTeamName"
-                ></p>
-
+                <p class="reg-field-error" data-error="regTeamName"></p>
               </div>
-
-
 
               <!-- STUDENT NAME -->
 
               <div class="reg-field">
-
-                <label
-                  for="regStudentName"
-                  class="reg-label"
-                >
+                <label for="regStudentName" class="reg-label">
                   STUDENT NAME
                   <span class="req">*</span>
                 </label>
-
 
                 <input
                   type="text"
@@ -325,28 +249,16 @@
                   required
                 />
 
-
-                <p
-                  class="reg-field-error"
-                  data-error="regStudentName"
-                ></p>
-
+                <p class="reg-field-error" data-error="regStudentName"></p>
               </div>
-
-
 
               <!-- EMAIL -->
 
               <div class="reg-field">
-
-                <label
-                  for="regEmail"
-                  class="reg-label"
-                >
+                <label for="regEmail" class="reg-label">
                   EMAIL ID
                   <span class="req">*</span>
                 </label>
-
 
                 <input
                   type="email"
@@ -356,28 +268,16 @@
                   required
                 />
 
-
-                <p
-                  class="reg-field-error"
-                  data-error="regEmail"
-                ></p>
-
+                <p class="reg-field-error" data-error="regEmail"></p>
               </div>
-
-
 
               <!-- COLLEGE -->
 
               <div class="reg-field">
-
-                <label
-                  for="regCollege"
-                  class="reg-label"
-                >
+                <label for="regCollege" class="reg-label">
                   COLLEGE NAME
                   <span class="req">*</span>
                 </label>
-
 
                 <input
                   type="text"
@@ -387,28 +287,16 @@
                   required
                 />
 
-
-                <p
-                  class="reg-field-error"
-                  data-error="regCollege"
-                ></p>
-
+                <p class="reg-field-error" data-error="regCollege"></p>
               </div>
-
-
 
               <!-- DEPARTMENT -->
 
               <div class="reg-field">
-
-                <label
-                  for="regDept"
-                  class="reg-label"
-                >
+                <label for="regDept" class="reg-label">
                   DEPARTMENT
                   <span class="req">*</span>
                 </label>
-
 
                 <input
                   type="text"
@@ -419,28 +307,16 @@
                   required
                 />
 
-
-                <p
-                  class="reg-field-error"
-                  data-error="regDept"
-                ></p>
-
+                <p class="reg-field-error" data-error="regDept"></p>
               </div>
-
-
 
               <!-- YEAR -->
 
               <div class="reg-field">
-
-                <label
-                  for="regYear"
-                  class="reg-label"
-                >
+                <label for="regYear" class="reg-label">
                   YEAR OF STUDY
                   <span class="req">*</span>
                 </label>
-
 
                 <select
                   id="regYear"
@@ -448,63 +324,34 @@
                   class="reg-input"
                   required
                 >
+                  <option value="">Select Year</option>
 
-                  <option value="">
-                    Select Year
-                  </option>
+                  <option value="1">1st Year</option>
 
-                  <option value="1">
-                    1st Year
-                  </option>
+                  <option value="2">2nd Year</option>
 
-                  <option value="2">
-                    2nd Year
-                  </option>
+                  <option value="3">3rd Year</option>
 
-                  <option value="3">
-                    3rd Year
-                  </option>
-
-                  <option value="4">
-                    4th Year
-                  </option>
-
+                  <option value="4">4th Year</option>
                 </select>
 
-
-                <p
-                  class="reg-field-error"
-                  data-error="regYear"
-                ></p>
-
+                <p class="reg-field-error" data-error="regYear"></p>
               </div>
-
-
 
               <!-- NUMBER OF MEMBERS -->
 
               <div class="reg-field reg-field--full">
-
                 <label class="reg-label">
-
                   NUMBER OF MEMBERS
                   <span class="req">*</span>
-
                 </label>
-
 
                 <div
                   class="reg-radio-group"
                   role="group"
                   aria-label="Number of members"
                 >
-
-
-                  <label
-                    class="reg-radio-label"
-                    for="mem1"
-                  >
-
+                  <label class="reg-radio-label" for="mem1">
                     <input
                       type="radio"
                       id="mem1"
@@ -513,19 +360,10 @@
                       class="reg-radio"
                     />
 
-                    <span class="reg-radio-btn">
-                      1 Member
-                    </span>
-
+                    <span class="reg-radio-btn"> 1 Member </span>
                   </label>
 
-
-
-                  <label
-                    class="reg-radio-label"
-                    for="mem2"
-                  >
-
+                  <label class="reg-radio-label" for="mem2">
                     <input
                       type="radio"
                       id="mem2"
@@ -534,19 +372,10 @@
                       class="reg-radio"
                     />
 
-                    <span class="reg-radio-btn">
-                      2 Members
-                    </span>
-
+                    <span class="reg-radio-btn"> 2 Members </span>
                   </label>
 
-
-
-                  <label
-                    class="reg-radio-label"
-                    for="mem3"
-                  >
-
+                  <label class="reg-radio-label" for="mem3">
                     <input
                       type="radio"
                       id="mem3"
@@ -556,86 +385,48 @@
                       checked
                     />
 
-                    <span class="reg-radio-btn">
-                      3 Members
-                    </span>
-
+                    <span class="reg-radio-btn"> 3 Members </span>
                   </label>
-
                 </div>
 
-
-                <p
-                  class="reg-field-error"
-                  data-error="regNumMembers"
-                ></p>
-
+                <p class="reg-field-error" data-error="regNumMembers"></p>
               </div>
-
             </div>
-
           </div>
-
-
 
           <!-- =====================================================
                SECTION 02 — FOOD PREFERENCE
           ====================================================== -->
 
           <div class="reg-section">
-
             <h2 class="reg-section-title">
+              <span class="reg-section-num"> 02 </span>
 
-              <span class="reg-section-num">
-                02
-              </span>
-
-              Food Preference
-              (Veg / Non-Veg Counters)
-
+              Food Preference (Veg / Non-Veg Counters)
             </h2>
 
-
             <p class="reg-section-desc">
-
-              Set your team's meal preferences.
-              Combined Veg + Non-Veg count must equal
-              total team members
-              (<strong id="totalMembersTarget">3</strong>).
-
+              Set your team's meal preferences. Combined Veg + Non-Veg count
+              must equal total team members (<strong id="totalMembersTarget"
+                >3</strong
+              >).
             </p>
 
-
             <div class="food-counters-box">
-
-
               <!-- VEG -->
 
               <div class="food-counter-card">
-
                 <div class="fc-info">
-
-                  <span class="fc-icon veg-icon">
-                    🟢
-                  </span>
+                  <span class="fc-icon veg-icon"> 🟢 </span>
 
                   <div>
+                    <h4 class="fc-title">Veg Meal</h4>
 
-                    <h4 class="fc-title">
-                      Veg Meal
-                    </h4>
-
-                    <p class="fc-sub">
-                      Vegetarian food option
-                    </p>
-
+                    <p class="fc-sub">Vegetarian food option</p>
                   </div>
-
                 </div>
 
-
                 <div class="fc-controls">
-
                   <button
                     type="button"
                     class="fc-btn"
@@ -645,14 +436,7 @@
                     –
                   </button>
 
-
-                  <span
-                    class="fc-count"
-                    id="countVegDisplay"
-                  >
-                    3
-                  </span>
-
+                  <span class="fc-count" id="countVegDisplay"> 3 </span>
 
                   <button
                     type="button"
@@ -662,40 +446,23 @@
                   >
                     +
                   </button>
-
                 </div>
-
               </div>
-
-
 
               <!-- NON VEG -->
 
               <div class="food-counter-card">
-
                 <div class="fc-info">
-
-                  <span class="fc-icon nonveg-icon">
-                    🔴
-                  </span>
+                  <span class="fc-icon nonveg-icon"> 🔴 </span>
 
                   <div>
+                    <h4 class="fc-title">Non-Veg Meal</h4>
 
-                    <h4 class="fc-title">
-                      Non-Veg Meal
-                    </h4>
-
-                    <p class="fc-sub">
-                      Non-vegetarian food option
-                    </p>
-
+                    <p class="fc-sub">Non-vegetarian food option</p>
                   </div>
-
                 </div>
 
-
                 <div class="fc-controls">
-
                   <button
                     type="button"
                     class="fc-btn"
@@ -705,14 +472,7 @@
                     –
                   </button>
 
-
-                  <span
-                    class="fc-count"
-                    id="countNonVegDisplay"
-                  >
-                    0
-                  </span>
-
+                  <span class="fc-count" id="countNonVegDisplay"> 0 </span>
 
                   <button
                     type="button"
@@ -722,185 +482,100 @@
                   >
                     +
                   </button>
-
                 </div>
-
               </div>
-
             </div>
-
 
             <div class="food-summary-strip">
-
               <span>
                 Combined Total:
-                <strong id="currentSumDisplay">
-                  3
-                </strong>
+                <strong id="currentSumDisplay"> 3 </strong>
                 /
-                <strong id="maxMembersDisplay">
-                  3
-                </strong>
+                <strong id="maxMembersDisplay"> 3 </strong>
               </span>
 
-
-              <span
-                class="fs-check"
-                id="fsCheckBadge"
-              >
-                ✓ Balanced
-              </span>
-
+              <span class="fs-check" id="fsCheckBadge"> ✓ Balanced </span>
             </div>
-
           </div>
-
-
 
           <!-- =====================================================
                SECTION 03 — PAYMENT
           ====================================================== -->
 
           <div class="reg-section">
-
             <h2 class="reg-section-title">
-
-              <span class="reg-section-num">
-                03
-              </span>
+              <span class="reg-section-num"> 03 </span>
 
               Payment Details
-
             </h2>
 
-
             <p class="reg-section-desc payment-intro">
-
-              Scan the official QR code, pay the exact
-              registration amount, then enter the UPI ID
-              used for payment and upload the payment
+              Scan the official QR code, pay the exact registration amount, then
+              enter the UPI ID used for payment and upload the payment
               screenshot.
-
             </p>
-
 
             <!-- PAYMENT CALCULATION -->
 
             <div class="payment-calc-card">
-
               <div class="pcalc-row">
+                <span> Registration Fee per Member: </span>
 
-                <span>
-                  Registration Fee per Member:
-                </span>
-
-                <strong>
-                  ₹250
-                </strong>
-
+                <strong> ₹250 </strong>
               </div>
 
-
               <div class="pcalc-row">
+                <span> Team Members Count: </span>
 
-                <span>
-                  Team Members Count:
-                </span>
-
-                <strong id="calcMemberCount">
-                  3
-                </strong>
-
+                <strong id="calcMemberCount"> 3 </strong>
               </div>
-
 
               <div class="pcalc-divider"></div>
 
-
               <div class="pcalc-row pcalc-total">
+                <span> Total Payable Amount: </span>
 
-                <span>
-                  Total Payable Amount:
-                </span>
-
-                <strong id="calcTotalAmount">
-                  ₹750
-                </strong>
-
+                <strong id="calcTotalAmount"> ₹750 </strong>
               </div>
-
             </div>
-
-
 
             <!-- UPI GRID -->
 
             <div class="upi-payment-grid">
-
-
               <!-- QR CARD -->
 
               <div class="upi-qr-card">
-
-                <span class="upi-card-label">
-                  OFFICIAL ZYPHOR'26 UPI
-                </span>
-
+                <span class="upi-card-label"> OFFICIAL ZYPHOR'26 UPI </span>
 
                 <div class="upi-qr-frame">
-
                   <img
                     src="images/qr.jpeg"
                     alt="ZYPHOR'26 UPI payment QR code"
                   />
-
                 </div>
 
-
                 <p class="upi-payee">
-
                   UPI ID:
 
-                  <strong>
-                    jerlinfelcia-1@okaxis
-                  </strong>
-
+                  <strong> jerlinfelcia-1@okaxis </strong>
                 </p>
-
 
                 <p class="upi-qr-hint">
-
-                  Scan with any UPI app and pay
-                  the exact amount shown above.
-
+                  Scan with any UPI app and pay the exact amount shown above.
                 </p>
-
               </div>
-
-
 
               <!-- PAYMENT DETAILS -->
 
               <div class="upi-details-card">
-
-
                 <!-- UPI ID -->
 
                 <div class="reg-field">
-
-                  <label
-                    for="regUpiId"
-                    class="reg-label"
-                  >
-
+                  <label for="regUpiId" class="reg-label">
                     UPI ID USED FOR PAYMENT
 
-                    <span class="req">
-                      *
-                    </span>
-
+                    <span class="req"> * </span>
                   </label>
-
 
                   <input
                     type="text"
@@ -912,47 +587,23 @@
                     required
                   />
 
-
                   <p class="reg-field-hint">
-
-                    Enter the UPI ID from the
-                    account/app you used to pay.
-
+                    Enter the UPI ID from the account/app you used to pay.
                   </p>
 
-
-                  <p
-                    class="reg-field-error"
-                    data-error="regUpiId"
-                  ></p>
-
+                  <p class="reg-field-error" data-error="regUpiId"></p>
                 </div>
-
-
 
                 <!-- SCREENSHOT -->
 
                 <div class="reg-field">
-
-                  <label
-                    for="paymentScreenshot"
-                    class="reg-label"
-                  >
-
+                  <label for="paymentScreenshot" class="reg-label">
                     PAYMENT SCREENSHOT
 
-                    <span class="req">
-                      *
-                    </span>
-
+                    <span class="req"> * </span>
                   </label>
 
-
-                  <label
-                    class="payment-upload-box"
-                    for="paymentScreenshot"
-                  >
-
+                  <label class="payment-upload-box" for="paymentScreenshot">
                     <input
                       type="file"
                       id="paymentScreenshot"
@@ -961,13 +612,8 @@
                       required
                     />
 
-
                     <div class="payment-upload-content">
-
-                      <span class="payment-upload-icon">
-                        ↑
-                      </span>
-
+                      <span class="payment-upload-icon"> ↑ </span>
 
                       <span
                         class="payment-upload-title"
@@ -976,13 +622,10 @@
                         Upload Payment Screenshot
                       </span>
 
-
                       <span class="payment-upload-sub">
                         PNG, JPG or WEBP · Maximum 2 MB
                       </span>
-
                     </div>
-
 
                     <img
                       id="paymentPreview"
@@ -990,67 +633,37 @@
                       alt="Payment screenshot preview"
                       hidden
                     />
-
                   </label>
 
-
                   <p class="reg-field-hint">
-
-                    Keep the transaction amount,
-                    date and payment status visible.
-
+                    Keep the transaction amount, date and payment status
+                    visible.
                   </p>
 
-
-                  <p
-                    class="reg-field-error"
-                    data-error="paymentScreenshot"
-                  ></p>
-
+                  <p class="reg-field-error" data-error="paymentScreenshot"></p>
                 </div>
-
-
 
                 <!-- VERIFICATION NOTE -->
 
                 <div class="payment-verification-note">
-
-                  <span class="payment-note-icon">
-                    ✓
-                  </span>
+                  <span class="payment-note-icon"> ✓ </span>
 
                   <span>
-
                     Payment will be marked
-                    <strong>
-                      Pending Verification
-                    </strong>.
-
-                    The organizers will verify the
-                    screenshot before confirming your
-                    registration.
-
+                    <strong> Pending Verification </strong>. The organizers will
+                    verify the screenshot before confirming your registration.
                   </span>
-
                 </div>
-
               </div>
-
             </div>
-
           </div>
-
-
 
           <!-- =====================================================
                SUBMIT
           ====================================================== -->
 
           <div class="reg-submit-section">
-
-
             <label class="reg-confirm-label">
-
               <input
                 type="checkbox"
                 id="regConfirmCheck"
@@ -1058,38 +671,18 @@
                 class="reg-confirm-check"
               />
 
-
-              <span
-                class="reg-confirm-custom"
-                aria-hidden="true"
-              ></span>
-
+              <span class="reg-confirm-custom" aria-hidden="true"></span>
 
               <span>
-                I confirm that all student details and
-                food preferences are correct.
+                I confirm that all student details and food preferences are
+                correct.
               </span>
-
             </label>
 
+            <p class="reg-field-error" data-error="regConfirmCheck"></p>
 
-            <p
-              class="reg-field-error"
-              data-error="regConfirmCheck"
-            ></p>
-
-
-
-            <button
-              type="submit"
-              class="btn-reg-submit"
-              id="regSubmitBtn"
-            >
-
-              <span id="regSubmitText">
-                Submit Registration · ₹750
-              </span>
-
+            <button type="submit" class="btn-reg-submit" id="regSubmitBtn">
+              <span id="regSubmitText"> Submit Registration · ₹750 </span>
 
               <svg
                 class="btn-spinner"
@@ -1099,7 +692,6 @@
                 aria-hidden="true"
                 style="display: none"
               >
-
                 <circle
                   cx="12"
                   cy="12"
@@ -1109,11 +701,8 @@
                   stroke-dasharray="40 20"
                   stroke-linecap="round"
                 />
-
               </svg>
-
             </button>
-
 
             <p
               class="reg-form-status"
@@ -1121,263 +710,178 @@
               role="status"
               aria-live="polite"
             ></p>
-
           </div>
-
         </form>
-
       </div>
-
     </main>
-
-
 
     <!-- =========================================================
      SUCCESS OVERLAY
 ========================================================== -->
 
-<div
-  class="reg-success-overlay"
-  id="regSuccessOverlay"
-  hidden
->
-  <div class="reg-success-card">
+    <div class="reg-success-overlay" id="regSuccessOverlay" hidden>
+      <div class="reg-success-card">
+        <!-- SUCCESS ICON -->
+        <div class="reg-success-icon" aria-hidden="true">
+          <svg viewBox="0 0 80 80" fill="none">
+            <circle
+              cx="40"
+              cy="40"
+              r="38"
+              stroke="#4ade80"
+              stroke-width="2"
+              opacity="0.2"
+            />
 
-    <!-- SUCCESS ICON -->
-    <div
-      class="reg-success-icon"
-      aria-hidden="true"
-    >
-      <svg
-        viewBox="0 0 80 80"
-        fill="none"
-      >
-        <circle
-          cx="40"
-          cy="40"
-          r="38"
-          stroke="#4ade80"
-          stroke-width="2"
-          opacity="0.2"
-        />
+            <circle
+              cx="40"
+              cy="40"
+              r="28"
+              stroke="#4ade80"
+              stroke-width="1.5"
+              opacity="0.4"
+            />
 
-        <circle
-          cx="40"
-          cy="40"
-          r="28"
-          stroke="#4ade80"
-          stroke-width="1.5"
-          opacity="0.4"
-        />
+            <path
+              d="M24 40l10 10 22-22"
+              stroke="#4ade80"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
 
-        <path
-          d="M24 40l10 10 22-22"
-          stroke="#4ade80"
-          stroke-width="3"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
-    </div>
+        <!-- STATUS -->
+        <div class="reg-status-badge">
+          Payment Submitted · Pending Verification
+        </div>
 
+        <!-- TITLE -->
+        <h2 class="reg-success-title">Registration Complete!</h2>
 
-    <!-- STATUS -->
-    <div class="reg-status-badge">
-      Payment Submitted · Pending Verification
-    </div>
+        <!-- DESCRIPTION -->
+        <p class="reg-success-desc">
+          Team
+          <strong id="regSuccessTeam"></strong>
+          has been registered. Your payment screenshot is now
+          <strong>Pending Verification</strong>.
+        </p>
 
-
-    <!-- TITLE -->
-    <h2 class="reg-success-title">
-      Registration Complete!
-    </h2>
-
-
-    <!-- DESCRIPTION -->
-    <p class="reg-success-desc">
-      Team
-      <strong id="regSuccessTeam"></strong>
-      has been registered.
-
-      Your payment screenshot is now
-      <strong>Pending Verification</strong>.
-    </p>
-
-
-    <!-- =====================================================
+        <!-- =====================================================
          WHATSAPP INVITATION
     ====================================================== -->
 
-    <div class="whatsapp-invite-card">
+        <div class="whatsapp-invite-card">
+          <div class="whatsapp-invite-top">
+            <div class="whatsapp-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M20.5 11.5a8.5 8.5 0 0 1-12.7 7.4L3.5 20l1.1-4.1A8.5 8.5 0 1 1 20.5 11.5Z"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linejoin="round"
+                />
 
-      <div class="whatsapp-invite-top">
+                <path
+                  d="M8.7 8.3c.2-.3.4-.3.7-.3h.5c.2 0 .4.1.5.4l.7 1.6c.1.2.1.4 0 .6l-.5.7c-.1.2-.1.3 0 .5.4.7 1 1.3 1.7 1.7.2.1.3.1.5 0l.7-.5c.2-.1.4-.1.6 0l1.6.7c.3.1.4.3.4.5v.5c0 .3-.1.5-.3.7-.3.3-.8.5-1.3.5-1.2 0-2.6-.7-3.8-1.9-1.2-1.2-1.9-2.6-1.9-3.8 0-.5.2-1 .5-1.3Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
 
-        <div class="whatsapp-badge" aria-hidden="true">
+            <div>
+              <span class="whatsapp-kicker"> IMPORTANT </span>
 
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
+              <h3>Join the Official WhatsApp Group</h3>
+            </div>
+          </div>
+
+          <p class="whatsapp-invite-text">
+            Stay updated with important announcements, hackathon instructions,
+            registration updates, and other ZYPHOR'26 notifications.
+          </p>
+
+          <a
+            href="https://chat.whatsapp.com/G2lvdHsS14WLOssWlHUsme?s=cl&p=a&ilr=1"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-whatsapp"
           >
-            <path
-              d="M20.5 11.5a8.5 8.5 0 0 1-12.7 7.4L3.5 20l1.1-4.1A8.5 8.5 0 1 1 20.5 11.5Z"
-              stroke="currentColor"
-              stroke-width="1.7"
-              stroke-linejoin="round"
-            />
+            <span> Join Official WhatsApp Group </span>
 
-            <path
-              d="M8.7 8.3c.2-.3.4-.3.7-.3h.5c.2 0 .4.1.5.4l.7 1.6c.1.2.1.4 0 .6l-.5.7c-.1.2-.1.3 0 .5.4.7 1 1.3 1.7 1.7.2.1.3.1.5 0l.7-.5c.2-.1.4-.1.6 0l1.6.7c.3.1.4.3.4.5v.5c0 .3-.1.5-.3.7-.3.3-.8.5-1.3.5-1.2 0-2.6-.7-3.8-1.9-1.2-1.2-1.9-2.6-1.9-3.8 0-.5.2-1 .5-1.3Z"
-              fill="currentColor"
-            />
-          </svg>
+            <span class="whatsapp-arrow"> → </span>
+          </a>
 
+          <p class="whatsapp-note">
+            Please join the group after completing your registration.
+          </p>
         </div>
 
-
-        <div>
-          <span class="whatsapp-kicker">
-            IMPORTANT
-          </span>
-
-          <h3>
-            Join the Official WhatsApp Group
-          </h3>
-        </div>
-
-      </div>
-
-
-      <p class="whatsapp-invite-text">
-        Stay updated with important announcements,
-        hackathon instructions, registration updates,
-        and other ZYPHOR'26 notifications.
-      </p>
-
-
-      <a
-        href="https://chat.whatsapp.com/G2lvdHsS14WLOssWlHUsme?s=cl&p=a&ilr=1"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn-whatsapp"
-      >
-
-        <span>
-          Join Official WhatsApp Group
-        </span>
-
-        <span class="whatsapp-arrow">
-          →
-        </span>
-
-      </a>
-
-
-      <p class="whatsapp-note">
-        Please join the group after completing your registration.
-      </p>
-
-    </div>
-
-
-    <!-- =====================================================
+        <!-- =====================================================
          RELEASE INFORMATION
     ====================================================== -->
 
-    <div class="reg-release-card">
+        <div class="reg-release-card">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            class="rel-icon"
+            aria-hidden="true"
+          >
+            <path
+              d="M12 8v4l3 3"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            />
 
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        class="rel-icon"
-        aria-hidden="true"
-      >
+            <circle
+              cx="12"
+              cy="12"
+              r="9"
+              stroke="currentColor"
+              stroke-width="1.8"
+            />
+          </svg>
 
-        <path
-          d="M12 8v4l3 3"
-          stroke="currentColor"
-          stroke-width="1.8"
-          stroke-linecap="round"
-        />
+          <p class="rel-text">
+            Your problem statement will be released on
 
-        <circle
-          cx="12"
-          cy="12"
-          r="9"
-          stroke="currentColor"
-          stroke-width="1.8"
-        />
+            <strong> 27-08-2026 at 9:00 AM </strong>.
+          </p>
+        </div>
 
-      </svg>
-
-
-      <p class="rel-text">
-
-        Your problem statement will be released on
-
-        <strong>
-          27-08-2026 at 9:00 AM
-        </strong>.
-
-      </p>
-
-    </div>
-
-
-    <!-- =====================================================
+        <!-- =====================================================
          SUCCESS ACTION
     ====================================================== -->
 
-    <div class="reg-success-actions">
-
-      <a
-        href="problem-statement.html"
-        class="success-secondary-btn"
-      >
-        View Statement Release Page →
-      </a>
-
+        <div class="reg-success-actions">
+          <a href="problem-statement.html" class="success-secondary-btn">
+            View Statement Release Page →
+          </a>
+        </div>
+      </div>
     </div>
 
-  </div>
-</div>
+    <!-- ================= FOOTER ================= -->
 
+    <footer class="site-footer">
+      <div class="footer-logo">
+        <img src="images/logo-transparent.png" alt="ZYPHOR'26" />
+      </div>
 
-<!-- ================= FOOTER ================= -->
+      <p>ZYPHOR'26 — National Level Technical Hackathon</p>
 
-<footer class="site-footer">
+      <p>© 2026 ZYPHOR'26. All Rights Reserved.</p>
+    </footer>
 
-  <div class="footer-logo">
-
-    <img
-      src="images/logo-transparent.png"
-      alt="ZYPHOR'26"
-    />
-
-  </div>
-
-
-  <p>
-    ZYPHOR'26 — National Level Technical Hackathon
-  </p>
-
-
-  <p>
-    © 2026 ZYPHOR'26. All Rights Reserved.
-  </p>
-
-</footer>
-
-
-<!-- =========================================================
+    <!-- =========================================================
      JAVASCRIPT
 ========================================================== -->
 
-<script src="galaxy.js"></script>
+    <script src="galaxy.js"></script>
 
-<script
-  type="module"
-  src="register-script.js"
-></script>
-
-</body>
+    <script type="module" src="register-script.js"></script>
+  </body>
 </html>

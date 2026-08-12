@@ -6,7 +6,7 @@
 import {
   getTeamByName,
   upsertRegistration,
-  uploadPaymentScreenshot
+  uploadPaymentScreenshot,
 } from "./supabase-client.js";
 
 // ----------------------------------------------------------
@@ -16,34 +16,54 @@ import {
 const REGISTRATION_DEADLINE = new Date("2026-08-24T23:59:59+05:30");
 
 function isRegistrationClosed() {
-    return new Date() > REGISTRATION_DEADLINE;
+  return new Date() > REGISTRATION_DEADLINE;
 }
 
 /* ----------------------------------------------------------
    Elements & State
 ---------------------------------------------------------- */
-const form           = document.getElementById("registrationForm");
-const regTeamName    = document.getElementById("regTeamName");
-const regTeamStatus  = document.getElementById("regTeamStatus");
-const regSubmitBtn   = document.getElementById("regSubmitBtn");
+const form = document.getElementById("registrationForm");
+const regTeamName = document.getElementById("regTeamName");
+const regTeamStatus = document.getElementById("regTeamStatus");
+const regSubmitBtn = document.getElementById("regSubmitBtn");
 
 function updateRegistrationButton() {
+  const closedMessage = document.getElementById("registrationClosedMessage");
+
+  const registrationForm = document.getElementById("registrationForm");
+
   if (isRegistrationClosed()) {
-    regSubmitBtn.disabled = true;
+    // Show "Registration Closed" message
+    if (closedMessage) {
+      closedMessage.hidden = false;
+    }
 
-    const submitText = document.getElementById("regSubmitText");
+    // Hide the registration form
+    if (registrationForm) {
+      registrationForm.hidden = true;
+    }
 
-    if (submitText) {
-      submitText.textContent = "Registration Closed";
+    // Keep submit button disabled as an extra safety measure
+    if (regSubmitBtn) {
+      regSubmitBtn.disabled = true;
+    }
+  } else {
+    // Registration is still open
+    if (closedMessage) {
+      closedMessage.hidden = true;
+    }
+
+    if (registrationForm) {
+      registrationForm.hidden = false;
     }
   }
 }
 
 updateRegistrationButton();
 
-const regSubmitText  = document.getElementById("regSubmitText");
-const regSpinner     = document.getElementById("regSpinner");
-const regFormStatus  = document.getElementById("regFormStatus");
+const regSubmitText = document.getElementById("regSubmitText");
+const regSpinner = document.getElementById("regSpinner");
+const regFormStatus = document.getElementById("regFormStatus");
 
 let resolvedTeam = null;
 let currentMaxMembers = 3; // Default 3 members
@@ -56,18 +76,29 @@ let countNonVeg = 0;
 function showErr(id, msg) {
   const el = document.querySelector(`[data-error="${id}"]`);
   const fi = document.getElementById(id);
-  if (el) { el.textContent = msg; el.classList.add("visible"); }
+  if (el) {
+    el.textContent = msg;
+    el.classList.add("visible");
+  }
   if (fi) fi.closest(".reg-field")?.classList.add("has-error");
 }
 function clearErr(id) {
   const el = document.querySelector(`[data-error="${id}"]`);
   const fi = document.getElementById(id);
-  if (el) { el.textContent = ""; el.classList.remove("visible"); }
+  if (el) {
+    el.textContent = "";
+    el.classList.remove("visible");
+  }
   if (fi) fi.closest(".reg-field")?.classList.remove("has-error");
 }
 function clearAllErrors() {
-  document.querySelectorAll(".reg-field-error").forEach(e => { e.textContent = ""; e.classList.remove("visible"); });
-  document.querySelectorAll(".has-error").forEach(e => e.classList.remove("has-error"));
+  document.querySelectorAll(".reg-field-error").forEach((e) => {
+    e.textContent = "";
+    e.classList.remove("visible");
+  });
+  document
+    .querySelectorAll(".has-error")
+    .forEach((e) => e.classList.remove("has-error"));
 }
 
 /* ----------------------------------------------------------
@@ -92,7 +123,8 @@ regTeamName.addEventListener("input", () => {
     try {
       const { data, error } = await getTeamByName(val);
       if (error || !data) {
-        regTeamStatus.textContent = "✗ Team not found — submit Problem Statement first";
+        regTeamStatus.textContent =
+          "✗ Team not found — submit Problem Statement first";
         regTeamStatus.className = "reg-team-status error";
         resolvedTeam = null;
       } else {
@@ -103,7 +135,9 @@ regTeamName.addEventListener("input", () => {
 
         // Sync team members size from Problem Statement if available
         if (data.num_members) {
-          const radio = document.querySelector(`input[name="numMembers"][value="${data.num_members}"]`);
+          const radio = document.querySelector(
+            `input[name="numMembers"][value="${data.num_members}"]`,
+          );
           if (radio) {
             radio.checked = true;
             updateMemberCountAndPricing(parseInt(data.num_members));
@@ -122,15 +156,15 @@ regTeamName.addEventListener("input", () => {
 ---------------------------------------------------------- */
 const numMembersRadios = document.querySelectorAll('input[name="numMembers"]');
 const totalMembersTarget = document.getElementById("totalMembersTarget");
-const countVegDisplay    = document.getElementById("countVegDisplay");
+const countVegDisplay = document.getElementById("countVegDisplay");
 const countNonVegDisplay = document.getElementById("countNonVegDisplay");
-const currentSumDisplay  = document.getElementById("currentSumDisplay");
-const maxMembersDisplay  = document.getElementById("maxMembersDisplay");
+const currentSumDisplay = document.getElementById("currentSumDisplay");
+const maxMembersDisplay = document.getElementById("maxMembersDisplay");
 
 const calcMemberCount = document.getElementById("calcMemberCount");
 const calcTotalAmount = document.getElementById("calcTotalAmount");
 
-numMembersRadios.forEach(radio => {
+numMembersRadios.forEach((radio) => {
   radio.addEventListener("change", () => {
     updateMemberCountAndPricing(parseInt(radio.value));
   });
@@ -138,33 +172,35 @@ numMembersRadios.forEach(radio => {
 
 function updateMemberCountAndPricing(members) {
   currentMaxMembers = members;
-  
+
   // Default Veg to max, Non-Veg to 0
   countVeg = members;
   countNonVeg = 0;
 
   totalMembersTarget.textContent = members;
-  maxMembersDisplay.textContent  = members;
+  maxMembersDisplay.textContent = members;
 
   // Update Pricing: ₹250 per member
   const totalFee = members * 250;
   calcMemberCount.textContent = members;
   calcTotalAmount.textContent = `₹${totalFee}`;
-  regSubmitText.textContent   = `Submit Registration · ₹${totalFee}`;
+  regSubmitText.textContent = `Submit Registration · ₹${totalFee}`;
 
   renderFoodCounters();
 }
 
 function renderFoodCounters() {
-  countVegDisplay.textContent    = countVeg;
+  countVegDisplay.textContent = countVeg;
   countNonVegDisplay.textContent = countNonVeg;
-  currentSumDisplay.textContent  = countVeg + countNonVeg;
+  currentSumDisplay.textContent = countVeg + countNonVeg;
 
   // Button disabled states
-  document.getElementById("btnVegMinus").disabled    = (countVeg <= 0);
-  document.getElementById("btnVegPlus").disabled     = (countVeg + countNonVeg >= currentMaxMembers);
-  document.getElementById("btnNonVegMinus").disabled = (countNonVeg <= 0);
-  document.getElementById("btnNonVegPlus").disabled  = (countVeg + countNonVeg >= currentMaxMembers);
+  document.getElementById("btnVegMinus").disabled = countVeg <= 0;
+  document.getElementById("btnVegPlus").disabled =
+    countVeg + countNonVeg >= currentMaxMembers;
+  document.getElementById("btnNonVegMinus").disabled = countNonVeg <= 0;
+  document.getElementById("btnNonVegPlus").disabled =
+    countVeg + countNonVeg >= currentMaxMembers;
 }
 
 // Counter button listeners
@@ -211,78 +247,67 @@ const MAX_PAYMENT_SCREENSHOT = 2 * 1024 * 1024;
 let paymentScreenshotFile = null;
 
 if (paymentInput) {
-    paymentInput.addEventListener("change", function () {
+  paymentInput.addEventListener("change", function () {
+    const file = this.files && this.files[0];
 
-        const file = this.files && this.files[0];
+    console.log("Payment screenshot selected:", file);
 
-        console.log("Payment screenshot selected:", file);
+    if (!file) {
+      paymentScreenshotFile = null;
 
-        if (!file) {
-            paymentScreenshotFile = null;
+      if (paymentPreview) {
+        paymentPreview.hidden = true;
+        paymentPreview.removeAttribute("src");
+      }
 
-            if (paymentPreview) {
-                paymentPreview.hidden = true;
-                paymentPreview.removeAttribute("src");
-            }
+      if (paymentUploadTitle) {
+        paymentUploadTitle.textContent = "Upload Payment Screenshot";
+      }
 
-            if (paymentUploadTitle) {
-                paymentUploadTitle.textContent =
-                    "Upload Payment Screenshot";
-            }
+      return;
+    }
 
-            return;
-        }
+    const allowedTypes = ["image/png", "image/jpeg", "image/webp"];
 
-        const allowedTypes = [
-            "image/png",
-            "image/jpeg",
-            "image/webp"
-        ];
+    if (!allowedTypes.includes(file.type)) {
+      alert("Please upload a PNG, JPG or WEBP image.");
+      this.value = "";
+      paymentScreenshotFile = null;
+      return;
+    }
 
-        if (!allowedTypes.includes(file.type)) {
-            alert("Please upload a PNG, JPG or WEBP image.");
-            this.value = "";
-            paymentScreenshotFile = null;
-            return;
-        }
+    if (file.size > MAX_PAYMENT_SCREENSHOT) {
+      alert("Screenshot must be smaller than 2 MB.");
+      this.value = "";
+      paymentScreenshotFile = null;
+      return;
+    }
 
-        if (file.size > MAX_PAYMENT_SCREENSHOT) {
-            alert("Screenshot must be smaller than 2 MB.");
-            this.value = "";
-            paymentScreenshotFile = null;
-            return;
-        }
+    paymentScreenshotFile = file;
 
-        paymentScreenshotFile = file;
+    if (paymentUploadTitle) {
+      paymentUploadTitle.textContent = file.name;
+    }
 
-        if (paymentUploadTitle) {
-            paymentUploadTitle.textContent = file.name;
-        }
+    const reader = new FileReader();
 
-        const reader = new FileReader();
+    reader.onload = function (event) {
+      if (paymentPreview) {
+        paymentPreview.src = event.target.result;
+        paymentPreview.hidden = false;
+      }
+    };
 
-        reader.onload = function (event) {
-            if (paymentPreview) {
-                paymentPreview.src = event.target.result;
-                paymentPreview.hidden = false;
-            }
-        };
+    reader.onerror = function () {
+      alert("Could not read the screenshot. Please try another image.");
 
-        reader.onerror = function () {
-            alert("Could not read the screenshot. Please try another image.");
+      paymentInput.value = "";
+      paymentScreenshotFile = null;
+    };
 
-            paymentInput.value = "";
-            paymentScreenshotFile = null;
-        };
-
-        reader.readAsDataURL(file);
-    });
+    reader.readAsDataURL(file);
+  });
 }
-
-
-
-
-
 
 /* ----------------------------------------------------------
    Form Submit
@@ -291,21 +316,21 @@ if (paymentInput) {
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-if (isRegistrationClosed()) {
+  if (isRegistrationClosed()) {
     alert("Registration is closed. The deadline was 24 August 2026.");
     return;
-}
+  }
 
   clearAllErrors();
   regFormStatus.textContent = "";
 
-  const teamNameVal  = regTeamName.value.trim();
-  const studentName  = document.getElementById("regStudentName").value.trim();
-  const email        = document.getElementById("regEmail").value.trim();
-  const collegeName  = document.getElementById("regCollege").value.trim();
-  const department   = document.getElementById("regDept").value.trim();
+  const teamNameVal = regTeamName.value.trim();
+  const studentName = document.getElementById("regStudentName").value.trim();
+  const email = document.getElementById("regEmail").value.trim();
+  const collegeName = document.getElementById("regCollege").value.trim();
+  const department = document.getElementById("regDept").value.trim();
   const confirmCheck = document.getElementById("regConfirmCheck");
-  const upiId        = upiInput?.value.trim() || "";
+  const upiId = upiInput?.value.trim() || "";
 
   let ok = true;
 
@@ -313,7 +338,10 @@ if (isRegistrationClosed()) {
     showErr("regTeamName", "Please enter your team name.");
     ok = false;
   } else if (!resolvedTeam) {
-    showErr("regTeamName", "Team not found. Please complete the Problem Statement first.");
+    showErr(
+      "regTeamName",
+      "Team not found. Please complete the Problem Statement first.",
+    );
     ok = false;
   }
 
@@ -348,13 +376,17 @@ if (isRegistrationClosed()) {
   }
 
   if (!confirmCheck.checked) {
-    showErr("regConfirmCheck", "Please confirm that the information is correct.");
+    showErr(
+      "regConfirmCheck",
+      "Please confirm that the information is correct.",
+    );
     ok = false;
   }
 
   if (!ok) {
     regFormStatus.textContent = "Please fix the highlighted fields.";
-    document.querySelector(".has-error, .reg-field-error.visible")
+    document
+      .querySelector(".has-error, .reg-field-error.visible")
       ?.scrollIntoView({ behavior: "smooth", block: "center" });
     return;
   }
@@ -369,7 +401,7 @@ if (isRegistrationClosed()) {
   try {
     const screenshotUrl = await uploadPaymentScreenshot(
       paymentScreenshotFile,
-      teamNameVal
+      teamNameVal,
     );
 
     regSubmitText.textContent = "Submitting Registration…";
@@ -388,7 +420,7 @@ if (isRegistrationClosed()) {
       upiId,
       paymentId: null,
       paymentScreenshotUrl: screenshotUrl,
-      paymentStatus: "Pending Verification"
+      paymentStatus: "Pending Verification",
     });
 
     if (regErr) throw regErr;
@@ -398,28 +430,23 @@ if (isRegistrationClosed()) {
     document.getElementById("regSuccessOverlay").hidden = false;
     const whatsappInvite = document.getElementById("whatsappInvite");
 
-if (whatsappInvite) {
-  whatsappInvite.style.display = "block";
-}
+    if (whatsappInvite) {
+      whatsappInvite.style.display = "block";
+    }
 
     window.scrollTo({ top: 0, behavior: "smooth" });
-
   } catch (err) {
     console.error("Registration save error:", err);
 
     regFormStatus.textContent =
-      "Submission failed: " +
-      (err.message || "Please try again.");
+      "Submission failed: " + (err.message || "Please try again.");
 
     regSubmitBtn.disabled = false;
-    regSubmitText.textContent =
-      `Submit Registration · ₹${totalAmount}`;
+    regSubmitText.textContent = `Submit Registration · ₹${totalAmount}`;
 
     regSpinner.style.display = "none";
   }
 });
-
-
 
 /* Initial counter render */
 updateMemberCountAndPricing(3);
