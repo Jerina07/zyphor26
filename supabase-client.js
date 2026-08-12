@@ -252,3 +252,11 @@ export async function claimProblemStatement(teamId, statementId, statementObj) {
     p_statement: statementObj
   });
 }
+
+export async function getRegistrationStatusByTeam(teamId) {
+  return supabase
+    .from("registrations")
+    .select("payment_status")
+    .eq("team_id", teamId)
+    .maybeSingle();
+}

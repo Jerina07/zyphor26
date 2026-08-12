@@ -6,7 +6,7 @@
    team lookup, rendering available statements, and the
    atomic claim flow.
    ========================================================= */
-
+ 
 import {
   DOMAIN_STATEMENTS,
   HACKATHON_NOTE
@@ -16,7 +16,8 @@ import {
   getTeamByName,
   saveTeamStatement,
   claimProblemStatement,
-  getClaimedStatementIds
+  getClaimedStatementIds,
+  getRegistrationStatusByTeam
 } from "./supabase-client.js";
 
 let selectedTeamData = null;
@@ -99,7 +100,36 @@ if (teamLookupForm) {
       selectedTeamData = data;
 
       console.log("RAW team.domain value from DB:", JSON.stringify(data.domain));
+         // ---- PAYMENT VERIFICATION CHECK ----
+      const { data: regData, error: regError } = await getRegistrationStatusByTeam(data.id);
 
+      if (regError) {
+        stmtLookupStatus.textContent =
+          "✗ Could not verify payment status. Please contact the organizer.";
+        stmtLookupStatus.classList.add("error");
+        stmtListSection.hidden = true;
+        stmtListSection.style.display = "none";
+        return;
+      }
+
+      if (!regData) {
+        stmtLookupStatus.textContent =
+          "✗ No registration found for this team. Please complete registration and payment first.";
+        stmtLookupStatus.classList.add("error");
+        stmtListSection.hidden = true;
+        stmtListSection.style.display = "none";
+        return;
+      }
+
+      if (regData.payment_status !== "Verified") {
+        stmtLookupStatus.textContent =
+          "⏳ Your payment is still pending verification by the organizers. Problem statements will unlock once your payment is verified.";
+        stmtLookupStatus.classList.add("error");
+        stmtListSection.hidden = true;
+        stmtListSection.style.display = "none";
+        return;
+      }
+      // ---- END PAYMENT CHECK ----
       const domain = normalizeDomain(data.domain);
 
       if (!domain) {
