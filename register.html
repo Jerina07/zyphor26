@@ -193,208 +193,238 @@
                SECTION 01 — STUDENT INFORMATION
           ====================================================== -->
 
-          <div class="reg-section">
-            <h2 class="reg-section-title">
-              <span class="reg-section-num"> 01 </span>
+          <div class="reg-field-grid">
 
-              Student Information
-            </h2>
-
-            <div class="reg-field-grid">
-              <!-- TEAM NAME -->
+  <!-- TEAM NAME -->
 
               <div class="reg-field reg-field--full">
                 <label for="regTeamName" class="reg-label">
-                  TEAM NAME
-                  <span class="req">*</span>
-                </label>
+      TEAM NAME
+      <span class="req">*</span>
+    </label>
 
-                <div class="reg-team-name-wrap">
-                  <input
-                    type="text"
-                    id="regTeamName"
-                    name="teamName"
-                    class="reg-input"
-                    placeholder="Must match your Problem Statement team name"
-                    required
-                    autocomplete="off"
-                  />
+    <div class="reg-team-name-wrap">
+      <input
+        type="text"
+        id="regTeamName"
+        name="teamName"
+        class="reg-input"
+        placeholder="Must match your Problem Statement team name"
+        required
+        autocomplete="off"
+      />
 
-                  <span
-                    class="reg-team-status"
-                    id="regTeamStatus"
-                    aria-live="polite"
-                  ></span>
-                </div>
+      <span
+        class="reg-team-status"
+        id="regTeamStatus"
+        aria-live="polite"
+      ></span>
+    </div>
 
-                <p class="reg-field-hint">
-                  Enter the exact team name created in the Problem Statement
-                  form.
-                </p>
+    <p class="reg-field-hint">
+      Enter the exact team name created in the Problem Statement form.
+    </p>
 
-                <p class="reg-field-error" data-error="regTeamName"></p>
-              </div>
+    <p class="reg-field-error" data-error="regTeamName"></p>
+  </div>
 
-              <!-- STUDENT NAME -->
 
-              <div class="reg-field">
-                <label for="regStudentName" class="reg-label">
-                  STUDENT NAME
-                  <span class="req">*</span>
-                </label>
+  <!-- TEAM LEADER NAME -->
 
-                <input
-                  type="text"
-                  id="regStudentName"
-                  name="studentName"
-                  class="reg-input"
-                  required
-                />
+  <div class="reg-field">
+    <label for="regStudentName" class="reg-label">
+      TEAM LEADER NAME WITH INITIAL
+      <span class="req">*</span>
+    </label>
 
-                <p class="reg-field-error" data-error="regStudentName"></p>
-              </div>
+    <input
+      type="text"
+      id="regStudentName"
+      name="studentName"
+      class="reg-input"
+      placeholder="e.g. K. Kavitha"
+      required
+    />
 
-              <!-- EMAIL -->
+    <p class="reg-field-error" data-error="regStudentName"></p>
+  </div>
 
-              <div class="reg-field">
-                <label for="regEmail" class="reg-label">
-                  EMAIL ID
-                  <span class="req">*</span>
-                </label>
 
-                <input
-                  type="email"
-                  id="regEmail"
-                  name="email"
-                  class="reg-input"
-                  required
-                />
+  <!-- PARTICIPANT PHONE NUMBER -->
 
-                <p class="reg-field-error" data-error="regEmail"></p>
-              </div>
+  <div class="reg-field">
+    <label for="regPhone" class="reg-label">
+      PARTICIPANT PHONE NUMBER
+      <span class="req">*</span>
+    </label>
 
-              <!-- COLLEGE -->
+    <input
+      type="tel"
+      id="regPhone"
+      name="phone"
+      class="reg-input"
+      placeholder="Enter 10-digit mobile number"
+      pattern="[0-9]{10}"
+      maxlength="10"
+      inputmode="numeric"
+      required
+    />
 
-              <div class="reg-field">
-                <label for="regCollege" class="reg-label">
-                  COLLEGE NAME
-                  <span class="req">*</span>
-                </label>
+    <p class="reg-field-error" data-error="regPhone"></p>
+  </div>
 
-                <input
-                  type="text"
-                  id="regCollege"
-                  name="collegeName"
-                  class="reg-input"
-                  required
-                />
 
-                <p class="reg-field-error" data-error="regCollege"></p>
-              </div>
+  <!-- EMAIL -->
 
-              <!-- DEPARTMENT -->
+  <div class="reg-field">
+    <label for="regEmail" class="reg-label">
+      EMAIL ID
+      <span class="req">*</span>
+    </label>
 
-              <div class="reg-field">
-                <label for="regDept" class="reg-label">
-                  DEPARTMENT
-                  <span class="req">*</span>
-                </label>
+    <input
+      type="email"
+      id="regEmail"
+      name="email"
+      class="reg-input"
+      required
+    />
 
-                <input
-                  type="text"
-                  id="regDept"
-                  name="department"
-                  class="reg-input"
-                  placeholder="e.g. CSE, IT, ECE"
-                  required
-                />
+    <p class="reg-field-error" data-error="regEmail"></p>
+  </div>
 
-                <p class="reg-field-error" data-error="regDept"></p>
-              </div>
 
-              <!-- YEAR -->
+  <!-- COLLEGE -->
 
-              <div class="reg-field">
-                <label for="regYear" class="reg-label">
-                  YEAR OF STUDY
-                  <span class="req">*</span>
-                </label>
+  <div class="reg-field">
+    <label for="regCollege" class="reg-label">
+      COLLEGE NAME
+      <span class="req">*</span>
+    </label>
 
-                <select
-                  id="regYear"
-                  name="yearOfStudy"
-                  class="reg-input"
-                  required
-                >
-                  <option value="">Select Year</option>
+    <input
+      type="text"
+      id="regCollege"
+      name="collegeName"
+      class="reg-input"
+      required
+    />
 
-                  <option value="1">1st Year</option>
+    <p class="reg-field-error" data-error="regCollege"></p>
+  </div>
 
-                  <option value="2">2nd Year</option>
 
-                  <option value="3">3rd Year</option>
+  <!-- DEPARTMENT -->
 
-                  <option value="4">4th Year</option>
-                </select>
+  <div class="reg-field">
+    <label for="regDept" class="reg-label">
+      DEPARTMENT
+      <span class="req">*</span>
+    </label>
 
-                <p class="reg-field-error" data-error="regYear"></p>
-              </div>
+    <input
+      type="text"
+      id="regDept"
+      name="department"
+      class="reg-input"
+      placeholder="e.g. CSE, IT, ECE"
+      required
+    />
 
-              <!-- NUMBER OF MEMBERS -->
+    <p class="reg-field-error" data-error="regDept"></p>
+  </div>
 
-              <div class="reg-field reg-field--full">
-                <label class="reg-label">
-                  NUMBER OF MEMBERS
-                  <span class="req">*</span>
-                </label>
 
-                <div
-                  class="reg-radio-group"
-                  role="group"
-                  aria-label="Number of members"
-                >
-                  <label class="reg-radio-label" for="mem1">
-                    <input
-                      type="radio"
-                      id="mem1"
-                      name="numMembers"
-                      value="1"
-                      class="reg-radio"
-                    />
+  <!-- YEAR -->
 
-                    <span class="reg-radio-btn"> 1 Member </span>
-                  </label>
+  <div class="reg-field">
+    <label for="regYear" class="reg-label">
+      YEAR OF STUDY
+      <span class="req">*</span>
+    </label>
 
-                  <label class="reg-radio-label" for="mem2">
-                    <input
-                      type="radio"
-                      id="mem2"
-                      name="numMembers"
-                      value="2"
-                      class="reg-radio"
-                    />
+    <select
+      id="regYear"
+      name="yearOfStudy"
+      class="reg-input"
+      required
+    >
+      <option value="">Select Year</option>
+      <option value="1">1st Year</option>
+      <option value="2">2nd Year</option>
+      <option value="3">3rd Year</option>
+      <option value="4">4th Year</option>
+    </select>
 
-                    <span class="reg-radio-btn"> 2 Members </span>
-                  </label>
+    <p class="reg-field-error" data-error="regYear"></p>
+  </div>
 
-                  <label class="reg-radio-label" for="mem3">
-                    <input
-                      type="radio"
-                      id="mem3"
-                      name="numMembers"
-                      value="3"
-                      class="reg-radio"
-                      checked
-                    />
 
-                    <span class="reg-radio-btn"> 3 Members </span>
-                  </label>
-                </div>
+  <!-- NUMBER OF MEMBERS -->
 
-                <p class="reg-field-error" data-error="regNumMembers"></p>
-              </div>
-            </div>
-          </div>
+  <div class="reg-field reg-field--full">
+    <label class="reg-label">
+      NUMBER OF MEMBERS
+      <span class="req">*</span>
+    </label>
+
+    <div
+      class="reg-radio-group"
+      role="group"
+      aria-label="Number of members"
+    >
+
+      <label class="reg-radio-label" for="mem1">
+        <input
+          type="radio"
+          id="mem1"
+          name="numMembers"
+          value="1"
+          class="reg-radio"
+        />
+
+        <span class="reg-radio-btn">
+          1 Member
+        </span>
+      </label>
+
+
+      <label class="reg-radio-label" for="mem2">
+        <input
+          type="radio"
+          id="mem2"
+          name="numMembers"
+          value="2"
+          class="reg-radio"
+        />
+
+        <span class="reg-radio-btn">
+          2 Members
+        </span>
+      </label>
+
+
+      <label class="reg-radio-label" for="mem3">
+        <input
+          type="radio"
+          id="mem3"
+          name="numMembers"
+          value="3"
+          class="reg-radio"
+          checked
+        />
+
+        <span class="reg-radio-btn">
+          3 Members
+        </span>
+      </label>
+
+    </div>
+
+    <p class="reg-field-error" data-error="regNumMembers"></p>
+  </div>
+
+</div>
 
           <!-- =====================================================
                SECTION 02 — FOOD PREFERENCE

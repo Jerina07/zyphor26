@@ -118,31 +118,7 @@
         </div>
 
         <!-- Event countdown: intentionally placed BELOW the event details -->
-        <div
-          class="home-countdown"
-          id="homeCountdown"
-          aria-label="Countdown to ZYPHOR'26"
-        >
-          <div class="home-countdown-unit">
-            <strong id="homeDays">00</strong>
-            <span>DAYS</span>
-          </div>
-          <div class="home-countdown-sep">:</div>
-          <div class="home-countdown-unit">
-            <strong id="homeHours">00</strong>
-            <span>HOURS</span>
-          </div>
-          <div class="home-countdown-sep">:</div>
-          <div class="home-countdown-unit">
-            <strong id="homeMinutes">00</strong>
-            <span>MINUTES</span>
-          </div>
-          <div class="home-countdown-sep">:</div>
-          <div class="home-countdown-unit">
-            <strong id="homeSeconds">00</strong>
-            <span>SECONDS</span>
-          </div>
-        </div>
+        
       </div>
 
       <div class="scroll-cue reveal" aria-hidden="true">
@@ -271,6 +247,7 @@
               Participants must develop their website at the hackathon venue
               based on the selected problem statement.
             </li>
+            <li>The name you enter in the registration form will be printed on your certificate.</li>
             <li>
               Cash prizes will be awarded to the 1st, 2nd, and 3rd place
               winners.
@@ -412,31 +389,8 @@
       }
 
       /* Home event countdown — 28 August 2026, 9:00 AM IST */
-      const homeCountdownTarget = new Date(
-        "2026-08-28T09:00:00+05:30",
-      ).getTime();
-
-      function updateHomeCountdown() {
-        const diff = Math.max(0, homeCountdownTarget - Date.now());
-
-        const days = Math.floor(diff / 86400000);
-        const hours = Math.floor((diff % 86400000) / 3600000);
-        const minutes = Math.floor((diff % 3600000) / 60000);
-        const seconds = Math.floor((diff % 60000) / 1000);
-
-        const set = (id, value) => {
-          const el = document.getElementById(id);
-          if (el) el.textContent = String(value).padStart(2, "0");
-        };
-
-        set("homeDays", days);
-        set("homeHours", hours);
-        set("homeMinutes", minutes);
-        set("homeSeconds", seconds);
-      }
-
-      updateHomeCountdown();
-      setInterval(updateHomeCountdown, 1000);
+      
+      
     </script>
   </body>
 </html>

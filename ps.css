@@ -168,9 +168,15 @@
   margin: 0 0 0.75rem;
 }
 .ps-panel-desc {
-  color: var(--cream-60);
+  color: var(--cream-61);
   line-height: 1.7;
   max-width: 520px;
+}
+.ps-panel-desc1 {
+  color: var(--cream-60);
+  font-family: var(--font-display);
+  line-height: 1.5;
+  max-width: 510px;
 }
 .ps-selected-domain {
   display: inline-block;

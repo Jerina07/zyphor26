@@ -326,6 +326,10 @@ form.addEventListener("submit", async (e) => {
 
   const teamNameVal = regTeamName.value.trim();
   const studentName = document.getElementById("regStudentName").value.trim();
+  const phone = document
+  .getElementById("regPhone")
+  .value
+  .trim();
   const email = document.getElementById("regEmail").value.trim();
   const collegeName = document.getElementById("regCollege").value.trim();
   const department = document.getElementById("regDept").value.trim();
@@ -350,6 +354,14 @@ form.addEventListener("submit", async (e) => {
     ok = false;
   }
 
+if (!phone || !/^[0-9]{10}$/.test(phone)) {
+  showErr(
+    "regPhone",
+    "Please enter a valid 10-digit phone number."
+  );
+
+  ok = false;
+}
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     showErr("regEmail", "Please enter a valid email address.");
     ok = false;
@@ -410,6 +422,7 @@ form.addEventListener("submit", async (e) => {
       teamId: resolvedTeam.id,
       teamName: teamNameVal,
       studentName,
+      phone,
       email,
       collegeName,
       department,

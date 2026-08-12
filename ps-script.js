@@ -92,7 +92,7 @@ function renderMemberFields(count) {
     const div = document.createElement("div");
     div.className = "ps-field";
     div.innerHTML = `
-      <label for="psMember${i}" class="ps-label">TEAM MEMBER ${i} NAME <span class="req">*</span></label>
+      <label for="psMember${i}" class="ps-label">TEAM MEMBER ${i} NAME WITH INITIAL AT END <span class="req">*</span></label>
       <input type="text" id="psMember${i}" name="member${i}" class="ps-input" placeholder="Full name" required>
       <p class="ps-field-error" data-error="psMember${i}"></p>
     `;

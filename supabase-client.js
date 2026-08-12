@@ -149,7 +149,7 @@ export async function getDomainAnswers(teamId) {
    REGISTRATIONS
 ------------------------------------------------------- */
 export async function upsertRegistration({
-  teamId, teamName, studentName, email, collegeName, department,
+  teamId, teamName, studentName,phone, email, collegeName, department,
   foodPref, vegCount = 0, nonVegCount = 0, totalAmount = 0,
   upiId = "", paymentScreenshotUrl = "", paymentId = null,
   paymentStatus = "Pending Verification"
@@ -159,6 +159,7 @@ export async function upsertRegistration({
       team_id: teamId,
       team_name: teamName,
       student_name: studentName,
+      phone: phone,
       email,
       college_name: collegeName,
       department,
