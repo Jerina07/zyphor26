@@ -589,7 +589,9 @@ function renderTable() {
         }
 
       </td>
-
+      <td>
+  ${escHtml(reg?.phone || "—")}
+</td>
 
       <td>
         ${paymentHtml}
