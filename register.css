@@ -3,6 +3,29 @@
    Registration & Razorpay Payment Styles
    ========================================================= */
 
+/* =========================================================
+   GLOBAL FIX
+========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+}
+
+.reg-body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
 .reg-body {
   background: var(--bg);
   color: var(--cream);
@@ -77,18 +100,16 @@
 .reg-main {
   max-width: 880px;
   margin: 0 auto;
-  padding: 1rem 1.5rem 6rem;
+  padding: 7rem 1.5rem 6rem;
 }
 .reg-card {
+  width: 100%;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
   overflow: hidden;
   backdrop-filter: blur(14px);
   box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.55);
-  transition:
-    box-shadow 0.4s cubic-bezier(0.22, 0.9, 0.32, 1),
-    border-color 0.4s cubic-bezier(0.22, 0.9, 0.32, 1);
 }
 .reg-card:hover {
   border-color: rgba(212, 168, 67, 0.2);
@@ -150,7 +171,7 @@
 }
 
 .reg-section {
-  padding: 2rem;
+  padding: 2rem 2.8rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 .reg-section-title {
@@ -185,8 +206,9 @@
 /* Field grid */
 .reg-field-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.25rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.4rem;
+  width: 100%;
 }
 @media (max-width: 640px) {
   .reg-field-grid {
@@ -235,6 +257,7 @@
 
 .reg-input {
   width: 100%;
+  box-sizing: border-box;
   background: rgba(255, 255, 255, 0.04);
   border: 1.5px solid rgba(255, 255, 255, 0.09);
   border-radius: 10px;
@@ -244,18 +267,22 @@
   outline: none;
   transition: all 0.25s cubic-bezier(0.22, 0.9, 0.32, 1);
 }
+
 .reg-input:focus {
   border-color: var(--gold);
   background: rgba(212, 168, 67, 0.04);
 }
+
 .reg-field.has-error .reg-input {
   border-color: #f87171;
 }
+
 .reg-field-hint {
   font-size: 0.73rem;
   color: rgba(255, 255, 255, 0.5);
   margin: 0;
 }
+
 .reg-field-error {
   font-size: 0.74rem;
   color: #f87171;
@@ -264,25 +291,30 @@
   overflow: hidden;
   transition: all 0.2s cubic-bezier(0.22, 0.9, 0.32, 1);
 }
+
 .reg-field-error.visible {
   opacity: 1;
   max-height: 40px;
 }
 
 /* Radio group */
+
 .reg-radio-group {
   display: flex;
   gap: 0.6rem;
   flex-wrap: wrap;
 }
+
 .reg-radio {
   position: absolute;
   opacity: 0;
   pointer-events: none;
 }
+
 .reg-radio-label {
   cursor: pointer;
 }
+
 .reg-radio-btn {
   display: inline-flex;
   align-items: center;
@@ -295,19 +327,23 @@
   color: rgba(255, 255, 255, 0.5);
   background: rgba(255, 255, 255, 0.03);
   cursor: pointer;
+
   transition:
     transform 0.28s var(--bounce),
     border-color 0.25s ease,
     color 0.25s ease,
     background 0.25s ease;
 }
+
 .reg-radio-btn:hover {
   transform: scale(1.06);
 }
+
 .reg-radio-btn:active {
   transform: scale(0.92);
   transition-duration: 0.12s;
 }
+
 .reg-radio:checked + .reg-radio-btn {
   border-color: var(--gold);
   color: var(--gold);
@@ -467,32 +503,7 @@
   font-family: var(--font-display);
 }
 
-.razorpay-box {
-  background: rgba(14, 116, 233, 0.06);
-  border: 1px solid rgba(14, 116, 233, 0.25);
-  border-radius: 14px;
-  padding: 1.25rem 1.5rem;
-}
-.rzp-header {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-.rzp-logo {
-  width: 32px;
-  height: 32px;
-}
-.rzp-header h3 {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #60a5fa;
-  margin-bottom: 0.2rem;
-}
-.rzp-header p {
-  font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.5);
-  margin: 0;
-}
+
 
 /* Submit section */
 .reg-submit-section {
@@ -572,17 +583,6 @@
   text-align: center;
 }
 
-/* Success overlay */
-.reg-success-overlay {
-  min-height: 70vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4rem 1.5rem;
-}
-.reg-success-overlay[hidden] {
-  display: none;
-}
 .reg-success-card {
   max-width: 520px;
   margin: 0 auto;
@@ -831,13 +831,7 @@
     max-width: 260px;
   }
 }
-.reg-input {
-  background: #0d0d0d;
-  color: #ffffff;
-  border: 1px solid #555;
-  padding: 12px 14px;
-  border-radius: 6px;
-}
+
 
 /* Dropdown options */
 .reg-input option {
@@ -1240,4 +1234,40 @@
 
   font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.45);
+}
+/* FORCE REGISTRATION INPUT STYLE */
+.reg-input,
+input.reg-input,
+select.reg-input {
+  width: 100% !important;
+  box-sizing: border-box !important;
+
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: var(--cream) !important;
+
+  border: 1.5px solid rgba(255, 255, 255, 0.09) !important;
+  border-radius: 10px !important;
+
+  padding: 0.75rem 1rem !important;
+
+  font-size: 0.9rem !important;
+  outline: none !important;
+}
+
+.reg-input:focus,
+input.reg-input:focus,
+select.reg-input:focus {
+  border-color: var(--gold) !important;
+  background: rgba(212, 168, 67, 0.04) !important;
+}
+select.reg-input option {
+  background: #1c1810;
+  color: white;
+}
+
+/* FORCE SPACE BETWEEN CARD BORDER AND FORM CONTENT */
+
+.reg-card .reg-field-grid {
+  padding-left: 2.5rem !important;
+  padding-right: 2.5rem !important;
 }
