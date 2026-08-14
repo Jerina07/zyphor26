@@ -248,23 +248,14 @@
     <script>
       (function () {
         const UNLOCK_DATE = new Date("2026-08-27T09:00:00+05:30").getTime(); // 27/8/2026, 9:00 AM IST — REAL RELEASE
-        var KEY = "zyphor26_problem_statements_unlocked";
+        
 
         var lockCard = document.getElementById("stmtLockCard");
         var unlockedCard = document.getElementById("stmtUnlockedCard");
 
         function isUnlocked() {
-          try {
-            if (localStorage.getItem(KEY) === "true") return true;
-          } catch (e) {}
-          if (Date.now() >= UNLOCK_DATE) {
-            try {
-              localStorage.setItem(KEY, "true");
-            } catch (e) {}
-            return true;
-          }
-          return false;
-        }
+  return Date.now() >= UNLOCK_DATE;
+}
 
         function showUnlocked() {
           if (lockCard) {

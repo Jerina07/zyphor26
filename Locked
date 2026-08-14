@@ -1,0 +1,14 @@
+[35mschema.sql[m[36m:[m[32m87[m[36m:[mCREATE TABLE IF NOT EXISTS public.[1;31mstatement_claims[m (
+[35mschema.sql[m[36m:[m[32m96[m[36m:[mALTER TABLE public.[1;31mstatement_claims[m ENABLE ROW LEVEL SECURITY;
+[35mschema.sql[m[36m:[m[32m98[m[36m:[mDROP POLICY IF EXISTS "Allow public select on statement claims" ON public.[1;31mstatement_claims[m;
+[35mschema.sql[m[36m:[m[32m100[m[36m:[mON public.[1;31mstatement_claims[m FOR SELECT USING (true);
+[35mschema.sql[m[36m:[m[32m104[m[36m:[mINSERT INTO public.[1;31mstatement_claims[m (
+[35mschema.sql[m[36m:[m[32m146[m[36m:[m    FROM public.[1;31mstatement_claims[m
+[35mschema.sql[m[36m:[m[32m156[m[36m:[m        FROM public.[1;31mstatement_claims[m
+[35mschema.sql[m[36m:[m[32m165[m[36m:[m            INSERT INTO public.[1;31mstatement_claims[m (
+[35mschema.sql[m[36m:[m[32m183[m[36m:[m        INSERT INTO public.[1;31mstatement_claims[m (
+[35mschema.sql[m[36m:[m[32m239[m[36m:[mCREATE TABLE IF NOT EXISTS public.[1;31mstatement_claims[m (
+[35mschema.sql[m[36m:[m[32m273[m[36m:[m        FROM public.[1;31mstatement_claims[m
+[35mschema.sql[m[36m:[m[32m286[m[36m:[m        FROM public.[1;31mstatement_claims[m
+[35mschema.sql[m[36m:[m[32m297[m[36m:[m    INSERT INTO public.[1;31mstatement_claims[m (
+[35msupabase-client.js[m[36m:[m[32m241[m[36m:[m    .from("[1;31mstatement_claims[m")
